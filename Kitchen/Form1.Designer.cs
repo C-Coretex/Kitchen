@@ -31,17 +31,16 @@
             this.FindRecepts = new System.Windows.Forms.Button();
             this.BrowseRecepts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
             // NAMES
             // 
             this.NAMES.BackColor = System.Drawing.Color.LightCyan;
             this.NAMES.Font = new System.Drawing.Font("Calibri", 12F);
-            this.NAMES.Location = new System.Drawing.Point(-8, 0);
+            this.NAMES.Location = new System.Drawing.Point(-8, -22);
             this.NAMES.Multiline = true;
             this.NAMES.Name = "NAMES";
-            this.NAMES.Size = new System.Drawing.Size(317, 271);
+            this.NAMES.Size = new System.Drawing.Size(317, 275);
             this.NAMES.TabIndex = 0;
             this.NAMES.TextChanged += new System.EventHandler(this.NAMES_TextChanged);
             this.NAMES.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NAMES_KeyDown);
@@ -82,14 +81,6 @@
             this.label1.Text = "Впишите ингридиенты...";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(307, 24);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // Form1
             // 
             this.AccessibleDescription = "";
@@ -102,9 +93,7 @@
             this.Controls.Add(this.BrowseRecepts);
             this.Controls.Add(this.FindRecepts);
             this.Controls.Add(this.NAMES);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(323, 398);
             this.MinimumSize = new System.Drawing.Size(323, 398);
             this.Name = "Form1";
@@ -121,7 +110,6 @@
         private System.Windows.Forms.Button FindRecepts;
         private System.Windows.Forms.Button BrowseRecepts;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 

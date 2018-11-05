@@ -9,3 +9,14 @@ C:\Users\valer\Documents\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.Co
 C:\Users\valer\Documents\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe
 C:\Users\valer\Documents\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
 C:\Users\valer\Documents\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form2.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\bin\Debug\Kitchen.exe.config
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\bin\Debug\Kitchen.exe
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\bin\Debug\Kitchen.pdb
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csprojAssemblyReference.cache
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form1.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form2.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Properties.Resources.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.GenerateResource.cache
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.CoreCompileInputs.cache
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
