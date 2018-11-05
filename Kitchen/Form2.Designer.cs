@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.Back = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.findText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Find = new System.Windows.Forms.Button();
+            this.testBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Back
@@ -44,15 +45,15 @@
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
-            // textBox1
+            // findText
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(114, 338);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(117, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.findText.BackColor = System.Drawing.Color.White;
+            this.findText.Location = new System.Drawing.Point(114, 338);
+            this.findText.Name = "findText";
+            this.findText.Size = new System.Drawing.Size(117, 20);
+            this.findText.TabIndex = 1;
+            this.findText.Click += new System.EventHandler(this.findText_Click);
+            this.findText.TextChanged += new System.EventHandler(this.findText_TextChanged);
             // 
             // label1
             // 
@@ -74,15 +75,26 @@
             this.Find.TabIndex = 3;
             this.Find.Text = "Искать!";
             this.Find.UseVisualStyleBackColor = true;
+            this.Find.Click += new System.EventHandler(this.Find_Click);
+            // 
+            // testBox2
+            // 
+            this.testBox2.Location = new System.Drawing.Point(0, 1);
+            this.testBox2.Multiline = true;
+            this.testBox2.Name = "testBox2";
+            this.testBox2.Size = new System.Drawing.Size(308, 338);
+            this.testBox2.TabIndex = 4;
+            this.testBox2.TextChanged += new System.EventHandler(this.testBox2_TextChanged);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(307, 359);
+            this.Controls.Add(this.testBox2);
             this.Controls.Add(this.Find);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.findText);
             this.Controls.Add(this.Back);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximumSize = new System.Drawing.Size(323, 398);
@@ -98,8 +110,9 @@
         #endregion
 
         private System.Windows.Forms.Button Back;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox findText;
         private System.Windows.Forms.Button Find;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox testBox2;
     }
 }

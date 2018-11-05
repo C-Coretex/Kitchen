@@ -33,7 +33,6 @@ namespace Kitchen
 
         private void BrowseRecepts_Click(object sender, EventArgs e)
         {
-              //  Hide();//Прячет ПЕРВУЮ фрому
             Form2 f2 = new Form2();
             f2.StartPosition = FormStartPosition.Manual;
             f2.Location = this.Location;
