@@ -65,7 +65,7 @@ namespace Kitchen
         {
             if(label1.Text != null)
             {
-                if(testBox2.Text.Contains(findText.Text) && findText.Text != "")
+                if(testBox2.Text.Contains(findText.Text) && (findText.Text != "" && findText.Text !=" "))
                 {
                     MessageBox.Show("Работает, ее");
                 }
