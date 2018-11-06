@@ -12,8 +12,8 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
-        static bool a = false;
-        static bool closed = false;
+         bool a = false;
+       bool closed = false;
         public Form1()
         {
                                                          InitializeComponent();

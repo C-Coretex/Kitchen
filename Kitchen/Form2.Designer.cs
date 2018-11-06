@@ -54,13 +54,14 @@
             this.findText.TabIndex = 1;
             this.findText.Click += new System.EventHandler(this.findText_Click);
             this.findText.TextChanged += new System.EventHandler(this.findText_TextChanged);
+            this.findText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.findText_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Enabled = false;
-            this.label1.Location = new System.Drawing.Point(116, 342);
+            this.label1.Location = new System.Drawing.Point(117, 342);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 13);
             this.label1.TabIndex = 2;
@@ -79,12 +80,14 @@
             // 
             // testBox2
             // 
-            this.testBox2.Location = new System.Drawing.Point(0, 1);
+            this.testBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.testBox2.Location = new System.Drawing.Point(0, 0);
             this.testBox2.Multiline = true;
             this.testBox2.Name = "testBox2";
-            this.testBox2.Size = new System.Drawing.Size(308, 338);
+            this.testBox2.Size = new System.Drawing.Size(308, 339);
             this.testBox2.TabIndex = 4;
             this.testBox2.TextChanged += new System.EventHandler(this.testBox2_TextChanged);
+            this.testBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.testBox2_KeyDown);
             // 
             // Form2
             // 
