@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Find = new System.Windows.Forms.Button();
             this.testBox2 = new System.Windows.Forms.TextBox();
+            this.AddRecept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Back
@@ -81,19 +82,30 @@
             // testBox2
             // 
             this.testBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.testBox2.Location = new System.Drawing.Point(0, 0);
+            this.testBox2.Location = new System.Drawing.Point(0, 171);
             this.testBox2.Multiline = true;
             this.testBox2.Name = "testBox2";
-            this.testBox2.Size = new System.Drawing.Size(308, 339);
+            this.testBox2.Size = new System.Drawing.Size(308, 168);
             this.testBox2.TabIndex = 4;
             this.testBox2.TextChanged += new System.EventHandler(this.testBox2_TextChanged);
             this.testBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.testBox2_KeyDown);
+            // 
+            // AddRecept
+            // 
+            this.AddRecept.Location = new System.Drawing.Point(23, 19);
+            this.AddRecept.Name = "AddRecept";
+            this.AddRecept.Size = new System.Drawing.Size(248, 94);
+            this.AddRecept.TabIndex = 5;
+            this.AddRecept.Text = "Добавить";
+            this.AddRecept.UseVisualStyleBackColor = true;
+            this.AddRecept.Click += new System.EventHandler(this.AddRecept_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(307, 359);
+            this.Controls.Add(this.AddRecept);
             this.Controls.Add(this.testBox2);
             this.Controls.Add(this.Find);
             this.Controls.Add(this.label1);
@@ -117,5 +129,6 @@
         private System.Windows.Forms.Button Find;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox testBox2;
+        private System.Windows.Forms.Button AddRecept;
     }
 }

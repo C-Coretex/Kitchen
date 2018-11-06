@@ -124,5 +124,13 @@ namespace Kitchen
                 SendKeys.Send("{Tab}");
             }
         }
+
+        private void AddRecept_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.StartPosition = FormStartPosition.Manual;
+            f3.Location = this.Location;
+            f3.ShowDialog();
+        }
     }
 }
