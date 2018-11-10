@@ -55,7 +55,7 @@ namespace Kitchen
         {
             if (findText == null)
             {
-                label1.Text = "Найти по названию";
+                label1.Text = "Найти по названию:";
             }
         }
 
