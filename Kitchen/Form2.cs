@@ -35,7 +35,7 @@ namespace Kitchen
         {
             if (textBox1 == null)
             {
-                label1.Text = "Найти по названию";
+                label1.Text = "Найти по названию:";
             }
         }
 
