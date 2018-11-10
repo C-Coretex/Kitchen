@@ -42,18 +42,17 @@ namespace Kitchen
                 // создаем объект BinaryFormatter
                 BinaryFormatter formatter = new BinaryFormatter();
                 // получаем поток, куда будем записывать сериализованный объект
-                using (FileStream fs = new FileStream(@"C:\Users\valer\Desktop\Programming\Kitchen\Recipe.dat", FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Append))
                 {
                     MessageBox.Show("Объект сериализован");
                     formatter.Serialize(fs, RL);
                 }
-
-                using (FileStream fs = new FileStream(@"C:\Users\valer\Desktop\Programming\Kitchen\Recipe.dat", FileMode.OpenOrCreate))
+                // десериализация
+                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
                 {
                     RecipeList newRL = (RecipeList)formatter.Deserialize(fs);
-
                     MessageBox.Show("Объект десериализован");
-                    MessageBox.Show("Название: " + newRL.Name + " \nИнгридиенты: \n" + newRL.Ingridients + "\nОписание:" + newRL.Description);
+                    MessageBox.Show("Название: " +  RL.Name + "\nИнгридиенты:\n" + RL.Ingridients + "\nОписание:\n" + RL.Description);
                 }
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
