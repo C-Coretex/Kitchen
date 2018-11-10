@@ -12,18 +12,18 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
-         bool a = false;
-       bool closed = false;
+        bool a = false;
+        bool closed = false;
         public Form1()
         {
-                                                         InitializeComponent();
-                                                        FindRecepts.TabStop = false;
-                                                        FindRecepts.FlatStyle = FlatStyle.Flat;
-                                                        FindRecepts.FlatAppearance.BorderSize = 0;
-                                                        BrowseRecepts.TabStop = false;
-                                                        BrowseRecepts.FlatStyle = FlatStyle.Flat;
-                                                        BrowseRecepts.FlatAppearance.BorderSize = 0;
-            
+            InitializeComponent();
+            FindRecepts.TabStop = false;
+            FindRecepts.FlatStyle = FlatStyle.Flat;
+            FindRecepts.FlatAppearance.BorderSize = 0;
+            BrowseRecepts.TabStop = false;
+            BrowseRecepts.FlatStyle = FlatStyle.Flat;
+            BrowseRecepts.FlatAppearance.BorderSize = 0;
+
         }
 
         private void FindRecepts_Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace Kitchen
 
         private void NAMES_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((a == false || NAMES.Text == "") &&(e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete && e.KeyCode != Keys.ShiftKey && e.KeyCode != Keys.Tab && e.KeyCode != Keys.Alt && e.KeyCode != Keys.CapsLock && e.KeyCode != Keys.ControlKey && e.KeyCode != Keys.LWin))
+            if ((a == false || NAMES.Text == "") && (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete && e.KeyCode != Keys.ShiftKey && e.KeyCode != Keys.Tab && e.KeyCode != Keys.Alt && e.KeyCode != Keys.CapsLock && e.KeyCode != Keys.ControlKey && e.KeyCode != Keys.LWin))
             {
                 SendKeys.Send("{Enter}");
                 label1.Text = "";
@@ -55,7 +55,7 @@ namespace Kitchen
             }
             if ((a == false || NAMES.Text == "") && (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete && e.KeyCode != Keys.ShiftKey && e.KeyCode != Keys.Tab && e.KeyCode != Keys.Alt && e.KeyCode != Keys.CapsLock && e.KeyCode != Keys.ControlKey && e.KeyCode != Keys.LWin))
             {
-                SendKeys.Send("{RIGHT}"+"{RIGHT}");
+                SendKeys.Send("{RIGHT}" + "{RIGHT}");
                 a = true;
             }
         }

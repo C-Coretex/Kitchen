@@ -31,17 +31,17 @@ namespace Kitchen
         private void Form2_Load(object sender, EventArgs e)
         {
         }
-        
+
         private void Back_Click(object sender, EventArgs e)
         {
-                string pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\" + @"Text.txt";
-                StreamWriter sw = new StreamWriter(pathToFile, false);
-                    line1 = testBox2.Text;
-                    line1 = line1.Replace(" \t ", "");
-                    line1 = line1.Replace(" \n ", "");
-                    line1 = line1.Trim();
-                sw.WriteLine(line1);
-                sw.Close();
+            string pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\" + @"Text.txt";
+            StreamWriter sw = new StreamWriter(pathToFile, false);
+            line1 = testBox2.Text;
+            line1 = line1.Replace(" \t ", "");
+            line1 = line1.Replace(" \n ", "");
+            line1 = line1.Trim();
+            sw.WriteLine(line1);
+            sw.Close();
 
             Form1 f1 = new Form1();
             f1.StartPosition = FormStartPosition.Manual;
@@ -65,14 +65,15 @@ namespace Kitchen
 
         private void Find_Click(object sender, EventArgs e)
         {
-            if(label1.Text != null)
+            if (label1.Text != null)
             {
-                if(testBox2.Text.Contains(findText.Text) && (findText.Text != "" && findText.Text !=" "))
+                if (testBox2.Text.Contains(findText.Text) && (findText.Text != "" && findText.Text != " "))
                 {
                     int start = 0;
                     int len = findText.Text.Length;
                     string txt = findText.Text;
-                    for (int i = 0; i<testBox2.Text.Length; i += 1)
+                    this.Cursor = Cursors.WaitCursor;
+                    for (int i = 0; i < testBox2.Text.Length; i += 1)
                     {
                         testBox2.Select(i, len);
                         if (testBox2.SelectedText == txt)
@@ -80,6 +81,7 @@ namespace Kitchen
                             start = testBox2.SelectionStart;
                         }
                     }
+                    this.Cursor = Cursors.Default;
                     MessageBox.Show("Ваш запрос: '" + findText.Text + "' найден");
                     testBox2.Select(start, len);
                     SendKeys.Send("{Tab}");

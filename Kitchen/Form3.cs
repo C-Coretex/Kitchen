@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Kitchen
 {
@@ -30,9 +32,29 @@ namespace Kitchen
                 //-----------------------------------------------------------------------------------------------------------------------------------------
                 sname = name.Text;
                 singridients = ingridients.Text;
-                sdescription = description.Text; 
+                sdescription = description.Text;
+                RecipeList RL = new RecipeList
+                {
+                    Name = sname,
+                    Ingridients = singridients,
+                    Description = sdescription
+                };
+                // создаем объект BinaryFormatter
+                BinaryFormatter formatter = new BinaryFormatter();
+                // получаем поток, куда будем записывать сериализованный объект
+                using (FileStream fs = new FileStream(@"C:\Users\valer\Desktop\Programming\Kitchen\Recipe.dat", FileMode.OpenOrCreate))
+                {
+                    MessageBox.Show("Объект сериализован");
+                    formatter.Serialize(fs, RL);
+                }
 
+                using (FileStream fs = new FileStream(@"C:\Users\valer\Desktop\Programming\Kitchen\Recipe.dat", FileMode.OpenOrCreate))
+                {
+                    RecipeList newRL = (RecipeList)formatter.Deserialize(fs);
 
+                    MessageBox.Show("Объект десериализован");
+                    MessageBox.Show("Название: " + newRL.Name + " \nИнгридиенты: \n" + newRL.Ingridients + "\nОписание:" + newRL.Description);
+                }
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
             }
