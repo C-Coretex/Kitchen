@@ -35,6 +35,7 @@
             this.ingridients = new System.Windows.Forms.TextBox();
             this.description = new System.Windows.Forms.TextBox();
             this.saveExit = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -112,11 +113,22 @@
             this.saveExit.UseVisualStyleBackColor = true;
             this.saveExit.Click += new System.EventHandler(this.saveExit_Click);
             // 
+            // exit
+            // 
+            this.exit.Location = new System.Drawing.Point(300, 1);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(272, 67);
+            this.exit.TabIndex = 7;
+            this.exit.Text = "Выйти не сохранив";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 332);
+            this.Controls.Add(this.exit);
             this.Controls.Add(this.saveExit);
             this.Controls.Add(this.description);
             this.Controls.Add(this.ingridients);
@@ -141,5 +153,6 @@
         private System.Windows.Forms.TextBox ingridients;
         private System.Windows.Forms.TextBox description;
         private System.Windows.Forms.Button saveExit;
+        private System.Windows.Forms.Button exit;
     }
 }

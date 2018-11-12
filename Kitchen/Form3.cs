@@ -30,30 +30,10 @@ namespace Kitchen
             if (name.Text != "" && ingridients.Text != "" && description.Text != "")
             {
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                sname = name.Text;
-                singridients = ingridients.Text;
-                sdescription = description.Text;
-                RecipeList RL = new RecipeList
-                {
-                    Name = sname,
-                    Ingridients = singridients,
-                    Description = sdescription
-                };
-                // создаем объект BinaryFormatter
-                BinaryFormatter formatter = new BinaryFormatter();
-                // получаем поток, куда будем записывать сериализованный объект
-                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Append))
-                {
-                    MessageBox.Show("Объект сериализован");
-                    formatter.Serialize(fs, RL);
-                }
+                RecipeList.Serialization(name.Text, ingridients.Text, description.Text);
+                RecipeList qwerty = RecipeList.Deserialization();
+                MessageBox.Show("Название: " + qwerty.Name + "\nИнгридиенты:\n" + qwerty.Ingridients, "\nОписание:\n" + qwerty.Description);
                 // десериализация
-                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
-                {
-                    RecipeList newRL = (RecipeList)formatter.Deserialize(fs);
-                    MessageBox.Show("Объект десериализован");
-                    MessageBox.Show("Название: " +  RL.Name + "\nИнгридиенты:\n" + RL.Ingridients + "\nОписание:\n" + RL.Description);
-                }
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
             }
@@ -79,6 +59,11 @@ namespace Kitchen
         }
         private void description_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

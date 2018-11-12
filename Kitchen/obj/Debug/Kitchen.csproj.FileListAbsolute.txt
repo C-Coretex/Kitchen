@@ -21,3 +21,4 @@ C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.Core
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form3.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Edit.resources
