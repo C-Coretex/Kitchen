@@ -14,10 +14,6 @@ namespace Kitchen
 {
     public partial class Form3 : Form
     {
-        string sname;
-        string singridients;
-        string sdescription;
-
         public Form3()
         {
             InitializeComponent();

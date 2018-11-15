@@ -55,7 +55,7 @@
             // findText
             // 
             this.findText.BackColor = System.Drawing.Color.White;
-            this.findText.Location = new System.Drawing.Point(114, 338);
+            this.findText.Location = new System.Drawing.Point(122, 338);
             this.findText.Name = "findText";
             this.findText.Size = new System.Drawing.Size(210, 20);
             this.findText.TabIndex = 1;
@@ -99,7 +99,8 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightCyan;
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -118,14 +119,15 @@
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.ShowEditingIcon = false;
             this.dataGridView.Size = new System.Drawing.Size(414, 319);
             this.dataGridView.TabIndex = 6;
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             // 
             // colNumber
             // 

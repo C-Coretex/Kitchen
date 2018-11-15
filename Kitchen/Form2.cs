@@ -19,6 +19,7 @@ namespace Kitchen
         public Form2()
         {
             InitializeComponent();
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.Cursor = Cursors.WaitCursor;
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
             //string pathToFile = @o;
@@ -64,6 +65,10 @@ namespace Kitchen
                 }
             }
             this.Cursor = Cursors.Default;
+            for (int n = 0; n < 5; n++)
+            {
+                SendKeys.Send("{TAB}");
+            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -98,20 +103,53 @@ namespace Kitchen
 
         private void Find_Click(object sender, EventArgs e)
         {
-            if (label1.Text != null)
+           // MessageBox.Show("" + dataGridView.CurrentRow.Index);
+            if (findText.Text != "")
             {
-
+                bool contains = false;
                 this.Cursor = Cursors.WaitCursor;
 
-
-
+                    if (dataGridView.CurrentRow.Index == dataGridView.RowCount - 1)
+                    {
+                       // dataGridView.ClearSelection();
+                       // dataGridView.CurrentCell = null;
+                        dataGridView.Rows[0].Cells[1].Selected = true;
+                    }
+                    
+                for (int i = dataGridView.CurrentRow.Index+1; i < dataGridView.RowCount;i++)
+                {
+                    string name = dataGridView.Rows[i].Cells[1].Value.ToString();
+                    int cursor;
+                    for (cursor = 0; cursor+findText.Text.Length <= name.Length; cursor++)
+                    {
+                        if (name.Substring(cursor, findText.Text.Length) == findText.Text)
+                        {
+                           // MessageBox.Show("Ваш запрос: '" + findText.Text + "' найден");
+                            //dataGridView.Rows[i].Selected = true;
+                            contains = true;
+                            SendKeys.Send("{TAB}");
+                            SendKeys.Send("{TAB}");
+                            SendKeys.Send("{TAB}");
+                            for (int n = 0; n < i;n++)
+                            {
+                                SendKeys.Send("{Enter}");
+                            }
+                                //SendKeys.Send("{Enter}");
+                            //for (int a = dataGridView.RowCount*3-)
+                            break;
+                        }
+                    }
+                    if (contains == true)
+                    {
+                        break;
+                    }
+                    }
+                if (contains == false)
+                {
+                    MessageBox.Show("Слово: '" + findText.Text + "' НЕ найдено!");
+                    dataGridView.Rows[0].Cells[1].Selected = true;
+                }
                 this.Cursor = Cursors.Default;
-                MessageBox.Show("Ваш запрос: '" + findText.Text + "' найден");
-
-            }
-            else if (findText.Text != " ")
-            {
-                MessageBox.Show("Слово: '" + findText.Text + " НЕ найдено!");
             }
         }
 
@@ -144,7 +182,6 @@ namespace Kitchen
             if (e.KeyCode == Keys.Enter)
             {
                 Find.PerformClick();
-                SendKeys.Send("{Tab}");
             }
         }
 
@@ -162,23 +199,10 @@ namespace Kitchen
             {
                 rowIndex = dataGridView.CurrentCell.RowIndex;
                 rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-                dataGridView.Rows[rowIndex].Selected = true;
                 Edit ed = new Edit();
                 ed.StartPosition = FormStartPosition.Manual;
                 ed.Location = this.Location;
                 ed.ShowDialog();
-            }
-            catch
-            {
-            }
-        }
-
-        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            try
-            {
-                int a = dataGridView.CurrentCell.RowIndex;
-                dataGridView.Rows[a].Selected = true;
             }
             catch
             {
