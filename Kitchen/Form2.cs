@@ -28,7 +28,6 @@ namespace Kitchen
             // StreamReader sr = new StreamReader(pathToFile + @"Text.txt", true);
             //testBox2.Text = sr.ReadToEnd();
             // sr.Close();
-            // testBox2.ScrollBars = ScrollBars.Both;
             dataGridView.RowHeadersWidth = 20;
             dataGridView.AutoResizeColumns();
             //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +102,6 @@ namespace Kitchen
 
         private void Find_Click(object sender, EventArgs e)
         {
-           // MessageBox.Show("" + dataGridView.CurrentRow.Index);
             if (findText.Text != "")
             {
                 bool contains = false;
@@ -115,8 +113,7 @@ namespace Kitchen
                        // dataGridView.CurrentCell = null;
                         dataGridView.Rows[0].Cells[1].Selected = true;
                     }
-                    
-                for (int i = dataGridView.CurrentRow.Index+1; i < dataGridView.RowCount;i++)
+                for (int i = dataGridView.CurrentRow.Index + 1; i < dataGridView.RowCount; i++)
                 {
                     string name = dataGridView.Rows[i].Cells[1].Value.ToString();
                     int cursor;
@@ -124,18 +121,15 @@ namespace Kitchen
                     {
                         if (name.Substring(cursor, findText.Text.Length) == findText.Text)
                         {
-                           // MessageBox.Show("Ваш запрос: '" + findText.Text + "' найден");
-                            //dataGridView.Rows[i].Selected = true;
                             contains = true;
                             SendKeys.Send("{TAB}");
                             SendKeys.Send("{TAB}");
                             SendKeys.Send("{TAB}");
+                            dataGridView.Rows[0].Cells[1].Selected = true;
                             for (int n = 0; n < i;n++)
                             {
                                 SendKeys.Send("{Enter}");
                             }
-                                //SendKeys.Send("{Enter}");
-                            //for (int a = dataGridView.RowCount*3-)
                             break;
                         }
                     }
@@ -155,10 +149,6 @@ namespace Kitchen
 
         private void findText_Click(object sender, EventArgs e)
         {
-            if (label1 != null)
-            {
-                label1.Text = null;
-            }
         }
 
         private void findText_TextChanged(object sender, EventArgs e)

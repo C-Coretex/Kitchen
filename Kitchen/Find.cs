@@ -20,22 +20,23 @@ namespace Kitchen
             this.Cursor = Cursors.WaitCursor;
             string ingr = Ingr;
             var list = new List<string>();
-                int firstIndex = 0;
-            while (firstIndex < ingr.Length)
+            int lastIndex = 0;
+            while (0 < ingr.Length)
             {
                 //MessageBox.Show(""+ ingr.Take(' '));
-                int lastIndex = ingr.IndexOf("\r");
-                    if (lastIndex < 0)
+                lastIndex = ingr.IndexOf("\r");
+                    if (lastIndex <= 0)
                     {
                         lastIndex = ingr.Length;
                     }
-                string subIngr = ingr.Substring(firstIndex, lastIndex);
-                    firstIndex = subIngr.Length;
-                    MessageBox.Show("" + subIngr);
-                 ingr = ingr.Remove(0, lastIndex);
-                 ingr = ingr.Replace("\r", "");
+                ingr = ingr.Remove(lastIndex, 0).Trim();
+                string subIngr = ingr.Substring(0, lastIndex);
+                   // MessageBox.Show("" + subIngr);
+                 ingr = ingr.Remove(0, lastIndex).Trim();
+                // ingr = ingr.Replace("\r", "");
                 //MessageBox.Show("ingr  " + ingr);
-                //list.Add(ingr.Split(' '))
+                list.Add(subIngr);
+                    MessageBox.Show("" + list.Last());
             }
             //int wordCount = ingr.
             using (Stream fs = File.Open(Form2.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))

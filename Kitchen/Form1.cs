@@ -22,8 +22,9 @@ namespace Kitchen
             BrowseRecepts.TabStop = false;
             BrowseRecepts.FlatStyle = FlatStyle.Flat;
             BrowseRecepts.FlatAppearance.BorderSize = 0;
-           // System.Threading.Thread.Sleep(1000);
-           //  firstButton.PerformClick();
+            NAMES.ScrollBars = ScrollBars.Both;
+            // System.Threading.Thread.Sleep(1000);
+            //  firstButton.PerformClick();
             //NAMES.Text = NAMES.Text = "● ";
         }
         
