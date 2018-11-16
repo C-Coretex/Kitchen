@@ -23,7 +23,7 @@ namespace Kitchen
             };
             // создаем объект BinaryFormatter
             // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Append))
+            using (FileStream fs = new FileStream(Form1.pathToFile + "Recipe.dat", FileMode.Append))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(fs, RL);
@@ -31,7 +31,7 @@ namespace Kitchen
         }
         static public RecipeList Deserialization()
         {
-            using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
+            using (FileStream fs = new FileStream(Form1.pathToFile + "Recipe.dat", FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 RecipeList newRL = (RecipeList)formatter.Deserialize(fs);

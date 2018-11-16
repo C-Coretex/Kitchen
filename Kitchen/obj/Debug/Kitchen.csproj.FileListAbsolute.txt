@@ -23,3 +23,4 @@ C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form3.resources
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Edit.resources
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Find.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Show.resources

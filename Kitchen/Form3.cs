@@ -28,8 +28,6 @@ namespace Kitchen
                 //-----------------------------------------------------------------------------------------------------------------------------------------
                 RecipeList.Serialization(name.Text, ingridients.Text, description.Text);
                 RecipeList qwerty = RecipeList.Deserialization();
-                MessageBox.Show("Название: " + qwerty.Name + "\nИнгридиенты:\n" + qwerty.Ingridients, "\nОписание:\n" + qwerty.Description);
-                // десериализация
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
             }

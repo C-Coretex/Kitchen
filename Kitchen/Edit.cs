@@ -13,17 +13,20 @@ namespace Kitchen
 {
     public partial class Edit : Form
     {
-        int rowNumber = Form2.rowNumber - 1;
-
-        public Edit()
+        int rowNumber;
+        int rowIndex;
+        string pathToFile = Form1.pathToFile;
+        public Edit(int RowIndex, int RowNumber)
         {
+            rowNumber = RowNumber - 1;
+            rowIndex = RowIndex;
             BinaryFormatter formatter = new BinaryFormatter();
             RecipeList RL = new RecipeList();
             var objects = new List<RecipeList>();
             InitializeComponent();
             ingridients.ScrollBars = ScrollBars.Both;
             description.ScrollBars = ScrollBars.Both;
-            using (Stream fs = File.Open(Form2.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
             {
                 int a = 0;
                 fs.Position = 0;
@@ -49,7 +52,7 @@ namespace Kitchen
                 };
                 var objects = new List<RecipeList>();
                 int a = 0;
-                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
                     fs.Position = 0;
@@ -70,8 +73,8 @@ namespace Kitchen
                         }
                     }
                 }
-                System.IO.File.WriteAllText(Form2.pathToFile + "Recipe.dat", string.Empty);
-                using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
+                System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
                     for (int i = 0; i < a; i++)
@@ -113,7 +116,7 @@ namespace Kitchen
             };
             var objects = new List<RecipeList>();
             int a = 0;
-            using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
+            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 fs.Position = 0;
@@ -131,8 +134,8 @@ namespace Kitchen
                     a++;
                 }
             }
-            System.IO.File.WriteAllText(Form2.pathToFile + "Recipe.dat", string.Empty);
-            using (FileStream fs = new FileStream(Form2.pathToFile + "Recipe.dat", FileMode.Open))
+            System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 for (int i = 0; i < a - 1; i++)

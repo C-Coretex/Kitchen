@@ -13,9 +13,10 @@ namespace Kitchen
 {
     public partial class Form2 : Form
     {
-        static public int rowIndex = 0;
-        static public int rowNumber = 0;
-        static public string pathToFile = "";
+        int rowIndex = 0;
+         int rowNumber = 0;
+        static public string saveMyIng;
+        string pathToFile = Form1.pathToFile;
         public Form2()
         {
             InitializeComponent();
@@ -24,14 +25,13 @@ namespace Kitchen
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
             //string pathToFile = @o;
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
-            pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\";
             // StreamReader sr = new StreamReader(pathToFile + @"Text.txt", true);
             //testBox2.Text = sr.ReadToEnd();
             // sr.Close();
             dataGridView.RowHeadersWidth = 20;
             dataGridView.AutoResizeColumns();
             //-----------------------------------------------------------------------------------------------------------------------------------------
-            using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
             {
                 try
                 {
@@ -84,7 +84,7 @@ namespace Kitchen
             //sw.WriteLine(line1);
             // sw.Close();
 
-            Form1 f1 = new Form1();
+            Form1 f1 = new Form1(saveMyIng);
             f1.StartPosition = FormStartPosition.Manual;
             f1.Location = this.Location;
             Hide();
@@ -119,7 +119,7 @@ namespace Kitchen
                     int cursor;
                     for (cursor = 0; cursor+findText.Text.Length <= name.Length; cursor++)
                     {
-                        if (name.Substring(cursor, findText.Text.Length) == findText.Text)
+                        if (name.Substring(cursor, findText.Text.Length).Equals(findText.Text, StringComparison.InvariantCultureIgnoreCase))
                         {
                             contains = true;
                             SendKeys.Send("{TAB}");
@@ -189,7 +189,7 @@ namespace Kitchen
             {
                 rowIndex = dataGridView.CurrentCell.RowIndex;
                 rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-                Edit ed = new Edit();
+                Edit ed = new Edit(rowIndex, rowNumber);
                 ed.StartPosition = FormStartPosition.Manual;
                 ed.Location = this.Location;
                 ed.ShowDialog();
@@ -197,6 +197,11 @@ namespace Kitchen
             catch
             {
             }
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

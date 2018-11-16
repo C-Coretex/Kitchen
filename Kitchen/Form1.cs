@@ -13,7 +13,14 @@ namespace Kitchen
     public partial class Form1 : Form
     {
         //bool a = false;
-        public Form1()
+        // string o = System.AppDomain.CurrentDomain.BaseDirectory;
+        //string pathToFile = @o;
+        //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
+        // StreamReader sr = new StreamReader(pathToFile + @"Text.txt", true);
+        //testBox2.Text = sr.ReadToEnd();
+        // sr.Close();
+        static public string pathToFile = "";
+        public Form1(string saveMyIng)
         {
             InitializeComponent();
             FindRecepts.TabStop = false;
@@ -23,6 +30,8 @@ namespace Kitchen
             BrowseRecepts.FlatStyle = FlatStyle.Flat;
             BrowseRecepts.FlatAppearance.BorderSize = 0;
             NAMES.ScrollBars = ScrollBars.Both;
+            NAMES.Text = saveMyIng;
+            pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\";
             // System.Threading.Thread.Sleep(1000);
             //  firstButton.PerformClick();
             //NAMES.Text = NAMES.Text = "● ";
@@ -32,8 +41,7 @@ namespace Kitchen
 
         private void FindRecepts_Click(object sender, EventArgs e)
         {
-            string ingr = NAMES.Text;
-            Find find = new Find(ingr);
+            Find find = new Find(NAMES.Text);
             find.StartPosition = FormStartPosition.Manual;
             find.Location = this.Location;
             find.ShowDialog();
@@ -47,6 +55,7 @@ namespace Kitchen
             f2.StartPosition = FormStartPosition.Manual;
             f2.Location = this.Location;
             Hide();
+            Form2.saveMyIng = NAMES.Text.Trim();
             f2.ShowDialog();
             Close();//Закрывает ПЕРВУЮ форму
         }
