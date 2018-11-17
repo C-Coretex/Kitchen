@@ -75,6 +75,7 @@
             this.dataGridView.ShowEditingIcon = false;
             this.dataGridView.Size = new System.Drawing.Size(506, 302);
             this.dataGridView.TabIndex = 7;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
             // colNumber
@@ -126,6 +127,7 @@
             this.Controls.Add(this.dataGridView);
             this.MinimumSize = new System.Drawing.Size(521, 341);
             this.Name = "Find";
+            this.ShowIcon = false;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.Find_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

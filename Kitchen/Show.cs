@@ -22,13 +22,11 @@ namespace Kitchen
 
         private void edit_Click(object sender, EventArgs e)
         {
-            //rowIndex = 0;
-            //rowNumber = 0;
-           // Edit ed = new Edit();
-           // ed.StartPosition = FormStartPosition.Manual;
-           // ed.Location = this.Location;
-          //  ed.ShowDialog();
-           // this.Close();
+            EditByName ed = new EditByName(name.Text, ingridients.Text, description.Text);
+            ed.StartPosition = FormStartPosition.Manual;
+            ed.Location = this.Location;
+            this.Close();
+            ed.ShowDialog();
         }
 
         private void name_TextChanged(object sender, EventArgs e)

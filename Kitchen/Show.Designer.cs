@@ -129,6 +129,7 @@
             this.Controls.Add(this.edit);
             this.MinimumSize = new System.Drawing.Size(625, 358);
             this.Name = "Show";
+            this.ShowIcon = false;
             this.Text = "Show";
             this.ResumeLayout(false);
             this.PerformLayout();

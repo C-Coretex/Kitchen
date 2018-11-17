@@ -14,12 +14,13 @@ namespace Kitchen
 {
     public partial class Find : Form
     {
+        string ingr;
         string pathToFile = Form1.pathToFile;
         public Find(string Ingr)
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
-            string ingr = Ingr.Trim();
+            ingr = Ingr.Trim();
             var list = new List<string>();
             int lastIndex = 0;
             int maxLength = 0;
@@ -134,6 +135,11 @@ namespace Kitchen
             sh.StartPosition = FormStartPosition.Manual;
             sh.Location = this.Location;
             sh.Show();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
