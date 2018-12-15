@@ -32,10 +32,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.TextBox();
-            this.ingridients = new System.Windows.Forms.TextBox();
             this.description = new System.Windows.Forms.TextBox();
             this.saveExit = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -77,19 +79,6 @@
             this.name.TabIndex = 3;
             this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
             // 
-            // ingridients
-            // 
-            this.ingridients.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ingridients.Font = new System.Drawing.Font("Courier New", 12F);
-            this.ingridients.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ingridients.Location = new System.Drawing.Point(2, 139);
-            this.ingridients.Multiline = true;
-            this.ingridients.Name = "ingridients";
-            this.ingridients.Size = new System.Drawing.Size(272, 187);
-            this.ingridients.TabIndex = 4;
-            this.ingridients.TextChanged += new System.EventHandler(this.ingridients_TextChanged);
-            // 
             // description
             // 
             this.description.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -99,7 +88,7 @@
             this.description.Location = new System.Drawing.Point(280, 94);
             this.description.Multiline = true;
             this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(292, 232);
+            this.description.Size = new System.Drawing.Size(292, 301);
             this.description.TabIndex = 5;
             this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
             // 
@@ -123,15 +112,50 @@
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(194, 125);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(193, 148);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(80, 17);
+            this.checkBox2.TabIndex = 9;
+            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(193, 171);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(80, 17);
+            this.checkBox3.TabIndex = 10;
+            this.checkBox3.Text = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 332);
+            this.ClientSize = new System.Drawing.Size(580, 401);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.saveExit);
             this.Controls.Add(this.description);
-            this.Controls.Add(this.ingridients);
             this.Controls.Add(this.name);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -151,9 +175,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox name;
-        private System.Windows.Forms.TextBox ingridients;
         private System.Windows.Forms.TextBox description;
         private System.Windows.Forms.Button saveExit;
         private System.Windows.Forms.Button exit;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }

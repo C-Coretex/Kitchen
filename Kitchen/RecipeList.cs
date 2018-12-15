@@ -11,14 +11,12 @@ namespace Kitchen
     class RecipeList
     {
         public string Name { get; set; }
-        public string Ingridients { get; set; }
         public string Description { get; set; }
-        static public void Serialization(string name, string ingridients, string description)
+        static public void Serialization(string name, string description)
         {
             RecipeList RL = new RecipeList
             {
                 Name = name,
-                Ingridients = ingridients,
                 Description = description
             };
             // создаем объект BinaryFormatter

@@ -36,7 +36,6 @@ namespace Kitchen
                     objects.Add((RecipeList)formatter.Deserialize(fs));
                 }
                 name.Text = objects[rowNumber].Name;
-                ingridients.Text = objects[rowNumber].Ingridients;
                 description.Text = objects[rowNumber].Description;
             }
         }
@@ -47,7 +46,7 @@ namespace Kitchen
                 RecipeList RL = new RecipeList
                 {
                     Name = name.Text,
-                    Ingridients = ingridients.Text,
+                    //Ingridients = ingridients.Text,
                     Description = description.Text
                 };
                 var objects = new List<RecipeList>();
@@ -111,7 +110,7 @@ namespace Kitchen
             RecipeList RL = new RecipeList
             {
                 Name = name.Text,
-                Ingridients = ingridients.Text,
+                // Ingridients = ingridients.Text,
                 Description = description.Text
             };
             var objects = new List<RecipeList>();

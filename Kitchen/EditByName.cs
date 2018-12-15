@@ -34,7 +34,7 @@ namespace Kitchen
                 RecipeList RL = new RecipeList
                 {
                     Name = name.Text,
-                    Ingridients = ingridients.Text,
+                    //Ingridients = ingridients.Text,
                     Description = description.Text
                 };
                 var objects = new List<RecipeList>();
@@ -77,7 +77,7 @@ namespace Kitchen
             RecipeList RL = new RecipeList
             {
                 Name = name.Text,
-                Ingridients = ingridients.Text,
+                //Ingridients = ingridients.Text,
                 Description = description.Text
             };
             var objects = new List<RecipeList>();

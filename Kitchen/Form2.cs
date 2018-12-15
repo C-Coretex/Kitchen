@@ -14,7 +14,7 @@ namespace Kitchen
     public partial class Form2 : Form
     {
         int rowIndex = 0;
-         int rowNumber = 0;
+        int rowNumber = 0;
         static public string saveMyIng;
         string pathToFile = Form1.pathToFile;
         public Form2()
@@ -55,7 +55,7 @@ namespace Kitchen
                     {
                         int n = dataGridView.Rows.Add();
                         dataGridView.Rows[n].Cells[1].Value = r.Name;
-                        dataGridView.Rows[n].Cells[2].Value = r.Ingridients;
+                       // dataGridView.Rows[n].Cells[2].Value = r.Ingridients;
                         dataGridView.Rows[n].Cells[0].Value = n + 1;
                     }
                 }

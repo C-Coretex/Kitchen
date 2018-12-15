@@ -24,3 +24,4 @@ C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Edit.resour
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Find.resources
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Show.resources
 C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.EditByName.resources
+C:\Users\valer\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csprojAssemblyReference.cache

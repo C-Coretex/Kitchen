@@ -44,6 +44,7 @@
             // 
             // Back
             // 
+            this.Back.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Back.Location = new System.Drawing.Point(0, 338);
             this.Back.Name = "Back";
             this.Back.Size = new System.Drawing.Size(116, 21);
@@ -55,6 +56,7 @@
             // findText
             // 
             this.findText.AcceptsReturn = true;
+            this.findText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.findText.BackColor = System.Drawing.Color.White;
             this.findText.Location = new System.Drawing.Point(122, 338);
             this.findText.Name = "findText";
@@ -66,6 +68,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Enabled = false;
@@ -81,6 +84,7 @@
             // 
             // Find
             // 
+            this.Find.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Find.Location = new System.Drawing.Point(330, 338);
             this.Find.Name = "Find";
             this.Find.Size = new System.Drawing.Size(84, 21);
@@ -91,6 +95,7 @@
             // 
             // AddRecept
             // 
+            this.AddRecept.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.AddRecept.Location = new System.Drawing.Point(0, 319);
             this.AddRecept.Name = "AddRecept";
             this.AddRecept.Size = new System.Drawing.Size(414, 20);
@@ -105,6 +110,9 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightCyan;
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -123,6 +131,7 @@
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.MinimumSize = new System.Drawing.Size(414, 319);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
@@ -169,14 +178,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 359);
+            this.ClientSize = new System.Drawing.Size(413, 359);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.AddRecept);
             this.Controls.Add(this.Find);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.findText);
             this.Controls.Add(this.Back);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(369, 398);
             this.Name = "Form2";
             this.ShowIcon = false;

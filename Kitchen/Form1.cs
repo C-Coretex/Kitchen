@@ -24,6 +24,9 @@ namespace Kitchen
             BrowseRecepts.FlatAppearance.BorderSize = 0;
             NAMES.ScrollBars = ScrollBars.Both;
             NAMES.Text = saveMyIng;
+            // string o = System.AppDomain.CurrentDomain.BaseDirectory;
+            //string pathToFile = @o + "\";
+            //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
             pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\";
         }
         
