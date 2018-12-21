@@ -131,6 +131,7 @@
             this.Name = "Show";
             this.ShowIcon = false;
             this.Text = "Show";
+            this.Load += new System.EventHandler(this.Show_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

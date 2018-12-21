@@ -40,5 +40,10 @@ namespace Kitchen
         private void description_TextChanged(object sender, EventArgs e)
         {
         }
+
+        private void Show_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

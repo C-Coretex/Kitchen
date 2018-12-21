@@ -131,15 +131,14 @@ namespace Kitchen
             //string Name = dataGridView.Rows[row].Cells["colName"].Value.ToString();
             //string Ingridients = dataGridView.Rows[row].Cells["colIngridients"].Value.ToString();
             //string Description = dataGridView.Rows[row].Cells["colDescription"].Value.ToString();
-            //Show sh = new Show(Name, Ingridients, Description);
-            //sh.StartPosition = FormStartPosition.Manual;
-            //sh.Location = this.Location;
-            //sh.Show();
+            //EditByName ed = new EditByName(ame, Ingridients, Description);
+            //ed.StartPosition = FormStartPosition.Manual;
+            //ed.Location = this.Location;
+            //ed.Show();
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
     }
 }

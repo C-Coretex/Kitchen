@@ -32,7 +32,6 @@
             this.delete = new System.Windows.Forms.Button();
             this.saveDelete = new System.Windows.Forms.Button();
             this.description = new System.Windows.Forms.TextBox();
-            this.ingridients = new System.Windows.Forms.TextBox();
             this.name = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -82,19 +81,6 @@
             this.description.TabIndex = 20;
             this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
             // 
-            // ingridients
-            // 
-            this.ingridients.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ingridients.Font = new System.Drawing.Font("Courier New", 12F);
-            this.ingridients.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ingridients.Location = new System.Drawing.Point(4, 131);
-            this.ingridients.Multiline = true;
-            this.ingridients.Name = "ingridients";
-            this.ingridients.Size = new System.Drawing.Size(282, 184);
-            this.ingridients.TabIndex = 19;
-            this.ingridients.TextChanged += new System.EventHandler(this.ingridients_TextChanged);
-            // 
             // name
             // 
             this.name.Font = new System.Drawing.Font("Courier New", 12F);
@@ -143,7 +129,6 @@
             this.Controls.Add(this.delete);
             this.Controls.Add(this.saveDelete);
             this.Controls.Add(this.description);
-            this.Controls.Add(this.ingridients);
             this.Controls.Add(this.name);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
@@ -151,6 +136,7 @@
             this.MinimumSize = new System.Drawing.Size(625, 358);
             this.Name = "EditByName";
             this.Text = "EditByName";
+            this.Load += new System.EventHandler(this.EditByName_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,7 +148,6 @@
         private System.Windows.Forms.Button delete;
         private System.Windows.Forms.Button saveDelete;
         private System.Windows.Forms.TextBox description;
-        private System.Windows.Forms.TextBox ingridients;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

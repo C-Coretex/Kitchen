@@ -84,7 +84,7 @@ namespace Kitchen
             //sw.WriteLine(line1);
             // sw.Close();
 
-            Form1 f1 = new Form1(saveMyIng);
+            Form1 f1 = new Form1();
             f1.StartPosition = FormStartPosition.Manual;
             f1.Location = this.Location;
             Hide();
@@ -185,7 +185,7 @@ namespace Kitchen
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
+           // try
             {
                 rowIndex = dataGridView.CurrentCell.RowIndex;
                 rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
@@ -194,7 +194,7 @@ namespace Kitchen
                 ed.Location = this.Location;
                 ed.ShowDialog();
             }
-            catch
+         //   catch
             {
             }
         }
