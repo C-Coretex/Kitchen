@@ -14,7 +14,6 @@ namespace Kitchen
     public partial class Form1 : Form
     {
         string ingr = "";
-        int boxTrue = 0;
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
         static public string pathToFile = "";
@@ -35,17 +34,24 @@ namespace Kitchen
             BrowseRecepts.FlatAppearance.BorderSize = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             int startLocation = 0;//Локация "генерирования" чекбокса (y)
-            int chboxTrueCount = 0;
             for (i = 0; i < ingridients.Length; i++)
             {
-                box = new CheckBox(); //Create new checkBox
-                box.Tag = i;//CheckBox (Tag 0-..)
-                box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                box.Text = ingridients[i];
-                box.AutoSize = true;
-                box.Location = new Point(2, startLocation);
-                startLocation += 25;
-                this.Controls.Add(box);
+                if (ingridients[i] != "")
+                {
+                    box = new CheckBox(); //Create new checkBox
+                    box.Tag = i;//CheckBox (Tag 0-..)
+                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                    box.Text = ingridients[i];
+                    box.AutoSize = true;
+                    box.Location = new Point(2, startLocation);
+                    startLocation += 25;
+                    this.Controls.Add(box);
+                }
+            }
+            if (startLocation > 240)
+            {
+
+                this.Size = new Size(323, startLocation + 150);
             }
         }
         
@@ -53,13 +59,13 @@ namespace Kitchen
         {
             int boxTrue = 0;
             int n = 0;
+            ingr = "";
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
             {
                 n++;
                 if (chbox.Checked)
                 {
                     boxTrue++;
-                    MessageBox.Show("Ты выбрал " + chbox.Text);
                     ingr += n;
                 }
             }

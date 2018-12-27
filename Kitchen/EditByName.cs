@@ -14,6 +14,8 @@ namespace Kitchen
 {
     public partial class EditByName : Form
     {
+        int startLocation = 142;//Локация "генерирования" чекбокса (y)
+        static public string name_ = "";
         string originalName;
         int i;//Количество CheckBox'ов
         string pathToFile = Form1.pathToFile;
@@ -28,14 +30,16 @@ namespace Kitchen
             string ingrid = Ingridients;
             //Надо добавить выделение чекбоксов с ингридиентами
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            int startLocation = 142;//Локация "генерирования" чекбокса (y)
             int chboxTrueCount = 0;
+            string[] subStr = ingrid.Split(' ');
+            int n = 0;
             for (i = 0; i < ingridients.Length; i++)
             {
                 try
                 {
-                    if (i == Convert.ToInt16(ingrid.Substring(chboxTrueCount, 1)))
+                    if (i - 1 == Convert.ToInt16(subStr[n]))
                     {
+                        n++;
                         this.box.Checked = true;
                         chboxTrueCount++;
                     }
@@ -43,84 +47,85 @@ namespace Kitchen
                 catch
                 {
                 }
-                box = new CheckBox(); //Create new checkBox
-                box.Tag = i;//CheckBox (Tag 0-..)
-                box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                box.Text = ingridients[i];
-                box.AutoSize = true;
-                box.Location = new Point(2, startLocation);
-                startLocation += 25;
-                this.Controls.Add(box);
-            }
-            try
-            {
-                if (i == Convert.ToInt16(ingrid.Substring(chboxTrueCount, 1)))
+                if (i - 1 < ingridients.Length)
                 {
-                    this.box.Checked = true;
-                    chboxTrueCount++;
+                    box = new CheckBox(); //Create new checkBox
+                    box.Tag = i;//CheckBox (Tag 0-..)
+                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                    box.Text = ingridients[i - 1];
+                    box.AutoSize = true;
+                    box.Location = new Point(2, startLocation);
+                    startLocation += 25;
+                    this.Controls.Add(box);
                 }
             }
-            catch
+                if (startLocation > 440)
             {
+                this.Size = new Size(596, startLocation + 50);
             }
         }
 
         private void saveDelete_Click(object sender, EventArgs e)
         {
-                if (name.Text != "" && description.Text != "")
+            if (name.Text != "" && description.Text != "")
+            {
+                string ingr = "";
+                int boxTrue = 0;
+                int n = 0;
+                foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
                 {
-                    int boxTrue = 0;
-                    foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+                    n++;
+                    if (chbox.Checked)
                     {
-                        if (chbox.Checked)
-                        {
-                            boxTrue++;
-                            MessageBox.Show("Ты выбрал " + chbox.Text);
-                        }
-                    }
-                    if (boxTrue != 0) {
-                        RecipeList RL = new RecipeList
-                        {
-                            Name = name.Text,
-                            Description = description.Text
-                        };
-                        var objects = new List<RecipeList>();
-                        int a = 0;
-                        using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
-                        {
-                            BinaryFormatter formatter = new BinaryFormatter();
-                            fs.Position = 0;
-
-                            while (fs.Position < fs.Length)
-                            {
-                                objects.Add((RecipeList)formatter.Deserialize(fs));
-                                if (objects[a].Name == originalName)
-                                {
-                                    objects.Remove(objects[a]);
-                                    objects.Add(RL);
-                                    a++;
-                                }
-                                else
-                                {
-                                    a++;
-                                }
-                            }
-                        }
-                        System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
-                        using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
-                        {
-                            BinaryFormatter formatter = new BinaryFormatter();
-                            for (int i = 0; i < a; i++)
-                            {
-                                formatter.Serialize(fs, objects[i]);
-                            }
-                        }
-                        this.Close();
+                        boxTrue++;
+                        ingr += n + " ";
                     }
                 }
-            }
+                if (boxTrue != 0)
+                {
+                    RecipeList RL = new RecipeList
+                    {
+                        Name = name.Text,
+                        Ingridients = ingr,
+                        Description = description.Text
+                    };
+                    var objects = new List<RecipeList>();
+                    int a = 0;
+                    using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        fs.Position = 0;
 
-            private void delete_Click(object sender, EventArgs e)
+                        while (fs.Position < fs.Length)
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                            if (objects[a].Name == originalName)
+                            {
+                                objects.Remove(objects[a]);
+                                objects.Add(RL);
+                                a++;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
+                    }
+                    System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                    using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        for (int i = 0; i < a; i++)
+                        {
+                            formatter.Serialize(fs, objects[i]);
+                        }
+                    }
+                    this.Close();
+                }
+            }
+        }
+
+        private void delete_Click(object sender, EventArgs e)
         {
             RecipeList RL = new RecipeList
             {
@@ -137,23 +142,29 @@ namespace Kitchen
                 while (fs.Position < fs.Length)
                 {
                     objects.Add((RecipeList)formatter.Deserialize(fs));
-                    if (objects[a].Name == name.Text)
+                    try
                     {
-                        objects.Remove(objects[a]);
+                        if (objects[a].Name == name.Text)
+                        {
+                            objects.Remove(objects[a]);
+                        }
+                        a++;
                     }
-                    a++;
+                    catch
+                    {
+                    }
                 }
             }
             System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
             using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
             {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    for (int i = 0; i < a - 1; i++)
-                    {
-                        formatter.Serialize(fs, objects[i]);
-                    }
+                BinaryFormatter formatter = new BinaryFormatter();
+                for (int i = 0; i < a - 1; i++)
+                {
+                    formatter.Serialize(fs, objects[i]);
                 }
-                this.Close();
+            }
+            this.Close();
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -172,6 +183,28 @@ namespace Kitchen
         }
         private void EditByName_Load(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Удалить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AddCheckBox aCB = new AddCheckBox();
+                aCB.StartPosition = FormStartPosition.Manual;
+                aCB.Location = this.Location;
+                aCB.ShowDialog();
+
+                box = new CheckBox(); //Create new checkBox
+                box.Tag = i;//CheckBox (Tag 0-..)
+                box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                box.Text = name_;
+                box.AutoSize = true;
+                box.Location = new Point(2, startLocation);
+                startLocation += 25;
+                this.Controls.Add(box);
+                this.box.Checked = true;
+            }
         }
     }
 }

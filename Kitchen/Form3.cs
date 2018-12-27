@@ -14,52 +14,58 @@ namespace Kitchen
 {
     public partial class Form3 : Form
     {
+        int startLocation = 142;//Локация "генерирования" чекбокса (y)
+        static public string name_ = "";
         int i;//Количество CheckBox'ов
         string pathToFile = Form1.pathToFile;
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы везде
         public Form3()
         {
             InitializeComponent();
+
             description.ScrollBars = ScrollBars.Both;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            int startLocation = 142;//Локация "генерирования" чекбокса (y)
             for (i = 0; i < ingridients.Length; i++)
             {
                 box = new CheckBox(); //Create new checkBox
                 box.Tag = i;//CheckBox (Tag 0-..)
                 box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                  box.Text = ingridients[i];
+                box.Text = ingridients[i];
                 box.AutoSize = true;
                 box.Location = new Point(2, startLocation);
                 startLocation += 25;
-                  this.Controls.Add(box);
+                this.Controls.Add(box);
+            }
+            //Увеличивает окно, если чекбоксов слишком много
+            if (startLocation> 440)
+            {
+                this.Size = new Size(596, startLocation+50);
             }
         }
 
         private void saveExit_Click(object sender, EventArgs e)
         {
-                    string ingr = "";
-                    int boxTrue = 0;
-                    int n = 0;
-                foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
-                {
+            string ingr = "";
+            int boxTrue = 0;
+            int n = 0;
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
                 n++;
-                    if (chbox.Checked)
-                    {
-                        boxTrue++;
-                        MessageBox.Show("Ты выбрал " + chbox.Text);
-                    ingr += n;
-                    }
+                if (chbox.Checked)
+                {
+                    boxTrue++;
+                    ingr += n + " ";
                 }
-          
-             if (name.Text == "")
+            }
+
+            if (name.Text == "")
             {
                 MessageBox.Show("Впишите название рецепта");
             }
-             else if (boxTrue == 0)
-              {
-                 MessageBox.Show("Выберите ингридиенты");
-              }
+            else if (boxTrue == 0)
+            {
+                MessageBox.Show("Выберите ингридиенты");
+            }
             else if (description.Text == "")
             {
                 MessageBox.Show("Впишите описание рецепта");
@@ -101,5 +107,28 @@ namespace Kitchen
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Удалить или изменить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AddCheckBox aCB = new AddCheckBox();
+                aCB.StartPosition = FormStartPosition.Manual;
+                aCB.Location = this.Location;
+                aCB.ShowDialog();
+
+                box = new CheckBox(); //Create new checkBox
+                box.Tag = i;//CheckBox (Tag 0-..)
+                box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                box.Text = name_;
+                box.AutoSize = true;
+                box.Location = new Point(2, startLocation);
+                startLocation += 25;
+                this.Controls.Add(box);
+                this.box.Checked = true;
+            }
+        }
     }
 }
+
