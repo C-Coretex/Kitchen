@@ -33,7 +33,7 @@ namespace Kitchen
             int chboxTrueCount = 0;
             string[] subStr = ingrid.Split(' ');
             int n = 0;
-            for (i = 0; i < ingridients.Length; i++)
+            for (i = 1; i < ingridients.Length; i++)
             {
                 try
                 {

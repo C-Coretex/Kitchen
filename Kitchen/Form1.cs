@@ -13,7 +13,7 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
-        string ingr = "";
+        string ingrTrue = "";
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
         static public string pathToFile = "";
@@ -59,17 +59,17 @@ namespace Kitchen
         {
             int boxTrue = 0;
             int n = 0;
-            ingr = "";
+            ingrTrue = "";
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
             {
                 n++;
                 if (chbox.Checked)
                 {
                     boxTrue++;
-                    ingr += n;
+                    ingrTrue += n + " ";
                 }
             }
-            Find find = new Find(ingr);
+            Find find = new Find(ingrTrue);
             find.StartPosition = FormStartPosition.Manual;
             find.Location = this.Location;
             find.ShowDialog();
@@ -81,7 +81,7 @@ namespace Kitchen
             f2.StartPosition = FormStartPosition.Manual;
             f2.Location = this.Location;
             Hide();
-            Form2.saveMyIng = ingr;
+            Form2.saveMyIng = ingrTrue;
             f2.ShowDialog();
             Close();//Закрывает ПЕРВУЮ форму
         }

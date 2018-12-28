@@ -14,19 +14,16 @@ namespace Kitchen
 {
     public partial class Find : Form
     {
-        string ingr;
+        string ingrTrue;
         string pathToFile = Form1.pathToFile;
-        public Find(string Ingr)
+        public Find(string IngrTrue)
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
-            ingr = Ingr;
-            var ingridientsList = new List<string>();
-            int lastIndex = 0;
-            int maxLength = 0;
+                ingrTrue = IngrTrue;
             //Наполнение ВСЕМИ рацептами (если ничего не выбрано)
 //---------------------------------------------------------------------------------------------------------------------------
-            if (ingr.Length == 0)
+            if (ingrTrue.Length == 0)
             {
                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
@@ -47,7 +44,7 @@ namespace Kitchen
                             int n = dataGridView.Rows.Add();
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
                             dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-                            dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
+                            dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "100%";
                             dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
                     }
@@ -59,14 +56,8 @@ namespace Kitchen
 //---------------------------------------------------------------------------------------------------------------------------
             else
             {
-                while (0 < ingr.Length)
-                {
-                    string subIngr = ingr.Substring(0, 1);
-                    ingr = ingr.Remove(0, 1);
-                    ingridientsList.Add(subIngr);
-                }
-               // int wordCount = ingr.Length;
-                using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+//---------------------------------------------------------------------------------------------------------------------------
+                using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
 
@@ -78,34 +69,45 @@ namespace Kitchen
                     {
                         objects.Add((RecipeList)formatter.Deserialize(fs));
                     }
-
                     foreach (RecipeList r in objects)
                     {
-                        int a = 0;
-                        for (int i = 0; i < ingridientsList.Count; i++)
-                        {
-                            bool equals = false;
 
-                            for (a = 0; a + ingridientsList[i].Length <= r.Ingridients.Length; a++)
-                            {
-                                if (ingridientsList[i].Equals(r.Ingridients.Substring(a, ingridientsList[i].Length), StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    equals = true;
-                                }
-                                if (equals == true)
-                                {
-                                    a = r.Ingridients.Length;//Находит ТОЛЬКО ОДНО совпадение
-                                                              a = ingridientsList.Count + 1;
-                                    int n = dataGridView.Rows.Add();
-                                    dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                                    dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-                                    dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
-                                    dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
-                                }
-                            }
+                        //Записываю выбранные ингредиенты во множество
+                        HashSet<uint> ingrTrueSet = new HashSet<uint>();
+                        string[] subStr = ingrTrue.Split(' ');
+                        for (uint i = 0; i < subStr.Length - 1; i++)
+                        {
+                            // Записать во множество числа
+                            ingrTrueSet.Add(Convert.ToUInt16(subStr[i]));
                         }
+                        //Записываю выбранные ингредиенты во множество
+
+                        //Записываю ингредиенты из конкретного рецепта во множество
+                        string[] ingrOrder = r.Ingridients.Split(' ');
+                        HashSet<uint> ingrCountEVER = new HashSet<uint>();
+                            for (uint n = 0; n < ingrOrder.Length-1; n++)
+                            {
+                                ingrCountEVER.Add(Convert.ToUInt32(ingrOrder[n]));
+                            }
+                        //Записываю ингредиенты из конкретного рецепта во множество
+
+                        //Если оба множества пересекаются, конкретный рецепт записывается в таблицу
+                            List<uint> equals = new List<uint>();
+                            float ingrTrueSetCount = ingrTrueSet.Count;
+                            ingrTrueSet.IntersectWith(ingrCountEVER);
+                            equals = ingrTrueSet.ToList();
+                            if (equals.Count != 0)
+                            {
+                                ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
+                                int n = dataGridView.Rows.Add();
+                                dataGridView.Rows[n].Cells["colName"].Value = r.Name;
+                                dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
+                                dataGridView.Rows[n].Cells["colEqualsProcents"].Value = Convert.ToInt16(ingrTrueSetCount) + "%";
+                                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+                            }
                     }
                 }
+                dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
             }
             this.Cursor = Cursors.Default;
         }
@@ -127,103 +129,103 @@ namespace Kitchen
 
 
             this.Cursor = Cursors.WaitCursor;
-            var ingridientsList = new List<string>();
-            int lastIndex = 0;
-            int maxLength = 0;
-            //Наполнение ВСЕМИ рацептами (если ничего не выбрано)
-            //---------------------------------------------------------------------------------------------------------------------------
-            if (ingr.Length == 0)
-            {
-                using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
-                {
-                    try
-                    {
-                        BinaryFormatter formatter = new BinaryFormatter();
+            //var ingridientsList = new List<string>();
+            //int lastIndex = 0;
+            //int maxLength = 0;
+            ////Наполнение ВСЕМИ рацептами (если ничего не выбрано)
+            ////---------------------------------------------------------------------------------------------------------------------------
+            //if (ingrTrue.Length == 0)
+            //{
+            //    using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            //    {
+            //        try
+            //        {
+            //            BinaryFormatter formatter = new BinaryFormatter();
 
-                        RecipeList RL = new RecipeList();
-                        var objects = new List<RecipeList>();
+            //            RecipeList RL = new RecipeList();
+            //            var objects = new List<RecipeList>();
 
-                        fs.Position = 0;
-                        while (fs.Position < fs.Length)
-                        {
-                            objects.Add((RecipeList)formatter.Deserialize(fs));
-                        }
-                        foreach (RecipeList r in objects)
-                        {
-                            int n = dataGridView.Rows.Add();
-                            dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                            dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-                            dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
-                            dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
-                        }
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-            //---------------------------------------------------------------------------------------------------------------------------
-            else
-            {
-                while (0 < ingr.Length)
-                {
-                    lastIndex = ingr.IndexOf("\r");
-                    if (lastIndex <= 0)
-                    {
-                        lastIndex = ingr.Length;
-                    }
-                    ingr = ingr.Remove(lastIndex, 0).Trim();
-                    string subIngr = ingr.Substring(0, lastIndex);
-                    if (subIngr.Length > maxLength)
-                    {
-                        maxLength = subIngr.Length;
-                    }
-                    ingr = ingr.Remove(0, lastIndex).Trim();
-                    ingridientsList.Add(subIngr);
-                    //   MessageBox.Show("" + ingridientsList.Last());
-                }
-                // int wordCount = ingr.Length;
-                using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
-                {
-                    BinaryFormatter formatter = new BinaryFormatter();
+            //            fs.Position = 0;
+            //            while (fs.Position < fs.Length)
+            //            {
+            //                objects.Add((RecipeList)formatter.Deserialize(fs));
+            //            }
+            //            foreach (RecipeList r in objects)
+            //            {
+            //                int n = dataGridView.Rows.Add();
+            //                dataGridView.Rows[n].Cells["colName"].Value = r.Name;
+            //                dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
+            //                dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
+            //                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+            //            }
+            //        }
+            //        catch
+            //        {
+            //        }
+            //    }
+            //}
+            ////---------------------------------------------------------------------------------------------------------------------------
+            //else
+            //{
+            //    while (0 < ingrTrue.Length)
+            //    {
+            //        lastIndex = ingrTrue.IndexOf("\r");
+            //        if (lastIndex <= 0)
+            //        {
+            //            lastIndex = ingrTrue.Length;
+            //        }
+            //        ingrTrue = ingrTrue.Remove(lastIndex, 0).Trim();
+            //        string subIngr = ingrTrue.Substring(0, lastIndex);
+            //        if (subIngr.Length > maxLength)
+            //        {
+            //            maxLength = subIngr.Length;
+            //        }
+            //        ingrTrue = ingrTrue.Remove(0, lastIndex).Trim();
+            //        ingridientsList.Add(subIngr);
+            //        //   MessageBox.Show("" + ingridientsList.Last());
+            //    }
+            //    // int wordCount = ingrTrue.Length;
+            //    using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            //    {
+            //        BinaryFormatter formatter = new BinaryFormatter();
 
-                    RecipeList RL = new RecipeList();
-                    var objects = new List<RecipeList>();
+            //        RecipeList RL = new RecipeList();
+            //        var objects = new List<RecipeList>();
 
-                    fs.Position = 0;
-                    while (fs.Position < fs.Length)
-                    {
-                        objects.Add((RecipeList)formatter.Deserialize(fs));
-                    }
+            //        fs.Position = 0;
+            //        while (fs.Position < fs.Length)
+            //        {
+            //            objects.Add((RecipeList)formatter.Deserialize(fs));
+            //        }
 
-                    foreach (RecipeList r in objects)
-                    {
-                        int a = 0;
-                        for (int i = 0; i < ingridientsList.Count; i++)
-                        {
-                            bool equals = false;
+            //        foreach (RecipeList r in objects)
+            //        {
+            //            int a = 0;
+            //            for (int i = 0; i < ingridientsList.Count; i++)
+            //            {
+            //                bool equals = false;
 
-                            for (a = 0; a + ingridientsList[i].Length <= r.Ingridients.Length; a++)
-                            {
-                                if (ingridientsList[i].Equals(r.Ingridients.Substring(a, ingridientsList[i].Length), StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    equals = true;
-                                }
-                                if (equals == true)
-                                {
-                                    a = r.Ingridients.Length;//Находит ТОЛЬКО ОДНО совпадение
-                                    a = ingridientsList.Count + 1;
-                                    int n = dataGridView.Rows.Add();
-                                    dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                                    dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-                                    dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
-                                    dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            //                for (a = 0; a + ingridientsList[i].Length <= r.Ingridients.Length; a++)
+            //                {
+            //                    if (ingridientsList[i].Equals(r.Ingridients.Substring(a, ingridientsList[i].Length), StringComparison.InvariantCultureIgnoreCase))
+            //                    {
+            //                        equals = true;
+            //                    }
+            //                    if (equals == true)
+            //                    {
+            //                        a = r.Ingridients.Length;//Находит ТОЛЬКО ОДНО совпадение
+            //                        a = ingridientsList.Count + 1;
+            //                        int n = dataGridView.Rows.Add();
+            //                        dataGridView.Rows[n].Cells["colName"].Value = r.Name;
+            //                        dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
+            //                        dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
+            //                        dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             this.Cursor = Cursors.Default;
         }
 

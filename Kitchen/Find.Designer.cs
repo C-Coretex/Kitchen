@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEqualsProcents = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +59,7 @@
             this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colNumber,
+            this.colEqualsProcents,
             this.colDescription,
             this.colName,
             this.colIngridients});
@@ -78,15 +78,15 @@
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
-            // colNumber
+            // colEqualsProcents
             // 
-            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumber.FillWeight = 20F;
-            this.colNumber.HeaderText = "№";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colNumber.Width = 42;
+            this.colEqualsProcents.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colEqualsProcents.FillWeight = 20F;
+            this.colEqualsProcents.HeaderText = "Совпадение";
+            this.colEqualsProcents.Name = "colEqualsProcents";
+            this.colEqualsProcents.ReadOnly = true;
+            this.colEqualsProcents.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colEqualsProcents.Width = 92;
             // 
             // colDescription
             // 
@@ -138,7 +138,7 @@
         #endregion
 
         public System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEqualsProcents;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
