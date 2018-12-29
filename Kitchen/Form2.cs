@@ -22,9 +22,6 @@ namespace Kitchen
             InitializeComponent();
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.Cursor = Cursors.WaitCursor;
-            // StreamReader sr = new StreamReader(pathToFile + @"Text.txt", true);
-            //testBox2.Text = sr.ReadToEnd();
-            // sr.Close();
             dataGridView.RowHeadersWidth = 20;
             dataGridView.AutoResizeColumns();
             //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +67,7 @@ namespace Kitchen
                                         var objects = new List<RecipeList>();
 
                                         fs.Position = 0;
+                                        string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
                                         while (fs.Position < fs.Length)
                                         {
                                             objects.Add((RecipeList)formatter.Deserialize(fs));
@@ -78,7 +76,12 @@ namespace Kitchen
                                         {
                                             int n = dataGridView.Rows.Add();
                                             dataGridView.Rows[n].Cells[1].Value = r.Name;
-                                            dataGridView.Rows[n].Cells[2].Value = r.Ingridients;
+                                                string[] subStr = r.Ingridients.Split(' ');
+                                                for (uint i = 0; i < subStr.Length - 1; i++)
+                                                {
+                                                    string together = dataGridView.Rows[n].Cells["colIngridients"].Value + "\r " + allIngridients[Convert.ToInt16(subStr[i]) - 1];
+                                                    dataGridView.Rows[n].Cells["colIngridients"].Value = together;
+                                                }
                                             dataGridView.Rows[n].Cells[0].Value = n + 1;
                                         }
                                     }
@@ -133,11 +136,11 @@ namespace Kitchen
             }
         }
 
-        private void findText_Click(object sender, EventArgs e)
+        private void FindText_Click(object sender, EventArgs e)
         {
         }
 
-        private void findText_TextChanged(object sender, EventArgs e)
+        private void FindText_TextChanged(object sender, EventArgs e)
         {
             if (label1 != null)
             {
@@ -153,7 +156,7 @@ namespace Kitchen
         {
         }
 
-        private void findText_KeyDown(object sender, KeyEventArgs e)
+        private void FindText_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -171,7 +174,7 @@ namespace Kitchen
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try
+           // try
             {
                 rowIndex = dataGridView.CurrentCell.RowIndex;
                 rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());

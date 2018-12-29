@@ -16,7 +16,6 @@ namespace Kitchen
     {
         int startLocation = 142;//Локация "генерирования" чекбокса (y)
         static public string name_ = "";
-        int boxTrue = 0;
         int rowNumber;
         int rowIndex;
         string pathToFile = Form1.pathToFile;
@@ -139,30 +138,27 @@ namespace Kitchen
                                 formatter.Serialize(fs, objects[i]);
                             }
                         }
-                    }
-                  this.Close();
+                    this.Close();
                 }
-            else if (name.Text == "")
-            {
-                MessageBox.Show("Впишите название рецепта");
-            }
-            else if (boxTrue == 0)
-            {
-                MessageBox.Show("Выберите ингридиенты");
-            }
-            else if (description.Text == "")
-            {
-                MessageBox.Show("Впишите описание рецепта");
-            }
+                else if (name.Text == "")
+                {
+                    MessageBox.Show("Впишите название рецепта");
+                }
+                else if (boxTrue == 0)
+                {
+                    MessageBox.Show("Выберите ингридиенты");
+                }
+                else if (description.Text == "")
+                {
+                    MessageBox.Show("Впишите описание рецепта");
+                }
+                }
         }
         private void Edit_Load(object sender, EventArgs e)
         {
         }
 
-        private void Exit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Exit_Click(object sender, EventArgs e) => this.Close();
 
         private void Delete_Click(object sender, EventArgs e)
         {

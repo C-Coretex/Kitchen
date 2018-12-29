@@ -30,11 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.colEqualsProcents = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNotEnough = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +64,7 @@
             this.colEqualsProcents,
             this.colDescription,
             this.colName,
-            this.colIngridients});
+            this.colNotEnough});
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
@@ -81,6 +83,9 @@
             // colEqualsProcents
             // 
             this.colEqualsProcents.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.YellowGreen;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.colEqualsProcents.DefaultCellStyle = dataGridViewCellStyle2;
             this.colEqualsProcents.FillWeight = 20F;
             this.colEqualsProcents.HeaderText = "Совпадение";
             this.colEqualsProcents.Name = "colEqualsProcents";
@@ -90,19 +95,16 @@
             // 
             // colDescription
             // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colDescription.HeaderText = "Описание";
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
-            this.colDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colDescription.Visible = false;
-            this.colDescription.Width = 5;
             // 
             // colName
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
             this.colName.HeaderText = "Название";
             this.colName.MaxInputLength = 0;
             this.colName.Name = "colName";
@@ -110,14 +112,17 @@
             this.colName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colName.Width = 81;
             // 
-            // colIngridients
+            // colNotEnough
             // 
-            this.colIngridients.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colIngridients.HeaderText = "Ингридиенты";
-            this.colIngridients.MaxInputLength = 0;
-            this.colIngridients.Name = "colIngridients";
-            this.colIngridients.ReadOnly = true;
-            this.colIngridients.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colNotEnough.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightCoral;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.DarkRed;
+            this.colNotEnough.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colNotEnough.HeaderText = "Нужно докупить";
+            this.colNotEnough.MaxInputLength = 0;
+            this.colNotEnough.Name = "colNotEnough";
+            this.colNotEnough.ReadOnly = true;
+            this.colNotEnough.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Find
             // 
@@ -141,6 +146,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEqualsProcents;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotEnough;
     }
 }

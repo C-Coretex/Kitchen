@@ -62,9 +62,9 @@
             this.findText.Name = "findText";
             this.findText.Size = new System.Drawing.Size(210, 20);
             this.findText.TabIndex = 1;
-            this.findText.Click += new System.EventHandler(this.findText_Click);
-            this.findText.TextChanged += new System.EventHandler(this.findText_TextChanged);
-            this.findText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.findText_KeyDown);
+            this.findText.Click += new System.EventHandler(this.FindText_Click);
+            this.findText.TextChanged += new System.EventHandler(this.FindText_TextChanged);
+            this.findText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FindText_KeyDown);
             // 
             // label1
             // 

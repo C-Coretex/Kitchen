@@ -21,8 +21,9 @@ namespace Kitchen
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
                 ingrTrue = IngrTrue;
+            string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
             //Наполнение ВСЕМИ рацептами (если ничего не выбрано)
-//---------------------------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
             if (ingrTrue.Length == 0)
             {
                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
@@ -43,8 +44,15 @@ namespace Kitchen
                         {
                             int n = dataGridView.Rows.Add();
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                            dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-                            dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "100%";
+
+                            string[] subStr = r.Ingridients.Split(' ');
+                            for (uint i = 0; i < subStr.Length-1; i++)
+                            {
+                                string together = dataGridView.Rows[n].Cells["colNotEnough"].Value + "\r " + allIngridients[Convert.ToInt16(subStr[i])-1];
+                                dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
+                            }
+
+                            dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "0%";
                             dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
                     }
@@ -93,21 +101,37 @@ namespace Kitchen
 
                         //Если оба множества пересекаются, конкретный рецепт записывается в таблицу
                             List<uint> equals = new List<uint>();
-                            float ingrTrueSetCount = ingrTrueSet.Count;
+                            float ingrTrueSetCount = ingrCountEVER.Count;
                             ingrTrueSet.IntersectWith(ingrCountEVER);
                             equals = ingrTrueSet.ToList();
                             if (equals.Count != 0)
                             {
-                                ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
                                 int n = dataGridView.Rows.Add();
                                 dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                                dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
+                                ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
                                 dataGridView.Rows[n].Cells["colEqualsProcents"].Value = Convert.ToInt16(ingrTrueSetCount) + "%";
-                                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+                            equals = ingrCountEVER.Except(equals).ToList();
+                            if (equals.Count != 0)
+                            {
+                                for (int i = 0; i < equals.Count; i++)
+                                {
+                                    string together = dataGridView.Rows[n].Cells["colNotEnough"].Value + "\r " + allIngridients[Convert.ToInt16(equals[i]) - 1];
+                                    //string a = Convert.ToString(dataGridView.Rows[n].Cells["colNotEnough"].Value) + " " + equals[i];
+                                    dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
+                                }
                             }
+                            else
+                            {
+                                dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
+                                dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
+                                dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
+                            }
+                                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+                        }
                     }
                 }
                 dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
+                dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
             this.Cursor = Cursors.Default;
         }
