@@ -20,11 +20,12 @@ namespace Kitchen
         public Form1()
         {
             InitializeComponent();
-
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
             //string pathToFile = @o + "\";
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
-            pathToFile = @"C:\Users\valer\Desktop\Programming\Kitchen\";
+            pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
             FindRecepts.TabStop = false;
             FindRecepts.FlatStyle = FlatStyle.Flat;
@@ -91,7 +92,6 @@ namespace Kitchen
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
