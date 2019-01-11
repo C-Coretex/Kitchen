@@ -26,11 +26,11 @@ namespace Kitchen
             dataGridView.AutoResizeColumns();
             //-----------------------------------------------------------------------------------------------------------------------------------------
             NewTable();
-            this.Cursor = Cursors.Default;
             for (int n = 0; n < 5; n++)
             {
                 SendKeys.Send("{TAB}");
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -166,10 +166,11 @@ namespace Kitchen
 
         private void AddRecept_Click(object sender, EventArgs e)
         {
-            AddName AD = new AddName();
-            AD.StartPosition = FormStartPosition.Manual;
-            AD.Location = this.Location;
-            AD.ShowDialog();
+            Form3 f3 = new Form3();
+            f3.StartPosition = FormStartPosition.Manual;
+            f3.Location = this.Location;
+            f3.ShowDialog();
+            this.Close();
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

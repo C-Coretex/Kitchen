@@ -13,9 +13,13 @@ namespace Kitchen
     public partial class AddName : Form
     {
         int i = 1;
-        public AddName()
+        string ingr = "";
+        string count = "";
+        public AddName(string Ingridients, string Count)
         {
             InitializeComponent();
+            ingr = Ingridients;
+            count = Count;
             description.ScrollBars = ScrollBars.Both;
         }
 
@@ -30,10 +34,7 @@ namespace Kitchen
                 MessageBox.Show("Впишите описание рецепта");
             }
             else{
-                Form3 f3 = new Form3(name.Text, description.Text);
-                f3.StartPosition = FormStartPosition.Manual;
-                f3.Location = this.Location;
-                f3.ShowDialog();
+                RecipeList.Serialization(name.Text, description.Text, ingr, count);
                 this.Close();
             }
         }
@@ -69,9 +70,19 @@ namespace Kitchen
             }
             catch
             {
-                MessageBox.Show("Сюда вписывать можно только цифры");
+                MessageBox.Show("Сюда можно вписывать только цифры");
                 сщгте.Text = Convert.ToString(i);
             }
+        }
+
+        private void AddName_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

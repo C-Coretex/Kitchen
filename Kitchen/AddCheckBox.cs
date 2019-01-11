@@ -37,7 +37,6 @@ namespace Kitchen
                 if (equals == false)
                 {
                     File.AppendAllText(path: Form1.pathToFile + "Ingridients.txt", contents: Environment.NewLine + textBox1.Text.Trim());
-                    Form3.name_ = textBox1.Text.Trim();
                     name = textBox1.Text.Trim();
                     this.Close();
                 }
