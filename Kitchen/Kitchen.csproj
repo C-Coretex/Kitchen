@@ -65,6 +65,12 @@
     <Compile Include="EditByName.Designer.cs">
       <DependentUpon>EditByName.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddName.Designer.cs">
+      <DependentUpon>AddName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Find.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditByName.resx">
       <DependentUpon>EditByName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddName.resx">
+      <DependentUpon>AddName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Find.resx">
       <DependentUpon>Find.cs</DependentUpon>

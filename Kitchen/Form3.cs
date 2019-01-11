@@ -9,43 +9,64 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace Kitchen
 {
     public partial class Form3 : Form
     {
-        int startLocation = 142;//Локация "генерирования" чекбокса (y)
+        int startLocation = 100;//Локация "генерирования" чекбокса (y)
         static public string name_ = "";
+        string nname;
+        string ddescription;
+        string ingr = "";
         int i;//Количество CheckBox'ов
         string pathToFile = Form1.pathToFile;
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы везде
-        public Form3()
+        public Form3(string Name, string Description)
         {
             InitializeComponent();
-
-            description.ScrollBars = ScrollBars.Both;
+                  dataGridView1.RowHeadersWidth = 20;
+            nname = Name;
+            ddescription = Description;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            for (i = 0; i < ingridients.Length; i++)
+            //for (i = 0; i < ingridients.Length; i++)
+            //{
+            //    box = new CheckBox(); //Create new checkBox
+            //    box.Tag = i;//CheckBox (Tag 0-..)
+            //    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+            //    box.Text = ingridients[i];
+            //    box.AutoSize = true;
+            //    box.Location = new Point(2, startLocation);
+            //    startLocation += 25;
+            //    this.Controls.Add(box);
+            //}
+            ////Увеличивает окно, если чекбоксов слишком много
+            //if (startLocation> 440)
+            //{
+            //    this.Size = new Size(596, startLocation+50);
+            //}
+            //-----------------------------------------------------------------------------------------------------------------------------------------
+            List<string> firstLetters = new List<string>();
+            foreach (string a in ingridients)
             {
-                box = new CheckBox(); //Create new checkBox
-                box.Tag = i;//CheckBox (Tag 0-..)
-                box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                box.Text = ingridients[i];
-                box.AutoSize = true;
-                box.Location = new Point(2, startLocation);
-                startLocation += 25;
-                this.Controls.Add(box);
+                if (firstLetters.Contains(a.Substring(0, 1)))
+                { }
+                else
+                {
+                    firstLetters.Add(a.Substring(0, 1));
+                    //comboBox1.Items.Add(a.Substring(0, 1));
+                }
             }
-            //Увеличивает окно, если чекбоксов слишком много
-            if (startLocation> 440)
+            firstLetters.Sort();
+            foreach (string a in firstLetters)
             {
-                this.Size = new Size(596, startLocation+50);
+                comboBox1.Items.Add(a);
             }
         }
 
         private void saveExit_Click(object sender, EventArgs e)
         {
-            string ingr = "";
             int boxTrue = 0;
             int n = 0;
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
@@ -58,22 +79,14 @@ namespace Kitchen
                 }
             }
 
-            if (name.Text == "")
-            {
-                MessageBox.Show("Впишите название рецепта");
-            }
-            else if (boxTrue == 0)
+            if (boxTrue == 0)
             {
                 MessageBox.Show("Выберите ингридиенты");
-            }
-            else if (description.Text == "")
-            {
-                MessageBox.Show("Впишите описание рецепта");
             }
             else
             {
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                RecipeList.Serialization(name.Text, description.Text, ingr);
+                RecipeList.Serialization(nname, ddescription, ingr);
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
             }
@@ -89,28 +102,16 @@ namespace Kitchen
         {
         }
 
-        private void exit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Exit_Click(object sender, EventArgs e) => this.Close();
 
         private void Form3_Load(object sender, EventArgs e)
         {
 
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Удалить или изменить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Удалить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 AddCheckBox aCB = new AddCheckBox();
@@ -118,15 +119,78 @@ namespace Kitchen
                 aCB.Location = this.Location;
                 aCB.ShowDialog();
 
+                //    box = new CheckBox(); //Create new checkBox
+                //    box.Tag = i;//CheckBox (Tag 0-..)
+                //    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                //    box.Text = AddCheckBox.name;
+                //    box.AutoSize = true;
+                //    box.Location = new Point(2, startLocation);
+                //    startLocation += 25;
+                //    this.Controls.Add(box);
+                //    this.box.Checked = true;
+
+                //    this.Size = new Size(596, startLocation + 50);
+            }
+            //if (startLocation> 440)
+            //{
+            //    this.Size = new Size(596, startLocation+50);
+            //}
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] ingrid = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            startLocation = 100;
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
+                if (chbox.Checked == true)
+                {
+                    ingr = chbox.Text + " ";
+                }
+                else
+                {
+                    // ingr.Split(" ");
+                }
+
+                chbox.Visible = false;
+                chbox.Enabled = false;
+            }
+            List<string> ingridients = new List<string>();
+            foreach (string a in ingrid)
+            {
+                if (a.Substring(0, 1) == comboBox1.Text)
+                {
+                    ingridients.Add(a);
+                }
+            }
+            for (i = 0; i < ingridients.Count; i++)
+            {
                 box = new CheckBox(); //Create new checkBox
                 box.Tag = i;//CheckBox (Tag 0-..)
                 box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                box.Text = name_;
+                box.Text = ingridients[i];
                 box.AutoSize = true;
                 box.Location = new Point(2, startLocation);
                 startLocation += 25;
                 this.Controls.Add(box);
-                this.box.Checked = true;
+            }
+            //Увеличивает окно, если чекбоксов слишком много
+            if (startLocation > 440)
+            {
+                this.Size = new Size(596, startLocation + 50);
+            }
+        }
+
+        private void Form3_MouseLeave(object sender, EventArgs e)
+        {
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
+                if (chbox.Checked == true)
+                {
+                    int n = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[n].Cells["colIngridients"].Value = chbox.Text;
+                    chbox.Checked = false;
+                }
             }
         }
     }

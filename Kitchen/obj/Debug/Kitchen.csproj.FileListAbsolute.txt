@@ -43,3 +43,4 @@ C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.cs
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.CoreCompileInputs.cache
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.AddName.resources

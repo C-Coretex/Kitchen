@@ -15,7 +15,6 @@ namespace Kitchen
     public partial class Edit : Form
     {
         int startLocation = 142;//Локация "генерирования" чекбокса (y)
-        static public string name_ = "";
         int rowNumber;
         int rowIndex;
         string pathToFile = Form1.pathToFile;
@@ -214,7 +213,7 @@ namespace Kitchen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Удалить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ",  MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Удалить новый ингредиент будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 AddCheckBox aCB = new AddCheckBox();
@@ -225,12 +224,14 @@ namespace Kitchen
                 box = new CheckBox(); //Create new checkBox
                 box.Tag = i;//CheckBox (Tag 0-..)
                 box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                box.Text = name_;
+                box.Text = AddCheckBox.name;
                 box.AutoSize = true;
                 box.Location = new Point(2, startLocation);
                 startLocation += 25;
                 this.Controls.Add(box);
                 this.box.Checked = true;
+                
+                this.Size = new Size(596, startLocation + 50);
             }
         }
     }

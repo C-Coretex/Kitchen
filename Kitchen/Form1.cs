@@ -26,6 +26,9 @@ namespace Kitchen
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
             pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            FileStream fs = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
+            fs.Close();
+
 
             FindRecepts.TabStop = false;
             FindRecepts.FlatStyle = FlatStyle.Flat;
