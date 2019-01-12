@@ -170,7 +170,6 @@ namespace Kitchen
             f3.StartPosition = FormStartPosition.Manual;
             f3.Location = this.Location;
             f3.ShowDialog();
-            this.Close();
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

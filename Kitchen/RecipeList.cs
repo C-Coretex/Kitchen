@@ -14,15 +14,17 @@ namespace Kitchen
         public string Description { get; set; }
         public string Ingridients { get; set; }
         public string Count { get; set; }
-        static public void Serialization(string name, string description, string ingridients, string count)
+        public string Type { get; set; }
+        static public void Serialization(string name, string description, string ingridients, string count, string type)
         {
             RecipeList RL = new RecipeList
             {
                 Name = name,
                 Description = description,
                 Ingridients = ingridients,
-                Count = count
-             };
+                Count = count,
+                Type = type
+            };
             // создаем объект BinaryFormatter
             // получаем поток, куда будем записывать сериализованный объект
             using (FileStream fs = new FileStream(Form1.pathToFile + "Recipe.dat", FileMode.Append))

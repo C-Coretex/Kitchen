@@ -33,11 +33,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.label2 = new System.Windows.Forms.Label();
             this.saveExit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.button2 = new System.Windows.Forms.Button();
             this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,19 +68,6 @@
             this.saveExit.Text = "Продолжить";
             this.saveExit.UseVisualStyleBackColor = false;
             this.saveExit.Click += new System.EventHandler(this.saveExit_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Silver;
-            this.button2.Image = global::Kitchen.Properties.Resources.Plus1;
-            this.button2.Location = new System.Drawing.Point(116, 64);
-            this.button2.Name = "button2";
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button2.Size = new System.Drawing.Size(49, 30);
-            this.button2.TabIndex = 16;
-            this.toolTip1.SetToolTip(this.button2, "Добавить новый ингредиент");
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBox1
             // 
@@ -122,7 +110,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(295, 291);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
             // 
             // comboBoxSearch
             // 
@@ -137,6 +124,31 @@
             this.comboBoxSearch.TabIndex = 22;
             this.comboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearch_SelectedIndexChanged);
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewImageColumn1.FillWeight = 10F;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 30;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Silver;
+            this.button2.Image = global::Kitchen.Properties.Resources.Plus1;
+            this.button2.Location = new System.Drawing.Point(116, 64);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button2.Size = new System.Drawing.Size(49, 30);
+            this.button2.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.button2, "Добавить новый ингредиент");
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // colDelete
             // 
             this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -145,7 +157,7 @@
             this.colDelete.Image = ((System.Drawing.Image)(resources.GetObject("colDelete.Image")));
             this.colDelete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.colDelete.Name = "colDelete";
-            this.colDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colDelete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colDelete.Width = 30;
             // 
@@ -176,7 +188,8 @@
             "мл",
             "л",
             "стак.",
-            "шт."});
+            "шт.",
+            "---"});
             this.colType.Name = "colType";
             this.colType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colType.Width = 52;
@@ -212,6 +225,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBoxSearch;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn colDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;

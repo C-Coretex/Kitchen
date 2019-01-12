@@ -29,130 +29,187 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.description = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.saveDelete = new System.Windows.Forms.Button();
-            this.delete = new System.Windows.Forms.Button();
-            this.exit = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edit));
+            this.saveExit = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // description
+            // saveExit
             // 
-            this.description.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.saveExit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveExit.BackColor = System.Drawing.Color.LightGray;
+            this.saveExit.Location = new System.Drawing.Point(3, 1);
+            this.saveExit.Name = "saveExit";
+            this.saveExit.Size = new System.Drawing.Size(464, 65);
+            this.saveExit.TabIndex = 24;
+            this.saveExit.Text = "Продолжить";
+            this.saveExit.UseVisualStyleBackColor = false;
+            this.saveExit.Click += new System.EventHandler(this.saveExit_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Location = new System.Drawing.Point(-1, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 20);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Ингредиенты";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.description.Font = new System.Drawing.Font("Courier New", 12F);
-            this.description.Location = new System.Drawing.Point(291, 84);
-            this.description.Multiline = true;
-            this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(312, 229);
-            this.description.TabIndex = 11;
-            this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colDelete,
+            this.colIngridients,
+            this.colNumber,
+            this.colType});
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.Highlight;
+            this.dataGridView1.Location = new System.Drawing.Point(172, 109);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(295, 291);
+            this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // name
+            // comboBox1
             // 
-            this.name.Font = new System.Drawing.Font("Courier New", 12F);
-            this.name.Location = new System.Drawing.Point(3, 83);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(282, 26);
-            this.name.TabIndex = 9;
-            this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(117, 92);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(49, 21);
+            this.comboBox1.TabIndex = 26;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // label4
+            // comboBoxSearch
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label4.Location = new System.Drawing.Point(287, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(263, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Описание рецепта (как готовить)";
+            this.comboBoxSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.comboBoxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBoxSearch.Location = new System.Drawing.Point(3, 92);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(108, 21);
+            this.comboBoxSearch.TabIndex = 28;
+            this.comboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearch_SelectedIndexChanged);
             // 
-            // label5
+            // dataGridViewImageColumn1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label5.Location = new System.Drawing.Point(-1, 106);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 20);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Ингредиенты";
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewImageColumn1.FillWeight = 10F;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 30;
             // 
-            // label6
+            // button2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label6.Location = new System.Drawing.Point(-1, 60);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(150, 20);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Название рецепта";
+            this.button2.BackColor = System.Drawing.Color.Silver;
+            this.button2.Image = global::Kitchen.Properties.Resources.Plus1;
+            this.button2.Location = new System.Drawing.Point(117, 65);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button2.Size = new System.Drawing.Size(49, 30);
+            this.button2.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button2, "Добавить новый ингредиент");
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // saveDelete
+            // colDelete
             // 
-            this.saveDelete.Location = new System.Drawing.Point(3, 2);
-            this.saveDelete.Name = "saveDelete";
-            this.saveDelete.Size = new System.Drawing.Size(196, 59);
-            this.saveDelete.TabIndex = 12;
-            this.saveDelete.Text = "Сохранить и выйти";
-            this.saveDelete.UseVisualStyleBackColor = true;
-            this.saveDelete.Click += new System.EventHandler(this.saveDelete_Click);
+            this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colDelete.FillWeight = 10F;
+            this.colDelete.HeaderText = "";
+            this.colDelete.Image = ((System.Drawing.Image)(resources.GetObject("colDelete.Image")));
+            this.colDelete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.colDelete.Name = "colDelete";
+            this.colDelete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colDelete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colDelete.Width = 30;
             // 
-            // delete
+            // colIngridients
             // 
-            this.delete.Location = new System.Drawing.Point(205, 2);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(194, 59);
-            this.delete.TabIndex = 13;
-            this.delete.Text = "Удалить";
-            this.delete.UseVisualStyleBackColor = true;
-            this.delete.Click += new System.EventHandler(this.Delete_Click);
+            this.colIngridients.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colIngridients.HeaderText = "Ингредиенты";
+            this.colIngridients.Name = "colIngridients";
+            this.colIngridients.ReadOnly = true;
+            this.colIngridients.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // exit
+            // colNumber
             // 
-            this.exit.Location = new System.Drawing.Point(405, 2);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(202, 59);
-            this.exit.TabIndex = 14;
-            this.exit.Text = "Выйти не сохранив";
-            this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.Exit_Click);
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumber.HeaderText = "Количество";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.Width = 91;
             // 
-            // button1
+            // colType
             // 
-            this.button1.Image = global::Kitchen.Properties.Resources.Plus1;
-            this.button1.Location = new System.Drawing.Point(117, 109);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(32, 29);
-            this.button1.TabIndex = 15;
-            this.toolTip1.SetToolTip(this.button1, "Добавить новый ингредиент");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colType.HeaderText = "             ";
+            this.colType.Items.AddRange(new object[] {
+            "ст. л.",
+            "ч. л.",
+            "гр.",
+            "кг",
+            "мл",
+            "л",
+            "стак.",
+            "шт.",
+            "---"});
+            this.colType.Name = "colType";
+            this.colType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colType.Width = 52;
             // 
             // Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 319);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.exit);
-            this.Controls.Add(this.delete);
-            this.Controls.Add(this.saveDelete);
-            this.Controls.Add(this.description);
-            this.Controls.Add(this.name);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.MinimumSize = new System.Drawing.Size(625, 358);
+            this.ClientSize = new System.Drawing.Size(467, 401);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.saveExit);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxSearch);
+            this.MinimumSize = new System.Drawing.Size(483, 440);
             this.Name = "Edit";
             this.Text = "Edit";
-            this.Load += new System.EventHandler(this.Edit_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edit_MouseMove);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,15 +217,17 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox description;
-        private System.Windows.Forms.TextBox name;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button saveDelete;
-        private System.Windows.Forms.Button delete;
-        private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button saveExit;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSearch;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn colDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colType;
     }
 }

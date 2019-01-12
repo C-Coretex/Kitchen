@@ -24,25 +24,7 @@ namespace Kitchen
         {
             InitializeComponent();
                 this.Cursor = Cursors.WaitCursor;
-            dataGridView1.RowHeadersWidth = 20;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            //for (i = 0; i < ingridients.Length; i++)
-            //{
-            //    box = new CheckBox(); //Create new checkBox
-            //    box.Tag = i;//CheckBox (Tag 0-..)
-            //    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-            //    box.Text = ingridients[i];
-            //    box.AutoSize = true;
-            //    box.Location = new Point(2, startLocation);
-            //    startLocation += 25;
-            //    this.Controls.Add(box);
-            //}
-            ////Увеличивает окно, если чекбоксов слишком много
-            //if (startLocation> 440)
-            //{
-            //    this.Size = new Size(596, startLocation+50);
-            //}
-            //-----------------------------------------------------------------------------------------------------------------------------------------
             List<string> firstLetters = new List<string>();
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
@@ -70,6 +52,7 @@ namespace Kitchen
         private void saveExit_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            string type = "";
             string count = "";
             int boxTrue = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
@@ -84,15 +67,25 @@ namespace Kitchen
                         boxTrue++;
                         ingr += n + " ";
                         string r = "";
+                        string rr = "";
                         try
                         {
-                             r = row.Cells[2].Value.ToString();
+                             r = row.Cells[2].Value.ToString().Trim();
                         }
                         catch
                         {
-                             r = "";
+                             r = "---";
+                        }
+                        try
+                        {
+                            rr = row.Cells[3].Value.ToString();
+                        }
+                        catch
+                        {
+                            rr = "---";
                         }
                         count += r + " ";
+                        type += rr + "|";
                         break;
                     }
                 }
@@ -108,7 +101,7 @@ namespace Kitchen
             {
                 this.Cursor = Cursors.Default;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName AD = new AddName(ingr, count);
+                AddName AD = new AddName(ingr, count, type);
                 AD.StartPosition = FormStartPosition.Manual;
                 AD.Location = this.Location;
                 AD.ShowDialog();
@@ -248,10 +241,6 @@ namespace Kitchen
             comboBoxSearch.Items.Remove(comboBoxSearch.SelectedItem);
         }
 
-        private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            comboBoxSearch.Items.Add(e.Row.Cells[0].Value.ToString());
-        }
     }
 }
 

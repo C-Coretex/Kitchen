@@ -15,11 +15,13 @@ namespace Kitchen
         int i = 1;
         string ingr = "";
         string count = "";
-        public AddName(string Ingridients, string Count)
+        string type = "";
+        public AddName(string Ingridients, string Count, string Type)
         {
             InitializeComponent();
             ingr = Ingridients;
             count = Count;
+            type = Type;
             description.ScrollBars = ScrollBars.Both;
         }
 
@@ -29,12 +31,12 @@ namespace Kitchen
             {
                 MessageBox.Show("Впишите название рецепта");
             }
-            else if (description.Text == "" || description.Text == "1. ")
+            else if (description.Text == "" || description.Text == "1. " || description.Text == "1. \r\n")
             {
                 MessageBox.Show("Впишите описание рецепта");
             }
             else{
-                RecipeList.Serialization(name.Text, description.Text, ingr, count);
+                RecipeList.Serialization(name.Text, description.Text, ingr, count, type);
                 this.Close();
             }
         }
