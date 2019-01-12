@@ -59,7 +59,7 @@ namespace Kitchen
                             {
                                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                                 {
-                                    try
+                                   // try
                                     {
                                         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -85,7 +85,7 @@ namespace Kitchen
                                             dataGridView.Rows[n].Cells[0].Value = n + 1;
                                         }
                                     }
-                                    catch
+                                  //  catch
                                     {
                                     }
                                 }

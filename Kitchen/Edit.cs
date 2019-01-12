@@ -81,10 +81,10 @@ namespace Kitchen
             for (int i = 0; i < subStr.Length - 1; i++)
             {
                 int n = dataGridView1.Rows.Add();
-                dataGridView1.Rows[n].Cells[1].Value = subStr[i];
+                dataGridView1.Rows[n].Cells[1].Value = ingridients[Convert.ToInt16(subStr[i])-1];
                 dataGridView1.Rows[n].Cells[2].Value = subCount[i];
                 dataGridView1.Rows[n].Cells[3].Value = subType[i];
-                comboBoxSearch.Items.Remove(subStr[i]);
+                comboBoxSearch.Items.Remove(ingridients[Convert.ToInt16(subStr[i]) - 1]);
             }
             this.Cursor = Cursors.Default;
         }

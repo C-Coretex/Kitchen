@@ -153,7 +153,6 @@
             this.MinimumSize = new System.Drawing.Size(600, 267);
             this.Name = "AddName";
             this.Text = "EditName";
-            this.Load += new System.EventHandler(this.AddName_Load);
             this.Shown += new System.EventHandler(this.AddName_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
