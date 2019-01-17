@@ -191,8 +191,62 @@ namespace Kitchen
             }
         }
 
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+            {
+                rowIndex = e.RowIndex;
+                ContextMenuStrip delMenu = new System.Windows.Forms.ContextMenuStrip();
+                int pos = dataGridView.HitTest(e.X, e.Y).RowIndex;
+                delMenu.Items.Add("Delete").Text = "Удалить";
+                delMenu.Show(dataGridView, new Point(e.X+20, e.Y+30));
+
+                //event menu click
+                delMenu.ItemClicked += new ToolStripItemClickedEventHandler(delMenu_ItemClicked);
+                
+            }
+        }
+
+        private void delMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+                int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                RecipeList RL = new RecipeList
+                {
+                    //Name = name,
+                    // Ingridients = ingridients.Text,
+                    //Description = description
+                };
+                List<RecipeList> objects = new List<RecipeList>();
+                int a = 0;
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        if (a == rowNumber)
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                            objects.Remove(objects[a-1]);
+                        }
+                        else
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                        }
+                        a++;
+                    }
+                }
+                File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    for (int i = 0; i < a - 1; i++)
+                    {
+                        formatter.Serialize(fs, objects[i]);
+                    }
+                }
+            dataGridView.Rows.Clear();
+            NewTable();
         }
     }
 }

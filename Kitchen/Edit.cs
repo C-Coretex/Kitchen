@@ -209,7 +209,7 @@ namespace Kitchen
                             rr = "---";
                         }
                         count += r + " ";
-                        type += rr + " ";
+                        type += rr + "|";
                         break;
                     }
                 }
@@ -225,11 +225,11 @@ namespace Kitchen
             {
                 this.Cursor = Cursors.Default;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                //AddName AD = new AddName(name, description, ingr, count, type);
-               //AD.StartPosition = FormStartPosition.Manual;
-                //AD.Location = this.Location;
-               // AD.ShowDialog();
-               // this.Close();
+                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber);
+                AD.StartPosition = FormStartPosition.Manual;
+                AD.Location = this.Location;
+                AD.ShowDialog();
+                this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
             }
         }

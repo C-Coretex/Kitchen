@@ -44,3 +44,4 @@ C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.cs
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.AddName.resources
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.AddName2.resources
