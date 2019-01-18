@@ -20,7 +20,7 @@ namespace Kitchen
         public Form1()
         {
             InitializeComponent();
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
             //string pathToFile = @o + "\";
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
@@ -29,51 +29,56 @@ namespace Kitchen
             FileStream fs = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
             fs.Close();
 
-
             FindRecepts.TabStop = false;
             FindRecepts.FlatStyle = FlatStyle.Flat;
             FindRecepts.FlatAppearance.BorderSize = 0;
             BrowseRecepts.TabStop = false;
             BrowseRecepts.FlatStyle = FlatStyle.Flat;
             BrowseRecepts.FlatAppearance.BorderSize = 0;
+
+            this.Cursor = Cursors.WaitCursor;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            int startLocation = 0;//Локация "генерирования" чекбокса (y)
-            for (i = 0; i < ingridients.Length; i++)
+            List<string> firstLetters = new List<string>();
+            List<string> allIngridients = new List<string>();
+            foreach (string a in ingridients)
             {
-                if (ingridients[i] != "")
+                allIngridients.Add(a.ToString());
+                if (firstLetters.Contains(a.Substring(0, 1))) { }
+                else
                 {
-                    box = new CheckBox(); //Create new checkBox
-                    box.Tag = i;//CheckBox (Tag 0-..)
-                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                    box.Text = ingridients[i];
-                    box.AutoSize = true;
-                    box.Location = new Point(2, startLocation);
-                    startLocation += 25;
-                    this.Controls.Add(box);
+                    firstLetters.Add(a.Substring(0, 1));
                 }
             }
-            if (startLocation > 240)
+            firstLetters.Sort();
+            allIngridients.Sort();
+            foreach (string a in firstLetters)
             {
-
-                this.Size = new Size(323, startLocation + 150);
+                comboBox1.Items.Add(a);
             }
+            foreach (string a in allIngridients)
+            {
+                comboBoxSearch.Items.Add(a);
+            }
+            this.Cursor = Cursors.Default;
         }
         
         private void FindRecepts_Click(object sender, EventArgs e)
         {
-            int boxTrue = 0;
-            int n = 0;
             ingrTrue = "";
-            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            string ingrTrueInt = "";
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                    ingrTrue += row.Cells[1].Value.ToString() + " ";
+            }
+            string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            uint n = 0;
+            foreach (string ing in ingridients)
             {
                 n++;
-                if (chbox.Checked)
-                {
-                    boxTrue++;
-                    ingrTrue += n + " ";
-                }
+                if (ingrTrue.Contains(ing))
+                    ingrTrueInt += n + " ";
             }
-            Find find = new Find(ingrTrue);
+            Find find = new Find(ingrTrueInt);
             find.StartPosition = FormStartPosition.Manual;
             find.Location = this.Location;
             find.ShowDialog();
@@ -95,6 +100,96 @@ namespace Kitchen
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int n = dataGridView1.Rows.Add();
+            dataGridView1.Rows[n].Cells["colIngridients"].Value = comboBoxSearch.SelectedItem.ToString();
+            comboBoxSearch.Items.Remove(comboBoxSearch.SelectedItem);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] ingrid = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            int startLocation = 50;
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
+                chbox.Visible = false;
+                chbox.Enabled = false;
+            }
+            List<string> ingridients = new List<string>();
+            foreach (string a in ingrid)
+            {
+                if (a.Substring(0, 1) == comboBox1.Text)
+                {
+                    ingridients.Add(a);
+                }
+            }
+            for (i = 0; i < ingridients.Count; i++)
+            {
+                bool repeat = false;
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells[1].Value.ToString() == ingridients[i])
+                    {
+                        repeat = true;
+                    }
+                }
+                if (repeat == false)
+                {
+                    box = new CheckBox(); //Create new checkBox
+                    box.Tag = i;//CheckBox (Tag 0-..)
+                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
+                    box.Text = ingridients[i];
+                    box.AutoSize = true;
+                    box.Location = new Point(2, startLocation);
+                    startLocation += 25;
+                    this.Controls.Add(box);
+                }
+            }
+            //Увеличивает окно, если чекбоксов слишком много
+            if (startLocation > 220)
+            {
+                this.Size = new Size(596, startLocation + 50);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
+                if (chbox.Checked == true)
+                {
+                    int n = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[n].Cells["colIngridients"].Value = chbox.Text;
+                    comboBoxSearch.Items.Remove(chbox.Text);
+                    chbox.Checked = false;
+                    chbox.Visible = false;
+                    chbox.Enabled = false;
+                }
+            }
+        }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 0)
+                {
+                        comboBoxSearch.Items.Add(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        comboBoxSearch.Sorted = true;
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

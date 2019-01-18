@@ -118,9 +118,6 @@ namespace Kitchen
                 {
                     ingr = chbox.Text + " ";
                 }
-                else
-                {
-                }
                 chbox.Visible = false;
                 chbox.Enabled = false;
             }
@@ -135,21 +132,9 @@ namespace Kitchen
             for (i = 0; i < ingridients.Count; i++)
             {
                 bool repeat = false;
-                if (dataGridView1.Rows.Count == 0)
-                {
-                    box = new CheckBox(); //Create new checkBox
-                    box.Tag = i;//CheckBox (Tag 0-..)
-                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                    box.Text = ingridients[i];
-                    box.AutoSize = true;
-                    box.Location = new Point(2, startLocation);
-                    startLocation += 25;
-                    this.Controls.Add(box);
-                    repeat = true;
-                }
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    if (row.Cells[0].Value.ToString() == ingridients[i])
+                    if (row.Cells[1].Value.ToString() == ingridients[i])
                     {
                         repeat = true;
                     }
@@ -250,6 +235,8 @@ namespace Kitchen
                         comboBoxSearch.Items.Add(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                         comboBoxSearch.Sorted = true;
                         dataGridView1.Rows.RemoveAt(e.RowIndex);
+                        comboBoxSearch.Items.Add(AddCheckBox.name);
+                        comboBoxSearch.Sorted = true;
                     }
                 }
             }

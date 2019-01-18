@@ -144,113 +144,12 @@ namespace Kitchen
         {
             int row = dataGridView.CurrentRow.Index;
             string Name = dataGridView.Rows[row].Cells["colName"].Value.ToString();
-            string Ingridients = dataGridView.Rows[row].Cells["colIngridients"].Value.ToString();
+            string Ingridients = dataGridView.Rows[row].Cells["colNotEnough"].Value.ToString();
             string Description = dataGridView.Rows[row].Cells["colDescription"].Value.ToString();
             EditByName ed = new EditByName(Name, Ingridients, Description);
             ed.StartPosition = FormStartPosition.Manual;
             ed.Location = this.Location;
             ed.Show();
-
-
-            this.Cursor = Cursors.WaitCursor;
-            //var ingridientsList = new List<string>();
-            //int lastIndex = 0;
-            //int maxLength = 0;
-            ////Наполнение ВСЕМИ рацептами (если ничего не выбрано)
-            ////---------------------------------------------------------------------------------------------------------------------------
-            //if (ingrTrue.Length == 0)
-            //{
-            //    using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
-            //    {
-            //        try
-            //        {
-            //            BinaryFormatter formatter = new BinaryFormatter();
-
-            //            RecipeList RL = new RecipeList();
-            //            var objects = new List<RecipeList>();
-
-            //            fs.Position = 0;
-            //            while (fs.Position < fs.Length)
-            //            {
-            //                objects.Add((RecipeList)formatter.Deserialize(fs));
-            //            }
-            //            foreach (RecipeList r in objects)
-            //            {
-            //                int n = dataGridView.Rows.Add();
-            //                dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-            //                dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-            //                dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
-            //                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
-            //            }
-            //        }
-            //        catch
-            //        {
-            //        }
-            //    }
-            //}
-            ////---------------------------------------------------------------------------------------------------------------------------
-            //else
-            //{
-            //    while (0 < ingrTrue.Length)
-            //    {
-            //        lastIndex = ingrTrue.IndexOf("\r");
-            //        if (lastIndex <= 0)
-            //        {
-            //            lastIndex = ingrTrue.Length;
-            //        }
-            //        ingrTrue = ingrTrue.Remove(lastIndex, 0).Trim();
-            //        string subIngr = ingrTrue.Substring(0, lastIndex);
-            //        if (subIngr.Length > maxLength)
-            //        {
-            //            maxLength = subIngr.Length;
-            //        }
-            //        ingrTrue = ingrTrue.Remove(0, lastIndex).Trim();
-            //        ingridientsList.Add(subIngr);
-            //        //   MessageBox.Show("" + ingridientsList.Last());
-            //    }
-            //    // int wordCount = ingrTrue.Length;
-            //    using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
-            //    {
-            //        BinaryFormatter formatter = new BinaryFormatter();
-
-            //        RecipeList RL = new RecipeList();
-            //        var objects = new List<RecipeList>();
-
-            //        fs.Position = 0;
-            //        while (fs.Position < fs.Length)
-            //        {
-            //            objects.Add((RecipeList)formatter.Deserialize(fs));
-            //        }
-
-            //        foreach (RecipeList r in objects)
-            //        {
-            //            int a = 0;
-            //            for (int i = 0; i < ingridientsList.Count; i++)
-            //            {
-            //                bool equals = false;
-
-            //                for (a = 0; a + ingridientsList[i].Length <= r.Ingridients.Length; a++)
-            //                {
-            //                    if (ingridientsList[i].Equals(r.Ingridients.Substring(a, ingridientsList[i].Length), StringComparison.InvariantCultureIgnoreCase))
-            //                    {
-            //                        equals = true;
-            //                    }
-            //                    if (equals == true)
-            //                    {
-            //                        a = r.Ingridients.Length;//Находит ТОЛЬКО ОДНО совпадение
-            //                        a = ingridientsList.Count + 1;
-            //                        int n = dataGridView.Rows.Add();
-            //                        dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-            //                        dataGridView.Rows[n].Cells["colIngridients"].Value = r.Ingridients;
-            //                        dataGridView.Rows[n].Cells["colNumber"].Value = n + 1;
-            //                        dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            this.Cursor = Cursors.Default;
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -23,14 +23,14 @@ namespace Kitchen
         public Form3()
         {
             InitializeComponent();
-                this.Cursor = Cursors.WaitCursor;
+            this.Cursor = Cursors.WaitCursor;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             List<string> firstLetters = new List<string>();
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
             {
                 allIngridients.Add(a.ToString());
-                if (firstLetters.Contains(a.Substring(0, 1))) {}
+                if (firstLetters.Contains(a.Substring(0, 1))) { }
                 else
                 {
                     firstLetters.Add(a.Substring(0, 1));
@@ -70,11 +70,11 @@ namespace Kitchen
                         string rr = "";
                         try
                         {
-                             r = row.Cells[2].Value.ToString().Trim();
+                            r = row.Cells[2].Value.ToString().Trim();
                         }
                         catch
                         {
-                             r = "---";
+                            r = "---";
                         }
                         try
                         {
@@ -126,6 +126,8 @@ namespace Kitchen
                 aCB.StartPosition = FormStartPosition.Manual;
                 aCB.Location = this.Location;
                 aCB.ShowDialog();
+                comboBoxSearch.Items.Add(AddCheckBox.name);
+                comboBoxSearch.Sorted = true;
             }
         }
 
@@ -135,13 +137,6 @@ namespace Kitchen
             startLocation = 115;
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
             {
-                if (chbox.Checked == true)
-                {
-                    ingr = chbox.Text + " ";
-                }
-                else
-                {
-                }
                 chbox.Visible = false;
                 chbox.Enabled = false;
             }
@@ -156,24 +151,12 @@ namespace Kitchen
             for (i = 0; i < ingridients.Count; i++)
             {
                 bool repeat = false;
-                if (dataGridView1.Rows.Count == 0)
-                {
-                    box = new CheckBox(); //Create new checkBox
-                    box.Tag = i;//CheckBox (Tag 0-..)
-                    box.TabIndex = 8 + i;//Последовательность "выбора" через TAB
-                    box.Text = ingridients[i];
-                    box.AutoSize = true;
-                    box.Location = new Point(2, startLocation);
-                    startLocation += 25;
-                    this.Controls.Add(box);
-                    repeat = true;
-                }
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                        if (row.Cells[0].Value.ToString() == ingridients[i])
-                        {
-                            repeat = true;
-                        }
+                    if (row.Cells[1].Value.ToString() == ingridients[i])
+                    {
+                        repeat = true;
+                    }
                 }
                 if (repeat == false)
                 {
