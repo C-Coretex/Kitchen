@@ -38,7 +38,6 @@ C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Fo
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form2.resources
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Form3.resources
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Properties.Resources.resources
-C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.Show.resources
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.GenerateResource.cache
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.CoreCompileInputs.cache
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.exe

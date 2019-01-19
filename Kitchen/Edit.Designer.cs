@@ -34,11 +34,11 @@
             this.saveExit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.button2 = new System.Windows.Forms.Button();
             this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +68,19 @@
             this.label2.Size = new System.Drawing.Size(112, 20);
             this.label2.TabIndex = 23;
             this.label2.Text = "Ингредиенты";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Silver;
+            this.button2.Image = global::Kitchen.Properties.Resources.Plus1;
+            this.button2.Location = new System.Drawing.Point(117, 65);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button2.Size = new System.Drawing.Size(49, 30);
+            this.button2.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button2, "Добавить новый ингредиент");
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dataGridView1
             // 
@@ -136,19 +149,6 @@
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn1.Width = 30;
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Silver;
-            this.button2.Image = global::Kitchen.Properties.Resources.Plus1;
-            this.button2.Location = new System.Drawing.Point(117, 65);
-            this.button2.Name = "button2";
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button2.Size = new System.Drawing.Size(49, 30);
-            this.button2.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.button2, "Добавить новый ингредиент");
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // colDelete
             // 
             this.colDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -172,9 +172,9 @@
             // colNumber
             // 
             this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNumber.HeaderText = "Количество";
+            this.colNumber.HeaderText = "Кол-во";
             this.colNumber.Name = "colNumber";
-            this.colNumber.Width = 91;
+            this.colNumber.Width = 66;
             // 
             // colType
             // 

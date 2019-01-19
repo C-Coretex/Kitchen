@@ -56,6 +56,7 @@ namespace Kitchen
             string count = "";
             int boxTrue = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            dataGridView1.Sort(dataGridView1.Columns[1], ListSortDirection.Ascending);
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 int n = 0;
@@ -219,9 +220,15 @@ namespace Kitchen
 
         private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int n = dataGridView1.Rows.Add();
-            dataGridView1.Rows[n].Cells["colIngridients"].Value = comboBoxSearch.SelectedItem.ToString();
-            comboBoxSearch.Items.Remove(comboBoxSearch.SelectedItem);
+            try
+            {
+                int n = dataGridView1.Rows.Add();
+                dataGridView1.Rows[n].Cells["colIngridients"].Value = comboBoxSearch.SelectedItem.ToString();
+                comboBoxSearch.Items.Remove(comboBoxSearch.SelectedItem);
+            }
+            catch
+                {
+                }
         }
 
     }

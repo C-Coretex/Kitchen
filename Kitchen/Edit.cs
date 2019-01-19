@@ -165,6 +165,7 @@ namespace Kitchen
             string count = "";
             int boxTrue = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            dataGridView1.Sort(dataGridView1.Columns[1], ListSortDirection.Ascending);
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 int n = 0;

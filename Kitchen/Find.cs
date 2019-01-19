@@ -44,14 +44,15 @@ namespace Kitchen
                         {
                             int n = dataGridView.Rows.Add();
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-
+                            dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
+                            dataGridView.Rows[n].Cells["colType"].Value = r.Type;
                             string[] subStr = r.Ingridients.Split(' ');
+                            string together = "";
                             for (uint i = 0; i < subStr.Length-1; i++)
                             {
-                                string together = dataGridView.Rows[n].Cells["colNotEnough"].Value + "\r " + allIngridients[Convert.ToInt16(subStr[i])-1];
-                                dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
+                                 together += allIngridients[Convert.ToInt16(subStr[i])-1] + "\r ";
                             }
-
+                            dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
                             dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "0%";
                             dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
@@ -100,14 +101,18 @@ namespace Kitchen
                         //Записываю ингредиенты из конкретного рецепта во множество
 
                         //Если оба множества пересекаются, конкретный рецепт записывается в таблицу
-                            List<uint> equals = new List<uint>();
+                        List<uint> equals = new List<uint>();
                             float ingrTrueSetCount = ingrCountEVER.Count;
                             ingrTrueSet.IntersectWith(ingrCountEVER);
                             equals = ingrTrueSet.ToList();
                             if (equals.Count != 0)
                             {
                                 int n = dataGridView.Rows.Add();
-                                dataGridView.Rows[n].Cells["colName"].Value = r.Name;
+                                dataGridView.Rows[n].Cells["colAllIngridients"].Value = r.Ingridients;
+                                dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
+                                dataGridView.Rows[n].Cells["colType"].Value = r.Type;
+
+                            dataGridView.Rows[n].Cells["colName"].Value = r.Name;
                                 ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
                                 dataGridView.Rows[n].Cells["colEqualsProcents"].Value = Convert.ToInt16(ingrTrueSetCount) + "%";
                             equals = ingrCountEVER.Except(equals).ToList();
@@ -120,12 +125,12 @@ namespace Kitchen
                                     dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
                                 }
                             }
-                            else
-                            {
-                                dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
-                                dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
-                                dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
-                            }
+                                else
+                                {
+                                    dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
+                                    dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
+                                    dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
+                                }
                                 dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
                     }
@@ -143,10 +148,31 @@ namespace Kitchen
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = dataGridView.CurrentRow.Index;
+            string INGGGGR = "";
+            try
+            {
+                string[] ingrTrueCOUNT = dataGridView.Rows[row].Cells["colAllIngridients"].Value.ToString().Split(' ');
+                string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
+                //i - номер ИНГРЕДИЕНТА
+                for (uint i = 0; i < allIngridients.Length; i++)
+                {
+                    if (ingrTrueCOUNT.Contains(Convert.ToString(i + 1)))
+                    {
+                        INGGGGR += allIngridients[i] + "\r ";
+                    }
+                }
+            }
+            catch
+            {
+                INGGGGR = dataGridView.Rows[row].Cells["colNotEnough"].Value.ToString();
+            }
             string Name = dataGridView.Rows[row].Cells["colName"].Value.ToString();
-            string Ingridients = dataGridView.Rows[row].Cells["colNotEnough"].Value.ToString();
             string Description = dataGridView.Rows[row].Cells["colDescription"].Value.ToString();
-            EditByName ed = new EditByName(Name, Ingridients, Description);
+            string count = dataGridView.Rows[row].Cells["colCount"].Value.ToString();
+            string type = dataGridView.Rows[row].Cells["colType"].Value.ToString();
+            string notEnough = dataGridView.Rows[row].Cells["colNotEnough"].Value.ToString();
+
+            EditByName ed = new EditByName(Name, INGGGGR, Description, count, type, notEnough);
             ed.StartPosition = FormStartPosition.Manual;
             ed.Location = this.Location;
             ed.Show();

@@ -29,146 +29,127 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.exit = new System.Windows.Forms.Button();
-            this.delete = new System.Windows.Forms.Button();
-            this.saveDelete = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.description = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelName = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // exit
-            // 
-            this.exit.Location = new System.Drawing.Point(406, 4);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(202, 59);
-            this.exit.TabIndex = 23;
-            this.exit.Text = "Выйти не сохранив";
-            this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.exit_Click);
-            // 
-            // delete
-            // 
-            this.delete.Location = new System.Drawing.Point(206, 4);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(194, 59);
-            this.delete.TabIndex = 22;
-            this.delete.Text = "Удалить";
-            this.delete.UseVisualStyleBackColor = true;
-            this.delete.Click += new System.EventHandler(this.delete_Click);
-            // 
-            // saveDelete
-            // 
-            this.saveDelete.Location = new System.Drawing.Point(4, 4);
-            this.saveDelete.Name = "saveDelete";
-            this.saveDelete.Size = new System.Drawing.Size(196, 59);
-            this.saveDelete.TabIndex = 21;
-            this.saveDelete.Text = "Сохранить и выйти";
-            this.saveDelete.UseVisualStyleBackColor = true;
-            this.saveDelete.Click += new System.EventHandler(this.saveDelete_Click);
             // 
             // description
             // 
             this.description.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.description.BackColor = System.Drawing.Color.White;
             this.description.Font = new System.Drawing.Font("Courier New", 12F);
-            this.description.Location = new System.Drawing.Point(292, 86);
+            this.description.Location = new System.Drawing.Point(255, 32);
             this.description.Multiline = true;
             this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(312, 229);
+            this.description.ReadOnly = true;
+            this.description.Size = new System.Drawing.Size(291, 244);
             this.description.TabIndex = 20;
             this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
             // 
-            // name
+            // labelName
             // 
-            this.name.Font = new System.Drawing.Font("Courier New", 12F);
-            this.name.Location = new System.Drawing.Point(4, 85);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(282, 26);
-            this.name.TabIndex = 18;
-            this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelName.Location = new System.Drawing.Point(0, 9);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(150, 20);
+            this.labelName.TabIndex = 15;
+            this.labelName.Text = "Название рецепта";
+            this.labelName.Click += new System.EventHandler(this.labelName_Click);
             // 
-            // label4
+            // dataGridView1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label4.Location = new System.Drawing.Point(288, 63);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(263, 20);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Описание рецепта (как готовить)";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colIngridients,
+            this.colNumber,
+            this.colType});
+            this.dataGridView1.GridColor = System.Drawing.Color.PaleTurquoise;
+            this.dataGridView1.Location = new System.Drawing.Point(4, 32);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(245, 264);
+            this.dataGridView1.TabIndex = 28;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // label5
+            // colIngridients
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label5.Location = new System.Drawing.Point(0, 108);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 20);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Ингредиенты";
+            this.colIngridients.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colIngridients.HeaderText = "Ингредиенты";
+            this.colIngridients.Name = "colIngridients";
+            this.colIngridients.ReadOnly = true;
+            this.colIngridients.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // label6
+            // colNumber
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label6.Location = new System.Drawing.Point(0, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(150, 20);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Название рецепта";
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNumber.FillWeight = 1F;
+            this.colNumber.HeaderText = "Кол-во";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 66;
             // 
-            // button1
+            // colType
             // 
-            this.button1.Image = global::Kitchen.Properties.Resources.Plus1;
-            this.button1.Location = new System.Drawing.Point(117, 111);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(32, 29);
-            this.button1.TabIndex = 24;
-            this.toolTip1.SetToolTip(this.button1, "Добавить новый ингредиент");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colType.HeaderText = "             ";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colType.Width = 52;
             // 
             // EditByName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 319);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.exit);
-            this.Controls.Add(this.delete);
-            this.Controls.Add(this.saveDelete);
+            this.ClientSize = new System.Drawing.Size(609, 550);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.description);
-            this.Controls.Add(this.name);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.labelName);
             this.MinimumSize = new System.Drawing.Size(625, 358);
             this.Name = "EditByName";
             this.Text = "EditByName";
             this.Load += new System.EventHandler(this.EditByName_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.Button delete;
-        private System.Windows.Forms.Button saveDelete;
         private System.Windows.Forms.TextBox description;
-        private System.Windows.Forms.TextBox name;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
     }
 }

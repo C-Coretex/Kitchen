@@ -37,6 +37,9 @@
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNotEnough = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAllIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +67,10 @@
             this.colEqualsProcents,
             this.colDescription,
             this.colName,
-            this.colNotEnough});
+            this.colNotEnough,
+            this.colCount,
+            this.colType,
+            this.colAllIngridients});
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
@@ -124,6 +130,27 @@
             this.colNotEnough.ReadOnly = true;
             this.colNotEnough.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // colCount
+            // 
+            this.colCount.HeaderText = "Column1";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.Visible = false;
+            // 
+            // colType
+            // 
+            this.colType.HeaderText = "Column1";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Visible = false;
+            // 
+            // colAllIngridients
+            // 
+            this.colAllIngridients.HeaderText = "Column1";
+            this.colAllIngridients.Name = "colAllIngridients";
+            this.colAllIngridients.ReadOnly = true;
+            this.colAllIngridients.Visible = false;
+            // 
             // Find
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,5 +174,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotEnough;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAllIngridients;
     }
 }
