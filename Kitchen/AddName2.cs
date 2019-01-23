@@ -20,9 +20,10 @@ namespace Kitchen
         string type = "";
         string name = "";
         string description = "";
+        string imageDirection = "";
         int rowNumber = 0;
         string pathToFile = Form1.pathToFile;
-        public AddName2(string Ingridients, string Count, string Type, string Name, string Description, int rowN)
+        public AddName2(string Ingridients, string Count, string Type, string Name, string Description, int rowN, string ImageDirection)
         {
             InitializeComponent();
             ingr = Ingridients;
@@ -31,7 +32,9 @@ namespace Kitchen
             name = Name;
             description = Description;
             rowNumber = rowN;
+            imageDirection = ImageDirection;
             ddescription.ScrollBars = ScrollBars.Both;
+            pictureBox1.ImageLocation = imageDirection;
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -39,7 +42,6 @@ namespace Kitchen
             RecipeList RL = new RecipeList
             {
                 Name = name,
-                // Ingridients = ingridients.Text,
                 Description = description
             };
             List<RecipeList> objects = new List<RecipeList>();
@@ -124,7 +126,8 @@ namespace Kitchen
                     Ingridients = ingr,
                     Description = ddescription.Text,
                     Type = type,
-                    Count = count
+                    Count = count,
+                    ImageDirection = imageDirection
                 };
                 var objects = new List<RecipeList>();
                 int a = 0;
@@ -160,6 +163,21 @@ namespace Kitchen
                 }
             }
             this.Close();
+        }
+
+        private void ChooseImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                imageDirection = fileDialog.FileName;
+                pictureBox1.ImageLocation = imageDirection;
+            }
+        }
+
+        private void ddescription_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

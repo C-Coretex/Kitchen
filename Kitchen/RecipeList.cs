@@ -15,7 +15,8 @@ namespace Kitchen
         public string Ingridients { get; set; }
         public string Count { get; set; }
         public string Type { get; set; }
-        static public void Serialization(string name, string description, string ingridients, string count, string type)
+        public string ImageDirection { get; set; }
+        static public void Serialization(string name, string description, string ingridients, string count, string type, string imageDirection)
         {
             RecipeList RL = new RecipeList
             {
@@ -23,7 +24,8 @@ namespace Kitchen
                 Description = description,
                 Ingridients = ingridients,
                 Count = count,
-                Type = type
+                Type = type,
+                ImageDirection = imageDirection
             };
             // создаем объект BinaryFormatter
             // получаем поток, куда будем записывать сериализованный объект

@@ -20,7 +20,7 @@ namespace Kitchen
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
-                ingrTrue = IngrTrue;
+            ingrTrue = IngrTrue;
             string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
             //Наполнение ВСЕМИ рацептами (если ничего не выбрано)
             //---------------------------------------------------------------------------------------------------------------------------
@@ -46,11 +46,12 @@ namespace Kitchen
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
                             dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
                             dataGridView.Rows[n].Cells["colType"].Value = r.Type;
+                            dataGridView.Rows[n].Cells["colImageDirection"].Value = r.ImageDirection;
                             string[] subStr = r.Ingridients.Split(' ');
                             string together = "";
-                            for (uint i = 0; i < subStr.Length-1; i++)
+                            for (uint i = 0; i < subStr.Length - 1; i++)
                             {
-                                 together += allIngridients[Convert.ToInt16(subStr[i])-1] + "\r ";
+                                together += allIngridients[Convert.ToInt16(subStr[i]) - 1] + "\r ";
                             }
                             dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
                             dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "0%";
@@ -62,10 +63,10 @@ namespace Kitchen
                     }
                 }
             }
-//---------------------------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------------------------
             else
             {
-//---------------------------------------------------------------------------------------------------------------------------
+                //---------------------------------------------------------------------------------------------------------------------------
                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
@@ -94,27 +95,28 @@ namespace Kitchen
                         //Записываю ингредиенты из конкретного рецепта во множество
                         string[] ingrOrder = r.Ingridients.Split(' ');
                         HashSet<uint> ingrCountEVER = new HashSet<uint>();
-                            for (uint n = 0; n < ingrOrder.Length-1; n++)
-                            {
-                                ingrCountEVER.Add(Convert.ToUInt32(ingrOrder[n]));
-                            }
+                        for (uint n = 0; n < ingrOrder.Length - 1; n++)
+                        {
+                            ingrCountEVER.Add(Convert.ToUInt32(ingrOrder[n]));
+                        }
                         //Записываю ингредиенты из конкретного рецепта во множество
 
                         //Если оба множества пересекаются, конкретный рецепт записывается в таблицу
                         List<uint> equals = new List<uint>();
-                            float ingrTrueSetCount = ingrCountEVER.Count;
-                            ingrTrueSet.IntersectWith(ingrCountEVER);
-                            equals = ingrTrueSet.ToList();
-                            if (equals.Count != 0)
-                            {
-                                int n = dataGridView.Rows.Add();
-                                dataGridView.Rows[n].Cells["colAllIngridients"].Value = r.Ingridients;
-                                dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
-                                dataGridView.Rows[n].Cells["colType"].Value = r.Type;
+                        float ingrTrueSetCount = ingrCountEVER.Count;
+                        ingrTrueSet.IntersectWith(ingrCountEVER);
+                        equals = ingrTrueSet.ToList();
+                        if (equals.Count != 0)
+                        {
+                            int n = dataGridView.Rows.Add();
+                            dataGridView.Rows[n].Cells["colAllIngridients"].Value = r.Ingridients;
+                            dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
+                            dataGridView.Rows[n].Cells["colType"].Value = r.Type;
+                            dataGridView.Rows[n].Cells["colImageDirection"].Value = r.ImageDirection;
 
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
-                                ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
-                                dataGridView.Rows[n].Cells["colEqualsProcents"].Value = Convert.ToInt16(ingrTrueSetCount) + "%";
+                            ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
+                            dataGridView.Rows[n].Cells["colEqualsProcents"].Value = Convert.ToInt16(ingrTrueSetCount) + "%";
                             equals = ingrCountEVER.Except(equals).ToList();
                             if (equals.Count != 0)
                             {
@@ -125,13 +127,13 @@ namespace Kitchen
                                     dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
                                 }
                             }
-                                else
-                                {
-                                    dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
-                                    dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
-                                    dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
-                                }
-                                dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+                            else
+                            {
+                                dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
+                                dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
+                                dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
+                            }
+                            dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
                     }
                 }
@@ -170,9 +172,18 @@ namespace Kitchen
             string Description = dataGridView.Rows[row].Cells["colDescription"].Value.ToString();
             string count = dataGridView.Rows[row].Cells["colCount"].Value.ToString();
             string type = dataGridView.Rows[row].Cells["colType"].Value.ToString();
+            string imageDirection = "";
+            try
+            {
+                imageDirection = dataGridView.Rows[row].Cells["colImageDirection"].Value.ToString();
+            }
+            catch
+            {
+                imageDirection = "";
+            }
             string notEnough = dataGridView.Rows[row].Cells["colNotEnough"].Value.ToString();
 
-            EditByName ed = new EditByName(Name, INGGGGR, Description, count, type, notEnough);
+            EditByName ed = new EditByName(Name, INGGGGR, Description, count, type, notEnough, imageDirection);
             ed.StartPosition = FormStartPosition.Manual;
             ed.Location = this.Location;
             ed.Show();

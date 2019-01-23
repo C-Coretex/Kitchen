@@ -40,6 +40,7 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAllIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImageDirection = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,8 @@
             this.colNotEnough,
             this.colCount,
             this.colType,
-            this.colAllIngridients});
+            this.colAllIngridients,
+            this.colImageDirection});
             this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
@@ -151,6 +153,13 @@
             this.colAllIngridients.ReadOnly = true;
             this.colAllIngridients.Visible = false;
             // 
+            // colImageDirection
+            // 
+            this.colImageDirection.HeaderText = "Column1";
+            this.colImageDirection.Name = "colImageDirection";
+            this.colImageDirection.ReadOnly = true;
+            this.colImageDirection.Visible = false;
+            // 
             // Find
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,5 +186,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAllIngridients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colImageDirection;
     }
 }

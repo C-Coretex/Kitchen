@@ -18,7 +18,7 @@ namespace Kitchen
         string originalName;
         int i;//Количество CheckBox'ов
         string pathToFile = Form1.pathToFile;
-        public EditByName(string Name, string Ingridients, string Descriprion, string Count, string Type, string lack)
+        public EditByName(string Name, string Ingridients, string Descriprion, string Count, string Type, string lack, string imageDirection)
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
@@ -50,20 +50,20 @@ namespace Kitchen
                     if (lack.Contains(subStr[i]))
                         {
                             dataGridView1.Rows[n].Cells[0].Style.BackColor = Color.LightCoral;
-                            dataGridView1.Rows[n].Cells[0].Style.ForeColor = Color.DarkRed;
+                             dataGridView1.Rows[n].Cells[0].Style.ForeColor = Color.DarkRed;
                             dataGridView1.Rows[n].Cells[1].Style.BackColor = Color.LightCoral;
-                            dataGridView1.Rows[n].Cells[1].Style.ForeColor = Color.DarkRed;
+                             dataGridView1.Rows[n].Cells[1].Style.ForeColor = Color.DarkRed;
                             dataGridView1.Rows[n].Cells[2].Style.BackColor = Color.LightCoral;
-                            dataGridView1.Rows[n].Cells[2].Style.ForeColor = Color.DarkRed;
+                             dataGridView1.Rows[n].Cells[2].Style.ForeColor = Color.DarkRed;
                         }
                 else
                 {
                     dataGridView1.Rows[n].Cells[0].Style.BackColor = Color.YellowGreen;
-                    dataGridView1.Rows[n].Cells[0].Style.ForeColor = Color.DarkGreen;
+                      dataGridView1.Rows[n].Cells[0].Style.ForeColor = Color.DarkGreen;
                     dataGridView1.Rows[n].Cells[1].Style.BackColor = Color.YellowGreen;
-                    dataGridView1.Rows[n].Cells[1].Style.ForeColor = Color.DarkGreen;
+                      dataGridView1.Rows[n].Cells[1].Style.ForeColor = Color.DarkGreen;
                     dataGridView1.Rows[n].Cells[2].Style.BackColor = Color.YellowGreen;
-                    dataGridView1.Rows[n].Cells[2].Style.ForeColor = Color.DarkGreen;
+                      dataGridView1.Rows[n].Cells[2].Style.ForeColor = Color.DarkGreen;
                 }
             }
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending);
@@ -74,6 +74,7 @@ namespace Kitchen
             }
             SendKeys.Send("{TAB}");
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            pictureBox1.ImageLocation = imageDirection;
             this.Cursor = Cursors.Default;
         }
         private void description_TextChanged(object sender, EventArgs e)

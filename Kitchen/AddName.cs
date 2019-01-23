@@ -16,6 +16,7 @@ namespace Kitchen
         string ingr = "";
         string count = "";
         string type = "";
+        string imageDirection = "";
         public AddName(string Ingridients, string Count, string Type)
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Kitchen
                 MessageBox.Show("Впишите описание рецепта");
             }
             else{
-                RecipeList.Serialization(name.Text, description.Text, ingr, count, type);
+                RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection);
                 this.Close();
             }
         }
@@ -80,6 +81,20 @@ namespace Kitchen
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ChooseImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if(fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                imageDirection = fileDialog.FileName;
+                pictureBox1.ImageLocation = imageDirection;
+            }
+        }
+
+        private void AddName_Load(object sender, EventArgs e)
+        {
         }
     }
 }

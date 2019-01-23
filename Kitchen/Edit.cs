@@ -20,6 +20,7 @@ namespace Kitchen
         int rowIndex;
         string name = "";
         string description = "";
+        string imageDirection = "";
         string pathToFile = Form1.pathToFile;
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
@@ -70,6 +71,7 @@ namespace Kitchen
                 }
                 name = objects[rowNumber].Name;
                 description = objects[rowNumber].Description;
+                imageDirection = objects[rowNumber].ImageDirection;
                 ingrid = objects[rowNumber].Ingridients;
                 count = objects[rowNumber].Count;
                 type = objects[rowNumber].Type;
@@ -211,7 +213,7 @@ namespace Kitchen
             {
                 this.Cursor = Cursors.Default;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber);
+                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection);
                 AD.StartPosition = FormStartPosition.Manual;
                 AD.Location = this.Location;
                 AD.ShowDialog();
@@ -260,6 +262,10 @@ namespace Kitchen
                     chbox.Enabled = false;
                 }
             }
+        }
+
+        private void Edit_Load(object sender, EventArgs e)
+        {
         }
     }
 }
