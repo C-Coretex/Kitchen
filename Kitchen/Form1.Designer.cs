@@ -27,77 +27,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.FindRecepts = new System.Windows.Forms.Button();
-            this.BrowseRecepts = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.BrowseRecepts = new System.Windows.Forms.Button();
+            this.FindRecepts = new System.Windows.Forms.Button();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabControl1.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // FindRecepts
+            // metroTabControl1
             // 
-            this.FindRecepts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.FindRecepts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.FindRecepts.Font = new System.Drawing.Font("Courier New", 12F);
-            this.FindRecepts.Location = new System.Drawing.Point(-8, 247);
-            this.FindRecepts.Name = "FindRecepts";
-            this.FindRecepts.Size = new System.Drawing.Size(317, 73);
-            this.FindRecepts.TabIndex = 1;
-            this.FindRecepts.Text = "Найти рецепты";
-            this.FindRecepts.UseVisualStyleBackColor = false;
-            this.FindRecepts.Click += new System.EventHandler(this.FindRecepts_Click);
+            this.metroTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Location = new System.Drawing.Point(-8, -11);
+            this.metroTabControl1.Name = "metroTabControl1";
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(342, 391);
+            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Pink;
+            this.metroTabControl1.TabIndex = 0;
+            this.metroTabControl1.UseSelectable = true;
             // 
-            // BrowseRecepts
+            // metroTabPage1
             // 
-            this.BrowseRecepts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BrowseRecepts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BrowseRecepts.Font = new System.Drawing.Font("Courier New", 12F);
-            this.BrowseRecepts.Location = new System.Drawing.Point(-8, 322);
-            this.BrowseRecepts.Name = "BrowseRecepts";
-            this.BrowseRecepts.Size = new System.Drawing.Size(317, 38);
-            this.BrowseRecepts.TabIndex = 2;
-            this.BrowseRecepts.Text = "Просмотреть рецепты";
-            this.BrowseRecepts.UseVisualStyleBackColor = false;
-            this.BrowseRecepts.Click += new System.EventHandler(this.BrowseRecepts_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 20);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Ингредиенты";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 23);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(49, 21);
-            this.comboBox1.TabIndex = 30;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // comboBoxSearch
-            // 
-            this.comboBoxSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.comboBoxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBoxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxSearch.FormattingEnabled = true;
-            this.comboBoxSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.comboBoxSearch.Location = new System.Drawing.Point(7, 23);
-            this.comboBoxSearch.Name = "comboBoxSearch";
-            this.comboBoxSearch.Size = new System.Drawing.Size(108, 21);
-            this.comboBoxSearch.TabIndex = 31;
-            this.comboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearch_SelectedIndexChanged);
+            this.metroTabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.metroTabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.metroTabPage1.Controls.Add(this.dataGridView1);
+            this.metroTabPage1.Controls.Add(this.label2);
+            this.metroTabPage1.Controls.Add(this.comboBox1);
+            this.metroTabPage1.Controls.Add(this.comboBoxSearch);
+            this.metroTabPage1.Controls.Add(this.BrowseRecepts);
+            this.metroTabPage1.Controls.Add(this.FindRecepts);
+            this.metroTabPage1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(334, 349);
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = " Начальный экран";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            this.metroTabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.metroTabPage1_MouseMove);
             // 
             // dataGridView1
             // 
@@ -106,28 +91,27 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDelete,
             this.colIngridients});
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.Highlight;
-            this.dataGridView1.Location = new System.Drawing.Point(176, 23);
+            this.dataGridView1.GridColor = System.Drawing.Color.Black;
+            this.dataGridView1.Location = new System.Drawing.Point(165, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(133, 218);
-            this.dataGridView1.TabIndex = 32;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_1);
+            this.dataGridView1.Size = new System.Drawing.Size(169, 234);
+            this.dataGridView1.TabIndex = 44;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colDelete
@@ -150,41 +134,117 @@
             this.colIngridients.ReadOnly = true;
             this.colIngridients.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 20);
+            this.label2.TabIndex = 41;
+            this.label2.Text = "Ингредиенты";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(117, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(46, 21);
+            this.comboBox1.TabIndex = 42;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.comboBoxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBoxSearch.Location = new System.Drawing.Point(6, 21);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(108, 21);
+            this.comboBoxSearch.TabIndex = 43;
+            this.comboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearch_SelectedIndexChanged_2);
+            // 
+            // BrowseRecepts
+            // 
+            this.BrowseRecepts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BrowseRecepts.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BrowseRecepts.Font = new System.Drawing.Font("Courier New", 12F);
+            this.BrowseRecepts.Location = new System.Drawing.Point(-4, 315);
+            this.BrowseRecepts.Name = "BrowseRecepts";
+            this.BrowseRecepts.Size = new System.Drawing.Size(343, 38);
+            this.BrowseRecepts.TabIndex = 40;
+            this.BrowseRecepts.Text = "Просмотреть рецепты";
+            this.BrowseRecepts.UseVisualStyleBackColor = false;
+            this.BrowseRecepts.Click += new System.EventHandler(this.BrowseRecepts_Click_1);
+            // 
+            // FindRecepts
+            // 
+            this.FindRecepts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.FindRecepts.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.FindRecepts.Font = new System.Drawing.Font("Courier New", 12F);
+            this.FindRecepts.Location = new System.Drawing.Point(-4, 243);
+            this.FindRecepts.Name = "FindRecepts";
+            this.FindRecepts.Size = new System.Drawing.Size(343, 73);
+            this.FindRecepts.TabIndex = 39;
+            this.FindRecepts.Text = "Найти рецепты";
+            this.FindRecepts.UseVisualStyleBackColor = false;
+            this.FindRecepts.Click += new System.EventHandler(this.FindRecepts_Click_1);
+            // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(334, 349);
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "Все пропало! Как восстановить?";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
             // Form1
             // 
             this.AccessibleDescription = "";
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Indicator;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(307, 359);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.comboBoxSearch);
-            this.Controls.Add(this.BrowseRecepts);
-            this.Controls.Add(this.FindRecepts);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(328, 373);
+            this.Controls.Add(this.metroTabControl1);
+            this.ForeColor = System.Drawing.Color.Black;
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.MinimumSize = new System.Drawing.Size(323, 398);
+            this.MinimumSize = new System.Drawing.Size(342, 412);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.metroTabControl1.ResumeLayout(false);
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button BrowseRecepts;
-        private System.Windows.Forms.Button FindRecepts;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBoxSearch;
+
+        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewImageColumn colDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSearch;
+        private System.Windows.Forms.Button BrowseRecepts;
+        private System.Windows.Forms.Button FindRecepts;
+        private MetroFramework.Controls.MetroTabPage metroTabPage2;
     }
 }
 

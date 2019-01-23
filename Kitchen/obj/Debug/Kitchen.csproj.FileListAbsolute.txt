@@ -44,3 +44,7 @@ C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.ex
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.pdb
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.AddName.resources
 C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.AddName2.resources
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\bin\Debug\MetroFramework.Design.dll
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\bin\Debug\MetroFramework.dll
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\Kitchen\obj\Debug\Kitchen.csproj.CopyComplete
