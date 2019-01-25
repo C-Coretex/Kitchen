@@ -150,6 +150,7 @@
             this.Name = "EditByName";
             this.Text = "EditByName";
             this.Load += new System.EventHandler(this.EditByName_Load);
+            this.Shown += new System.EventHandler(this.EditByName_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -170,6 +170,11 @@ namespace Kitchen
                 f3.StartPosition = FormStartPosition.Manual;
                 f3.Location = this.Location;
                 f3.ShowDialog();
+
+
+                backgroundWorker1.RunWorkerAsync();
+                dataGridView.Rows.Clear();
+                NewTable();
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -183,6 +188,14 @@ namespace Kitchen
                 ed.Location = this.Location;
                 ed.ShowDialog();
 
+                try
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
+                catch
+                {
+                    backgroundWorker1.CancelAsync();
+                }
                 dataGridView.Rows.Clear();
                 NewTable();
             }
@@ -199,7 +212,14 @@ namespace Kitchen
                 ContextMenuStrip delMenu = new System.Windows.Forms.ContextMenuStrip();
                 int pos = dataGridView.HitTest(e.X, e.Y).RowIndex;
                 delMenu.Items.Add("Delete").Text = "Удалить";
-                delMenu.Show(dataGridView, new Point(e.X+20, e.Y+30));
+                try
+                {
+                    dataGridView.Rows[e.RowIndex].Selected = true;
+                }
+                catch
+                {
+                }
+                delMenu.Show(dataGridView, new Point(e.Y, e.X));
 
                 //event menu click
                 delMenu.ItemClicked += new ToolStripItemClickedEventHandler(delMenu_ItemClicked);
@@ -210,12 +230,6 @@ namespace Kitchen
         private void delMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
                 int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-                RecipeList RL = new RecipeList
-                {
-                    //Name = name,
-                    // Ingridients = ingridients.Text,
-                    //Description = description
-                };
                 List<RecipeList> objects = new List<RecipeList>();
                 int a = 0;
                 using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
@@ -247,6 +261,15 @@ namespace Kitchen
                 }
             dataGridView.Rows.Clear();
             NewTable();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            MessageBox.Show("aaaaaaaaaaooooooooooo");
         }
     }
 }

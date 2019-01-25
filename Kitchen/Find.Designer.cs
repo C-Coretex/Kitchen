@@ -171,6 +171,7 @@
             this.ShowIcon = false;
             this.Text = "Find";
             this.Load += new System.EventHandler(this.Find_Load);
+            this.Shown += new System.EventHandler(this.Find_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

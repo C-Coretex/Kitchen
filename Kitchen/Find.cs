@@ -192,5 +192,10 @@ namespace Kitchen
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+
+        private void Find_Shown(object sender, EventArgs e)
+        {
+            dataGridView.ClearSelection();
+        }
     }
 }

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using MetroFramework.Components;
 
@@ -16,35 +19,38 @@ namespace Kitchen
     {
         string ingrTrue = "";
         int i;//Количество CheckBox'ов
-        CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
+        CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы ВЕЗДЕЕЕЕЕЕЕЕЕЕЕ
         static public string pathToFile = "";
         public Form1()
         {
             InitializeComponent();
+            MessageBox.Show("Ctrl+Shift+V " + " Shift+Tab");
             this.Cursor = Cursors.WaitCursor;
+            #region 1-st TAB
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
             //string pathToFile = @o + "\";
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
             pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             FileStream fs = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
             fs.Close();
-
+            #region Interface setting
             FindRecepts.TabStop = false;
             FindRecepts.FlatStyle = FlatStyle.Flat;
             FindRecepts.FlatAppearance.BorderSize = 0;
             BrowseRecepts.TabStop = false;
             BrowseRecepts.FlatStyle = FlatStyle.Flat;
             BrowseRecepts.FlatAppearance.BorderSize = 0;
-
+            #endregion 
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             List<string> firstLetters = new List<string>();
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
             {
                 allIngridients.Add(a.ToString());
-                if (firstLetters.Contains(a.Substring(0, 1))) { }
+                if (firstLetters.Contains(a.Substring(0, 1)))
+                { }
                 else
                 {
                     firstLetters.Add(a.Substring(0, 1));
@@ -60,11 +66,12 @@ namespace Kitchen
             {
                 comboBoxSearch.Items.Add(a);
             }
-            //tabControl1.
-
+            //metroTabControl1.SelectTab(0);
+            #endregion
             this.Cursor = Cursors.Default;
         }
 
+        #region 1-st TAB entrails
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -199,6 +206,32 @@ namespace Kitchen
             catch
             {
             }
+        }
+        #endregion
+
+        #region 2-nd TAB
+        private void Reload_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
+            timer.AutoReset = true; // the key is here so it repeats
+            timer.Elapsed += timer_elapsed;
+            timer.Start();
+        }
+
+        private void timer_elapsed(object sender, ElapsedEventArgs e)
+        {
+            NotifyIcon notifyIcon = new NotifyIcon();
+            notifyIcon.Visible = true;
+            notifyIcon.BalloonTipTitle = "Ээээй";
+            notifyIcon.BalloonTipText = "Есть тут кто?";
+            notifyIcon.Icon = SystemIcons.Application;
+            notifyIcon.ShowBalloonTip(5000);
         }
     }
 }

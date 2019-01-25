@@ -95,5 +95,10 @@ namespace Kitchen
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+
+        private void EditByName_Shown(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
     }
 }
