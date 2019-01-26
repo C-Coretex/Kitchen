@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kitchen
@@ -62,11 +60,9 @@ namespace Kitchen
             string type;
             using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
             {
-                int a = 0;
                 fs.Position = 0;
                 while (fs.Position < fs.Length)
                 {
-                    a++;
                     objects.Add((RecipeList)formatter.Deserialize(fs));
                 }
                 name = objects[rowNumber].Name;

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kitchen
@@ -172,36 +170,9 @@ namespace Kitchen
                 f3.ShowDialog();
 
 
-                backgroundWorker1.RunWorkerAsync();
                 dataGridView.Rows.Clear();
                 NewTable();
-        }
-
-        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-           // try
-            {
-                rowIndex = dataGridView.CurrentCell.RowIndex;
-                rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-                Edit ed = new Edit(rowIndex, rowNumber);
-                ed.StartPosition = FormStartPosition.Manual;
-                ed.Location = this.Location;
-                ed.ShowDialog();
-
-                try
-                {
-                    backgroundWorker1.RunWorkerAsync();
-                }
-                catch
-                {
-                    backgroundWorker1.CancelAsync();
-                }
-                dataGridView.Rows.Clear();
-                NewTable();
-            }
-          //  catch
-            {
-            }
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -223,53 +194,130 @@ namespace Kitchen
 
                 //event menu click
                 delMenu.ItemClicked += new ToolStripItemClickedEventHandler(delMenu_ItemClicked);
-                
+
             }
         }
 
         private void delMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-                int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-                List<RecipeList> objects = new List<RecipeList>();
-                int a = 0;
-                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+            int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+            List<RecipeList> objects = new List<RecipeList>();
+            int a = 0;
+            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                fs.Position = 0;
+                while (fs.Position < fs.Length)
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    fs.Position = 0;
-                    while (fs.Position < fs.Length)
+                    if (a == rowNumber)
                     {
-                        if (a == rowNumber)
-                        {
-                            objects.Add((RecipeList)formatter.Deserialize(fs));
-                            objects.Remove(objects[a-1]);
-                        }
-                        else
-                        {
-                            objects.Add((RecipeList)formatter.Deserialize(fs));
-                        }
-                        a++;
+                        objects.Add((RecipeList)formatter.Deserialize(fs));
+                        objects.Remove(objects[a - 1]);
                     }
+                    else
+                    {
+                        objects.Add((RecipeList)formatter.Deserialize(fs));
+                    }
+                    a++;
                 }
-                File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
-                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+            }
+            File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                for (int i = 0; i < a - 1; i++)
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    for (int i = 0; i < a - 1; i++)
-                    {
-                        formatter.Serialize(fs, objects[i]);
-                    }
+                    formatter.Serialize(fs, objects[i]);
                 }
+            }
             dataGridView.Rows.Clear();
             NewTable();
         }
-
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           // try
+            {
+                rowIndex = dataGridView.CurrentCell.RowIndex;
+                rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                Edit ed = new Edit(rowIndex, rowNumber);
+                ed.StartPosition = FormStartPosition.Manual;
+                ed.Location = this.Location;
+                ed.ShowDialog();
 
+                dataGridView.Rows.Clear();
+                NewTable();
+                try
+                {
+                    backgroundWorker2.RunWorkerAsync(); //TODO: Сохранение в директорию "C:\Program Files"
+                }
+                catch
+                {
+                    //backgroundWorker2.CancelAsync();
+                }
+            }
+          //  catch
+            {
+            }
+        }
+
+        #region Чё-то, что происходит при СОЗДАНИИ рецепта
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+                BinaryFormatter formatter = new BinaryFormatter();
+                var objects = new List<RecipeList>();
+                using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                {
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        objects.Add((RecipeList)formatter.Deserialize(fs));
+                    }
+                }
+                var objectsBackup = new List<RecipeList>();
+                bool exists = System.IO.Directory.Exists(@"C:\asd\");
+                if (!exists)
+                {
+                    Directory.CreateDirectory(@"C:\RecipeBackup");
+
+                }
+                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                {
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                    }
+                }
+
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    bool equals = false;
+                    foreach (var obB in objectsBackup)
+                    {
+                        if (objects[i].Description == obB.Description && objects[i].Name == obB.Name)
+                        {
+                            equals = true;
+                            break;
+                        }
+                    }
+                    if (equals == false)
+                    {
+                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "");
+                    }
+                }
+        }
+        #endregion
+
+        #region Чё-то, что происходит при ИЗМЕНЕНИИ рецепта
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Нужен OriginalDescription && OriginalName
+            System.Threading.Thread.Sleep(5000);
             MessageBox.Show("aaaaaaaaaaooooooooooo");
         }
+        #endregion
     }
 }

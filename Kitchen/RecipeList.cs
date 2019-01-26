@@ -35,6 +35,25 @@ namespace Kitchen
                 formatter.Serialize(fs, RL);
             }
         }
+        static public void Serialization2(string name, string description, string ingridients, string count, string type, string imageDirection)
+        {
+            RecipeList RL = new RecipeList
+            {
+                Name = name,
+                Description = description,
+                Ingridients = ingridients,
+                Count = count,
+                Type = type,
+                ImageDirection = imageDirection
+            };
+            // создаем объект BinaryFormatter
+            // получаем поток, куда будем записывать сериализованный объект
+            using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.Append))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(fs, RL);
+            }
+        }
         static public RecipeList Deserialization()
         {
             using (FileStream fs = new FileStream(Form1.pathToFile + "Recipe.dat", FileMode.Open))
