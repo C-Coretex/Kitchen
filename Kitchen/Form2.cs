@@ -15,12 +15,14 @@ namespace Kitchen
         int rowNumber = 0;
         static public string saveMyIng;
         string pathToFile = Form1.pathToFile;
+        static public string OriginalName = "";
+        static public string OriginalDescription = "";
+        static public bool deleted = false;
         public Form2()
         {
             InitializeComponent();
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.Cursor = Cursors.WaitCursor;
-            dataGridView.RowHeadersWidth = 20;
             dataGridView.AutoResizeColumns();
             //-----------------------------------------------------------------------------------------------------------------------------------------
             NewTable();
@@ -238,7 +240,7 @@ namespace Kitchen
         }
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-           // try
+            try
             {
                 rowIndex = dataGridView.CurrentCell.RowIndex;
                 rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
@@ -255,10 +257,10 @@ namespace Kitchen
                 }
                 catch
                 {
-                    //backgroundWorker2.CancelAsync();
+                   backgroundWorker2.RunWorkerAsync();
                 }
             }
-          //  catch
+            catch
             {
             }
         }
@@ -315,8 +317,63 @@ namespace Kitchen
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             //Нужен OriginalDescription && OriginalName
-            System.Threading.Thread.Sleep(5000);
-            MessageBox.Show("aaaaaaaaaaooooooooooo");
+            if (deleted == false)
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                var objects = new List<RecipeList>();
+                using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                {
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        objects.Add((RecipeList)formatter.Deserialize(fs));
+                    }
+                }
+
+                var objectsBackup = new List<RecipeList>();
+                bool exists = System.IO.Directory.Exists(@"C:\asd\");
+                if (!exists)
+                {
+                    Directory.CreateDirectory(@"C:\RecipeBackup");
+
+                }
+                // int editedRecepieNumber = 0;
+                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                {
+                    int a = 0;
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        a++;
+                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                        if (objectsBackup[a-1].Name == OriginalName && objectsBackup[a-1].Description == OriginalDescription)
+                        {
+                            objectsBackup.RemoveAt(a);
+                            //editedRecepieNumber = a;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    bool equals = false;
+                    foreach (var obB in objectsBackup)
+                    {
+                        if (objects[i].Description == obB.Description && objects[i].Name == obB.Name)
+                        {
+                            equals = true;
+                            break;
+                        }
+                    }
+                    if (equals == false)
+                    {
+                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "");
+                    }
+                }
+            }
+            deleted = false;
+            OriginalDescription = "";
+            OriginalName = "";
         }
         #endregion
     }

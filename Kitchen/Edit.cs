@@ -208,6 +208,8 @@ namespace Kitchen
             else
             {
                 this.Cursor = Cursors.Default;
+                Form2.OriginalName = name;
+                Form2.OriginalDescription = description;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
                 AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection);
                 AD.StartPosition = FormStartPosition.Manual;

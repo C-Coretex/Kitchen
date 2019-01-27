@@ -129,7 +129,7 @@ namespace Kitchen
                             }
                             else
                             {
-                                dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингридиенты куплены";
+                                dataGridView.Rows[n].Cells["colNotEnough"].Value = "Все ингредиенты куплены";
                                 dataGridView.Rows[n].Cells["colNotEnough"].Style.BackColor = Color.YellowGreen;
                                 dataGridView.Rows[n].Cells["colNotEnough"].Style.ForeColor = Color.DarkGreen;
                             }

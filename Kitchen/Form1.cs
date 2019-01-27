@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
@@ -206,12 +207,101 @@ namespace Kitchen
         #region 2-nd TAB
         private void Reload_Click(object sender, EventArgs e)
         {
+           // try
+            {
+                dataGridViewSQL.Rows.Clear();
+                BinaryFormatter formatter = new BinaryFormatter();
+                var objectsBackup = new List<RecipeList>();
+                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                {
+                    int a = -1;
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        a++;
+                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                        int n = dataGridViewSQL.Rows.Add();
+                        dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[a].Ingridients;
+                        dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[a].Name;
+                        dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a+1;
+                    }
+                }
+            }
+           // catch
+            {
+            }
+        }
+        private void findText_TextChanged(object sender, EventArgs e)
+        {
+            if (label1 != null)
+            {
+                label1.Text = null;
+            }
+            if (findText.Text == "")
+            {
+                label1.Text = "Найти по названию";
+            }
+        }
 
+        private void Find_Click(object sender, EventArgs e)
+        {
+            if (findText.Text != "")
+            {
+                bool contains = false;
+                this.Cursor = Cursors.WaitCursor;
+
+                if (dataGridViewSQL.CurrentRow.Index == dataGridViewSQL.RowCount - 1)
+                {
+                    Reload.PerformClick();
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                }
+                for (int i = dataGridViewSQL.CurrentRow.Index + 1; i < dataGridViewSQL.RowCount; i++)
+                {
+                    string name = dataGridViewSQL.Rows[i].Cells[1].Value.ToString();
+                    int cursor;
+                    for (cursor = 0; cursor + findText.Text.Length <= name.Length; cursor++)
+                    {
+                        if (name.Substring(cursor, findText.Text.Length).Equals(findText.Text, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            contains = true;
+
+                            Reload.PerformClick();
+                            dataGridViewSQL.ClearSelection();
+                            SendKeys.Send("{TAB}");
+                            SendKeys.Send("{TAB}");
+                            SendKeys.Send("{TAB}");
+                            SendKeys.Send("{TAB}");
+
+
+                            for (int n = 0; n < i; n++)
+                            {
+                                SendKeys.Send("{Enter}");
+                            }
+                            break;
+                        }
+                    }
+                    if (contains == true)
+                    {
+                        break;
+                    }
+                }
+                if (contains == false)
+                {
+                    MessageBox.Show("Слово: '" + findText.Text + "' НЕ найдено!");
+                    dataGridViewSQL.Rows[0].Cells[1].Selected = true;
+                }
+                this.Cursor = Cursors.Default;
+            }
         }
         #endregion
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+            dataGridViewSQL.RowHeadersWidth = 20;
+            dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
             timer.AutoReset = true; // the key is here so it repeats
             timer.Elapsed += timer_elapsed;
@@ -227,5 +317,11 @@ namespace Kitchen
             notifyIcon.Icon = SystemIcons.Application;
             notifyIcon.ShowBalloonTip(5000);
         }
+
+        private void metroTabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

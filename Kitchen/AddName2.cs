@@ -73,6 +73,7 @@ namespace Kitchen
                     formatter.Serialize(fs, objects[i]);
                 }
             }
+            Form2.deleted = true;
             this.Close();
         }
 
@@ -178,6 +179,10 @@ namespace Kitchen
         private void ddescription_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AddName2_Load(object sender, EventArgs e)
+        {
         }
     }
 }
