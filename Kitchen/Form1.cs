@@ -16,6 +16,7 @@ namespace Kitchen
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы ВЕЗДЕЕЕЕЕЕЕЕЕЕЕ
         static public string pathToFile = "";
+        bool findTextChanged = false;
         public Form1()
         {
             InitializeComponent();
@@ -241,64 +242,124 @@ namespace Kitchen
             {
                 label1.Text = "Найти по названию";
             }
+            findTextChanged = true;
         }
 
         private void Find_Click(object sender, EventArgs e)
         {
-            if (findText.Text != "")
+            if (dataGridViewSQL.RowCount != 0)
             {
-                bool contains = false;
-                this.Cursor = Cursors.WaitCursor;
+                if (findText.Text != "")
+                {
+                    bool contains = false;
+                    this.Cursor = Cursors.WaitCursor;
 
-                if (dataGridViewSQL.CurrentRow.Index == dataGridViewSQL.RowCount - 1)
-                {
-                    Reload.PerformClick();
-                    SendKeys.Send("{TAB}");
-                    SendKeys.Send("{TAB}");
-                    SendKeys.Send("{TAB}");
-                    SendKeys.Send("{TAB}");
-                }
-                for (int i = dataGridViewSQL.CurrentRow.Index + 1; i < dataGridViewSQL.RowCount; i++)
-                {
-                    string name = dataGridViewSQL.Rows[i].Cells[1].Value.ToString();
-                    int cursor;
-                    for (cursor = 0; cursor + findText.Text.Length <= name.Length; cursor++)
+                    if (dataGridViewSQL.CurrentRow.Index == dataGridViewSQL.RowCount - 1)
                     {
-                        if (name.Substring(cursor, findText.Text.Length).Equals(findText.Text, StringComparison.InvariantCultureIgnoreCase))
+                        Reload.PerformClick();
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                    }
+                    int i = 0;
+                    if (findTextChanged)
+                    {
+                        i = 0;
+                        findTextChanged = false;
+                    }
+                    else
+                    {
+                        i = dataGridViewSQL.CurrentRow.Index;
+                    }
+                    for (i = i + 1 ; i < dataGridViewSQL.RowCount; i++)
+                    {
+                        string name = dataGridViewSQL.Rows[i].Cells[2].Value.ToString();
+                        int cursor;
+                        for (cursor = 0; cursor + findText.Text.Length <= name.Length; cursor++)
                         {
-                            contains = true;
-
-                            Reload.PerformClick();
-                            dataGridViewSQL.ClearSelection();
-                            SendKeys.Send("{TAB}");
-                            SendKeys.Send("{TAB}");
-                            SendKeys.Send("{TAB}");
-                            SendKeys.Send("{TAB}");
-
-
-                            for (int n = 0; n < i; n++)
+                            if (name.Substring(cursor, findText.Text.Length).Equals(findText.Text, StringComparison.InvariantCultureIgnoreCase))
                             {
-                                SendKeys.Send("{Enter}");
+                                contains = true;
+
+                                Reload.PerformClick();
+                                dataGridViewSQL.ClearSelection();
+                                SendKeys.Send("{TAB}");
+                                SendKeys.Send("{TAB}");
+                                SendKeys.Send("{TAB}");
+                                SendKeys.Send("{TAB}");
+
+                                for (int n = 0; n < i; n++)
+                                {
+                                    SendKeys.Send("{Enter}");
+                                }
+                                break;
                             }
+                        }
+                        if (contains == true)
+                        {
                             break;
                         }
                     }
-                    if (contains == true)
+                    if (contains == false)
                     {
-                        break;
+                        MessageBox.Show("Слово: '" + findText.Text + "' НЕ найдено!");
+                        Reload.PerformClick();
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
                     }
+                    this.Cursor = Cursors.Default;
                 }
-                if (contains == false)
-                {
-                    MessageBox.Show("Слово: '" + findText.Text + "' НЕ найдено!");
-                    dataGridViewSQL.Rows[0].Cells[1].Selected = true;
-                }
-                this.Cursor = Cursors.Default;
             }
         }
-        #endregion
 
-        private void Form1_Shown(object sender, EventArgs e)
+        private void dataGridViewSQL_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                        this.Cursor = Cursors.WaitCursor;
+            //try
+            {
+                if (e.ColumnIndex == 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Удалить этот игредиент НАВСЕГДА?", "Мы удаляем?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string name = dataGridViewSQL.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        string ingridients = dataGridViewSQL.Rows[e.RowIndex].Cells[3].Value.ToString();
+                        dataGridViewSQL.Rows.RemoveAt(e.RowIndex);
+
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        var objectsBackup = new List<RecipeList>();
+                        using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                        {
+                            fs.Position = 0;
+                            while (fs.Position < fs.Length)
+                            {
+                                objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                                if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
+                                {
+                                    objectsBackup.RemoveAt(objectsBackup.Count - 1);
+                                }
+                            }
+                        }
+                        File.WriteAllText(@"C:\RecipeBackup\RecipeBackup.dat", String.Empty);
+                        foreach (RecipeList recipe in objectsBackup)
+                        {
+                            RecipeList.Serialization2(recipe.Name, recipe.Description, recipe.Ingridients, recipe.Count, recipe.Type, "");
+                        }
+                    }
+                }
+            }
+            //catch
+            {
+            }
+                        this.Cursor = Cursors.Default;
+        }
+            #endregion
+
+            private void Form1_Shown(object sender, EventArgs e)
         {
             dataGridViewSQL.RowHeadersWidth = 20;
             dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -322,6 +383,5 @@ namespace Kitchen
         {
 
         }
-
     }
 }
