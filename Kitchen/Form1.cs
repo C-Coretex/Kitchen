@@ -20,7 +20,6 @@ namespace Kitchen
         public Form1()
         {
             InitializeComponent();
-            MessageBox.Show("Ctrl+Shift+V " + " Shift+Tab");
             this.Cursor = Cursors.WaitCursor;
             #region 1-st TAB
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,22 +67,6 @@ namespace Kitchen
         }
 
         #region 1-st TAB entrails
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-        }
-
-
-        private void comboBoxSearch_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-        }
 
         private void comboBoxSearch_SelectedIndexChanged_2(object sender, EventArgs e)
         {
@@ -139,22 +122,6 @@ namespace Kitchen
             }
         }
 
-        private void metroTabPage1_MouseMove(object sender, MouseEventArgs e)
-        {
-            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
-            {
-                if (chbox.Checked == true)
-                {
-                    int n = dataGridView1.Rows.Add();
-                    dataGridView1.Rows[n].Cells["colIngridients"].Value = chbox.Text;
-                    comboBoxSearch.Items.Remove(chbox.Text);
-                    chbox.Checked = false;
-                    chbox.Visible = false;
-                    chbox.Enabled = false;
-                }
-            }
-        }
-
         private void FindRecepts_Click_1(object sender, EventArgs e)
         {
             ingrTrue = "";
@@ -185,7 +152,7 @@ namespace Kitchen
             Hide();
             Form2.saveMyIng = ingrTrue;
             f2.ShowDialog();
-            Close();//Закрывает ПЕРВУЮ форму
+            Hide();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -215,16 +182,17 @@ namespace Kitchen
                 var objectsBackup = new List<RecipeList>();
                 using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
                 {
-                    int a = -1;
+                    int a = 0;
                     fs.Position = 0;
                     while (fs.Position < fs.Length)
                     {
                         a++;
                         objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
                         int n = dataGridViewSQL.Rows.Add();
-                        dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[a].Ingridients;
-                        dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[a].Name;
-                        dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a+1;
+                        //int o = Convert.ToUInt16(objectsBackup[objectsBackup.Count - 1].Ingridients) - 1;
+                        dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[objectsBackup.Count - 1].Ingridients;
+                        dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[objectsBackup.Count - 1].Name;
+                        dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a;
                     }
                 }
             }
@@ -351,16 +319,148 @@ namespace Kitchen
                         }
                     }
                 }
+                else if (e.ColumnIndex == 4)
+                {
+                                    bool exist = false;
+                                    string name = dataGridViewSQL.Rows[e.RowIndex].Cells[2].Value.ToString();
+                                    string ingridients = dataGridViewSQL.Rows[e.RowIndex].Cells[3].Value.ToString();
+                                    var objects = new List<RecipeList>();
+                                    {
+                                        BinaryFormatter formatter = new BinaryFormatter();
+                                        using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                                        {
+                                            fs.Position = 0;
+                                            while (fs.Position < fs.Length)
+                                            {
+                                                objects.Add((RecipeList)formatter.Deserialize(fs));
+                                                if (objects[objects.Count -1].Name == name && objects[objects.Count - 1].Ingridients == ingridients)
+                                                {
+                                                    exist = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                    if (exist == false)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Хочешь восстановить игредиент?", "Мы восстанавливаем?", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            BinaryFormatter formatter = new BinaryFormatter();
+                            var objectsBackup = new List<RecipeList>();
+                            using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                            {
+                                fs.Position = 0;
+                                while (fs.Position < fs.Length)
+                                {
+                                    objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                                    if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
+                                    {
+                                        var RC = objectsBackup[objectsBackup.Count - 1];
+                                        RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             //catch
             {
             }
                         this.Cursor = Cursors.Default;
         }
-            #endregion
 
-            private void Form1_Shown(object sender, EventArgs e)
+        private void RestoreAll_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Хочешь восстановить АБСОЛЮТНО всё?", "Мы восстанавливаем ВСЁ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                    this.Cursor = Cursors.WaitCursor;
+                BinaryFormatter formatter = new BinaryFormatter();
+                var objectsBackup = new List<RecipeList>();
+                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                {
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                        var RC = objectsBackup[objectsBackup.Count - 1];
+                        bool exist = false;
+                                    var objects = new List<RecipeList>();
+                                    using (Stream fsss = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                                    {
+                                        fsss.Position = 0;
+                                        while (fsss.Position < fsss.Length)
+                                        {
+                                            objects.Add((RecipeList)formatter.Deserialize(fsss));
+                                        }
+                                    }
+                        foreach (RecipeList recipe in objects)
+                        {
+                            if (recipe.Name == RC.Name && recipe.Description == RC.Description)
+                            {
+                                exist = true;
+                                break;
+                            }
+                        }
+                        if (exist == false)
+                        {
+                            RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection);
+                        }
+                    }
+                }
+                    string[] ingridientsFile = File.ReadAllLines(@"C:\RecipeBackup\Ingridients.txt", Encoding.UTF8);
+                    File.WriteAllText(pathToFile + @"Ingridients.txt", String.Empty);
+                string ing = "";
+                for (int a = 0; a < ingridientsFile.Count(); a++)
+                {
+                    ing += ingridientsFile[a] + "\r";
+                }
+                File.WriteAllText(pathToFile + @"Ingridients.txt", ing.Substring(0, ing.Length - 1));
+                this.Cursor = Cursors.Default;
+            }
+         }
+
+        private void dataGridViewSQL_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string name = dataGridViewSQL.Rows[e.RowIndex].Cells[2].Value.ToString();
+            string ingridients = dataGridViewSQL.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            RecipeList objectBackupEdit = new RecipeList();
+            using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+            {
+                var objectsBackup = new List<RecipeList>();
+                fs.Position = 0;
+                while (fs.Position < fs.Length)
+                {
+                    objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                    if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
+                    {
+                        objectBackupEdit = objectsBackup[objectsBackup.Count - 1];
+                        break;
+                    }
+                }
+            }
+            string[] IngredientsNumbers = objectBackupEdit.Ingridients.Split(' ');
+            string[] ingridientsList = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            string ingr = "";
+            for (int i = 0; i < IngredientsNumbers.Count() - 1; i++)
+            {
+                ingr += ingridientsList[Convert.ToUInt16(IngredientsNumbers[i]) - 1] + "\r ";
+            }
+            EditByName ed = new EditByName(objectBackupEdit.Name, ingr, objectBackupEdit.Description, objectBackupEdit.Count, objectBackupEdit.Type, "Все ингредиенты куплены", objectBackupEdit.ImageDirection);
+            ed.StartPosition = FormStartPosition.Manual;
+            ed.Location = this.Location;
+            ed.Show();
+        }
+        #endregion
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
             dataGridViewSQL.RowHeadersWidth = 20;
             dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
@@ -379,9 +479,5 @@ namespace Kitchen
             notifyIcon.ShowBalloonTip(5000);
         }
 
-        private void metroTabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

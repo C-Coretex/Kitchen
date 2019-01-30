@@ -340,15 +340,13 @@ namespace Kitchen
                 // int editedRecepieNumber = 0;
                 using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
                 {
-                    int a = 0;
                     fs.Position = 0;
                     while (fs.Position < fs.Length)
                     {
-                        a++;
                         objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
-                        if (objectsBackup[a-1].Name == OriginalName && objectsBackup[a-1].Description == OriginalDescription)
+                        if (objectsBackup[objectsBackup.Count-1].Name == OriginalName && objectsBackup[objectsBackup.Count-1].Description == OriginalDescription)
                         {
-                            objectsBackup.RemoveAt(a);
+                            objectsBackup.RemoveAt(objectsBackup.Count-1);
                             //editedRecepieNumber = a;
                         }
                     }

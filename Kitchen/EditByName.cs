@@ -39,7 +39,6 @@ namespace Kitchen
                     objects.Add((RecipeList)formatter.Deserialize(fs));
                 }
             }
-            string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             string[] subStr = Ingridients.Split(new string[] { "\r " }, StringSplitOptions.None);
             string[] subCount = Count.Split(' ');
             string[] subType = Type.Split('|');

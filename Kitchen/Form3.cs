@@ -105,6 +105,7 @@ namespace Kitchen
                 AddName AD = new AddName(ingr, count, type);
                 AD.StartPosition = FormStartPosition.Manual;
                 AD.Location = this.Location;
+                this.Hide();
                 AD.ShowDialog();
                 this.Close();
                 //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -127,6 +128,14 @@ namespace Kitchen
                 aCB.StartPosition = FormStartPosition.Manual;
                 aCB.Location = this.Location;
                 aCB.ShowDialog();
+                 try
+                {
+                    backgroundWorker1.RunWorkerAsync(); //TODO: Сохранение в директорию "C:\Program Files"
+                }
+                catch
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
                 comboBoxSearch.Items.Add(AddCheckBox.name);
                 comboBoxSearch.Sorted = true;
             }
@@ -231,6 +240,23 @@ namespace Kitchen
                 }
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+                        string[] ingridientsFile = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            string ing = "";
+            for (int a = 0; a< ingridientsFile.Count(); a++)
+            {
+                ing += ingridientsFile[a] + "\r";
+            }
+            bool exists = System.IO.Directory.Exists(@"C:\asd\");
+            if (!exists)
+            {
+                Directory.CreateDirectory(@"C:\RecipeBackup");
+
+            }
+            File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", String.Empty);
+            System.IO.File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", ing.Substring(0, ing.Length - 1));
+        }
     }
 }
 

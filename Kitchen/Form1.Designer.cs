@@ -27,10 +27,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
@@ -43,16 +43,17 @@
             this.BrowseRecepts = new System.Windows.Forms.Button();
             this.FindRecepts = new System.Windows.Forms.Button();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.RestoreAll = new System.Windows.Forms.Button();
             this.Find = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.findText = new System.Windows.Forms.TextBox();
             this.Reload = new MetroFramework.Controls.MetroButton();
             this.dataGridViewSQL = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.colDelete2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIngredients = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRestore = new System.Windows.Forms.DataGridViewImageColumn();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -98,7 +99,6 @@
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
-            this.metroTabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.metroTabPage1_MouseMove);
             // 
             // dataGridView1
             // 
@@ -109,14 +109,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDelete,
@@ -181,7 +181,6 @@
             this.comboBoxSearch.Name = "comboBoxSearch";
             this.comboBoxSearch.Size = new System.Drawing.Size(108, 21);
             this.comboBoxSearch.TabIndex = 43;
-            this.comboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearch_SelectedIndexChanged_2);
             // 
             // BrowseRecepts
             // 
@@ -213,7 +212,7 @@
             // 
             // metroTabPage2
             // 
-            this.metroTabPage2.Controls.Add(this.button1);
+            this.metroTabPage2.Controls.Add(this.RestoreAll);
             this.metroTabPage2.Controls.Add(this.Find);
             this.metroTabPage2.Controls.Add(this.label1);
             this.metroTabPage2.Controls.Add(this.findText);
@@ -231,13 +230,27 @@
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
-            this.metroTabPage2.Click += new System.EventHandler(this.metroTabPage2_Click);
+            // 
+            // RestoreAll
+            // 
+            this.RestoreAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RestoreAll.BackColor = System.Drawing.Color.YellowGreen;
+            this.RestoreAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.RestoreAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RestoreAll.Location = new System.Drawing.Point(121, 0);
+            this.RestoreAll.Name = "RestoreAll";
+            this.RestoreAll.Size = new System.Drawing.Size(219, 24);
+            this.RestoreAll.TabIndex = 7;
+            this.RestoreAll.Text = "Восстановить все";
+            this.RestoreAll.UseVisualStyleBackColor = false;
+            this.RestoreAll.Click += new System.EventHandler(this.RestoreAll_Click);
             // 
             // Find
             // 
             this.Find.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Find.Location = new System.Drawing.Point(280, 22);
+            this.Find.Location = new System.Drawing.Point(280, 24);
             this.Find.Name = "Find";
             this.Find.Size = new System.Drawing.Size(64, 22);
             this.Find.TabIndex = 6;
@@ -254,7 +267,7 @@
             this.label1.Enabled = false;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(137, 25);
+            this.label1.Location = new System.Drawing.Point(126, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 17);
             this.label1.TabIndex = 5;
@@ -267,9 +280,9 @@
             this.findText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.findText.BackColor = System.Drawing.Color.White;
-            this.findText.Location = new System.Drawing.Point(129, 24);
+            this.findText.Location = new System.Drawing.Point(121, 24);
             this.findText.Name = "findText";
-            this.findText.Size = new System.Drawing.Size(152, 20);
+            this.findText.Size = new System.Drawing.Size(160, 20);
             this.findText.TabIndex = 4;
             this.findText.TextChanged += new System.EventHandler(this.findText_TextChanged);
             // 
@@ -277,7 +290,7 @@
             // 
             this.Reload.Location = new System.Drawing.Point(3, 0);
             this.Reload.Name = "Reload";
-            this.Reload.Size = new System.Drawing.Size(125, 45);
+            this.Reload.Size = new System.Drawing.Size(117, 45);
             this.Reload.TabIndex = 3;
             this.Reload.Text = "Обновить";
             this.Reload.UseSelectable = true;
@@ -294,68 +307,57 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewSQL.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridViewSQL.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSQL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSQL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewSQL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSQL.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDelete2,
             this.colNumber,
             this.colName,
-            this.colIngredients});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSQL.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colIngredients,
+            this.colRestore});
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSQL.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewSQL.Location = new System.Drawing.Point(3, 45);
             this.dataGridViewSQL.Name = "dataGridViewSQL";
             this.dataGridViewSQL.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSQL.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSQL.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewSQL.RowHeadersVisible = false;
             this.dataGridViewSQL.Size = new System.Drawing.Size(337, 301);
             this.dataGridViewSQL.TabIndex = 2;
             this.dataGridViewSQL.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSQL_CellClick);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.YellowGreen;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(129, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(211, 24);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Восстановить все";
-            this.button1.UseVisualStyleBackColor = false;
+            this.dataGridViewSQL.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewSQL_CellMouseDoubleClick);
             // 
             // colDelete2
             // 
-            this.colDelete2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colDelete2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colDelete2.FillWeight = 30F;
             this.colDelete2.HeaderText = "";
             this.colDelete2.Image = ((System.Drawing.Image)(resources.GetObject("colDelete2.Image")));
-            this.colDelete2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.colDelete2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.colDelete2.Name = "colDelete2";
             this.colDelete2.ReadOnly = true;
-            this.colDelete2.Width = 30;
+            this.colDelete2.ToolTipText = "Удалить рецепт";
+            this.colDelete2.Width = 5;
             // 
             // colNumber
             // 
@@ -378,6 +380,16 @@
             this.colIngredients.Name = "colIngredients";
             this.colIngredients.ReadOnly = true;
             // 
+            // colRestore
+            // 
+            this.colRestore.HeaderText = "";
+            this.colRestore.Image = ((System.Drawing.Image)(resources.GetObject("colRestore.Image")));
+            this.colRestore.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.colRestore.Name = "colRestore";
+            this.colRestore.ReadOnly = true;
+            this.colRestore.ToolTipText = "Восстановить рецепт";
+            this.colRestore.Width = 40;
+            // 
             // Form1
             // 
             this.AccessibleDescription = "";
@@ -392,9 +404,7 @@
             this.MinimumSize = new System.Drawing.Size(350, 412);
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
@@ -424,11 +434,12 @@
         private System.Windows.Forms.Button Find;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox findText;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RestoreAll;
         private System.Windows.Forms.DataGridViewImageColumn colDelete2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIngredients;
+        private System.Windows.Forms.DataGridViewImageColumn colRestore;
     }
 }
 
