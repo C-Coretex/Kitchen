@@ -104,7 +104,6 @@
             this.ddescription.Name = "ddescription";
             this.ddescription.Size = new System.Drawing.Size(295, 200);
             this.ddescription.TabIndex = 15;
-            this.ddescription.TextChanged += new System.EventHandler(this.ddescription_TextChanged);
             // 
             // label3
             // 
@@ -183,8 +182,8 @@
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(600, 338);
             this.Name = "AddName2";
-            this.Text = "AddName2";
-            this.Load += new System.EventHandler(this.AddName2_Load);
+            this.ShowIcon = false;
+            this.Text = "Редактировать рецепт";
             this.Shown += new System.EventHandler(this.AddName2_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

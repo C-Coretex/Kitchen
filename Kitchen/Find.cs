@@ -143,10 +143,6 @@ namespace Kitchen
             this.Cursor = Cursors.Default;
         }
 
-        private void Find_Load(object sender, EventArgs e)
-        {
-        }
-
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = dataGridView.CurrentRow.Index;
@@ -187,10 +183,6 @@ namespace Kitchen
             ed.StartPosition = FormStartPosition.Manual;
             ed.Location = this.Location;
             ed.Show();
-        }
-
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
         private void Find_Shown(object sender, EventArgs e)

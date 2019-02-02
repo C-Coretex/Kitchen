@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace Kitchen
 {
@@ -113,11 +109,6 @@ namespace Kitchen
         }
 
         private void Exit_Click(object sender, EventArgs e) => this.Close();
-
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -236,8 +227,8 @@ namespace Kitchen
                 comboBoxSearch.Items.Remove(comboBoxSearch.SelectedItem);
             }
             catch
-                {
-                }
+            {
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -252,7 +243,6 @@ namespace Kitchen
             if (!exists)
             {
                 Directory.CreateDirectory(@"C:\RecipeBackup");
-
             }
             File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", String.Empty);
             System.IO.File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", ing.Substring(0, ing.Length - 1));

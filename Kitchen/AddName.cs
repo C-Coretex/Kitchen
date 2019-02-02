@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kitchen
@@ -40,14 +33,6 @@ namespace Kitchen
                 RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection);
                 this.Close();
             }
-        }
-
-        private void name_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void description_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void AddName_Shown(object sender, EventArgs e)
@@ -91,10 +76,6 @@ namespace Kitchen
                 imageDirection = fileDialog.FileName;
                 pictureBox1.ImageLocation = imageDirection;
             }
-        }
-
-        private void AddName_Load(object sender, EventArgs e)
-        {
         }
     }
 }

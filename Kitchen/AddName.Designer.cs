@@ -49,7 +49,6 @@
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(277, 26);
             this.name.TabIndex = 1;
-            this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
             // 
             // label1
             // 
@@ -74,7 +73,6 @@
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(295, 200);
             this.description.TabIndex = 3;
-            this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
             // 
             // label3
             // 
@@ -181,8 +179,8 @@
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(600, 338);
             this.Name = "AddName";
-            this.Text = "EditName";
-            this.Load += new System.EventHandler(this.AddName_Load);
+            this.ShowIcon = false;
+            this.Text = "Добавить рецепт";
             this.Shown += new System.EventHandler(this.AddName_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

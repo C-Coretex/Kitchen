@@ -59,7 +59,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(267, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // AddCheckBox
             // 
@@ -70,8 +69,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "AddCheckBox";
-            this.Text = "AddCheckBox";
-            this.Load += new System.EventHandler(this.AddCheckBox_Load);
+            this.ShowIcon = false;
+            this.Text = "Добавить ингредиент";
             this.ResumeLayout(false);
             this.PerformLayout();
 

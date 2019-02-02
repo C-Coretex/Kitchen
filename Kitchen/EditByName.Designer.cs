@@ -54,7 +54,6 @@
             this.description.ReadOnly = true;
             this.description.Size = new System.Drawing.Size(663, 251);
             this.description.TabIndex = 20;
-            this.description.TextChanged += new System.EventHandler(this.description_TextChanged);
             // 
             // labelName
             // 
@@ -65,7 +64,6 @@
             this.labelName.Size = new System.Drawing.Size(150, 20);
             this.labelName.TabIndex = 15;
             this.labelName.Text = "Название рецепта";
-            this.labelName.Click += new System.EventHandler(this.labelName_Click);
             // 
             // dataGridView1
             // 
@@ -95,7 +93,6 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(245, 271);
             this.dataGridView1.TabIndex = 28;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colIngridients
             // 
@@ -148,8 +145,8 @@
             this.Controls.Add(this.labelName);
             this.MinimumSize = new System.Drawing.Size(680, 617);
             this.Name = "EditByName";
-            this.Text = "EditByName";
-            this.Load += new System.EventHandler(this.EditByName_Load);
+            this.ShowIcon = false;
+            this.Text = "Просмотреть рецепт";
             this.Shown += new System.EventHandler(this.EditByName_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

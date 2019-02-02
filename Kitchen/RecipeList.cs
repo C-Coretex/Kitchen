@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
@@ -16,6 +13,7 @@ namespace Kitchen
         public string Count { get; set; }
         public string Type { get; set; }
         public string ImageDirection { get; set; }
+
         static public void Serialization(string name, string description, string ingridients, string count, string type, string imageDirection)
         {
             RecipeList RL = new RecipeList

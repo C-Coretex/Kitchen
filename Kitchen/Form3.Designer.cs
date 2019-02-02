@@ -213,8 +213,8 @@
             this.Controls.Add(this.label2);
             this.MinimumSize = new System.Drawing.Size(483, 440);
             this.Name = "Form3";
-            this.Text = "Form3";
-            this.Load += new System.EventHandler(this.Form3_Load);
+            this.ShowIcon = false;
+            this.Text = "Добавить рецепт";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form3_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kitchen
@@ -75,24 +71,6 @@ namespace Kitchen
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             pictureBox1.ImageLocation = imageDirection;
             this.Cursor = Cursors.Default;
-        }
-        private void description_TextChanged(object sender, EventArgs e)
-        {
-        }
-        private void EditByName_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void labelName_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void labelDescription_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
         private void EditByName_Shown(object sender, EventArgs e)

@@ -12,6 +12,7 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
+        System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
         string ingrTrue = "";
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы ВЕЗДЕЕЕЕЕЕЕЕЕЕЕ
@@ -21,10 +22,11 @@ namespace Kitchen
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
+
             #region 1-st TAB
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             // string o = System.AppDomain.CurrentDomain.BaseDirectory;
-            //string pathToFile = @o + "\";
+            //pathToFile = @o + "\";
             //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
             pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +65,18 @@ namespace Kitchen
             }
             //metroTabControl1.SelectTab(0);
             #endregion
+
             this.Cursor = Cursors.Default;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
+            dataGridViewSQL.RowHeadersWidth = 20;
+            dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            timer.AutoReset = true; // the key is here so it repeats
+            timer.Elapsed += timer_elapsed;
+            timer.Start();
         }
 
         #region 1-st TAB entrails
@@ -149,10 +162,9 @@ namespace Kitchen
             Form2 f2 = new Form2();
             f2.StartPosition = FormStartPosition.Manual;
             f2.Location = this.Location;
-            Hide();
             Form2.saveMyIng = ingrTrue;
+            this.Hide();
             f2.ShowDialog();
-            Hide();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -177,28 +189,36 @@ namespace Kitchen
         {
            // try
             {
-                dataGridViewSQL.Rows.Clear();
-                BinaryFormatter formatter = new BinaryFormatter();
-                var objectsBackup = new List<RecipeList>();
-                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                if (metroToggle1.Checked == false)
                 {
-                    int a = 0;
-                    fs.Position = 0;
-                    while (fs.Position < fs.Length)
+                    dataGridViewSQL.Rows.Clear();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    var objectsBackup = new List<RecipeList>();
+                    using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
                     {
-                        a++;
-                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
-                        int n = dataGridViewSQL.Rows.Add();
-                        //int o = Convert.ToUInt16(objectsBackup[objectsBackup.Count - 1].Ingridients) - 1;
-                        dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[objectsBackup.Count - 1].Ingridients;
-                        dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[objectsBackup.Count - 1].Name;
-                        dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a;
+                        int a = 0;
+                        fs.Position = 0;
+                        while (fs.Position < fs.Length)
+                        {
+                            a++;
+                            objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                            int n = dataGridViewSQL.Rows.Add();
+                            //int o = Convert.ToUInt16(objectsBackup[objectsBackup.Count - 1].Ingridients) - 1;
+                            dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[objectsBackup.Count - 1].Ingridients;
+                            dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[objectsBackup.Count - 1].Name;
+                            dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a;
+                        }
                     }
+                }
+                else
+                {
+
                 }
             }
            // catch
             {
             }
+            
         }
         private void findText_TextChanged(object sender, EventArgs e)
         {
@@ -425,49 +445,49 @@ namespace Kitchen
 
         private void dataGridViewSQL_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string name = dataGridViewSQL.Rows[e.RowIndex].Cells[2].Value.ToString();
-            string ingridients = dataGridViewSQL.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            RecipeList objectBackupEdit = new RecipeList();
-            using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+            try
             {
-                var objectsBackup = new List<RecipeList>();
-                fs.Position = 0;
-                while (fs.Position < fs.Length)
+                string name = dataGridViewSQL.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string ingridients = dataGridViewSQL.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                BinaryFormatter formatter = new BinaryFormatter();
+                RecipeList objectBackupEdit = new RecipeList();
+                using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
                 {
-                    objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
-                    if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
+                    var objectsBackup = new List<RecipeList>();
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
                     {
-                        objectBackupEdit = objectsBackup[objectsBackup.Count - 1];
-                        break;
+                        objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                        if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
+                        {
+                            objectBackupEdit = objectsBackup[objectsBackup.Count - 1];
+                            break;
+                        }
                     }
                 }
+                string[] IngredientsNumbers = objectBackupEdit.Ingridients.Split(' ');
+                string[] ingridientsList = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+                string ingr = "";
+                for (int i = 0; i < IngredientsNumbers.Count() - 1; i++)
+                {
+                    ingr += ingridientsList[Convert.ToUInt16(IngredientsNumbers[i]) - 1] + "\r ";
+                }
+                EditByName ed = new EditByName(objectBackupEdit.Name, ingr, objectBackupEdit.Description, objectBackupEdit.Count, objectBackupEdit.Type, "Все ингредиенты куплены", objectBackupEdit.ImageDirection);
+                ed.StartPosition = FormStartPosition.Manual;
+                ed.Location = this.Location;
+                ed.Show();
             }
-            string[] IngredientsNumbers = objectBackupEdit.Ingridients.Split(' ');
-            string[] ingridientsList = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            string ingr = "";
-            for (int i = 0; i < IngredientsNumbers.Count() - 1; i++)
+            catch
             {
-                ingr += ingridientsList[Convert.ToUInt16(IngredientsNumbers[i]) - 1] + "\r ";
             }
-            EditByName ed = new EditByName(objectBackupEdit.Name, ingr, objectBackupEdit.Description, objectBackupEdit.Count, objectBackupEdit.Type, "Все ингредиенты куплены", objectBackupEdit.ImageDirection);
-            ed.StartPosition = FormStartPosition.Manual;
-            ed.Location = this.Location;
-            ed.Show();
+        }
+
+        private void metroToggle1_CheckedChanged(object sender, EventArgs e)
+        {
+            Reload.PerformClick();     
         }
         #endregion
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            this.CenterToScreen();
-            dataGridViewSQL.RowHeadersWidth = 20;
-            dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
-            timer.AutoReset = true; // the key is here so it repeats
-            timer.Elapsed += timer_elapsed;
-            timer.Start();
-        }
 
         private void timer_elapsed(object sender, ElapsedEventArgs e)
         {
@@ -479,5 +499,9 @@ namespace Kitchen
             notifyIcon.ShowBalloonTip(5000);
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer.Close();
+        }
     }
 }

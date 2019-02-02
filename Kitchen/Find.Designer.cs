@@ -85,7 +85,6 @@
             this.dataGridView.ShowEditingIcon = false;
             this.dataGridView.Size = new System.Drawing.Size(506, 302);
             this.dataGridView.TabIndex = 7;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
             // colEqualsProcents
@@ -170,7 +169,6 @@
             this.Name = "Find";
             this.ShowIcon = false;
             this.Text = "Find";
-            this.Load += new System.EventHandler(this.Find_Load);
             this.Shown += new System.EventHandler(this.Find_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
