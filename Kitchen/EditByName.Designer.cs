@@ -44,7 +44,8 @@
             // 
             // description
             // 
-            this.description.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.description.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.description.BackColor = System.Drawing.Color.White;
             this.description.Font = new System.Drawing.Font("Courier New", 12F);
@@ -52,7 +53,7 @@
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.ReadOnly = true;
-            this.description.Size = new System.Drawing.Size(663, 251);
+            this.description.Size = new System.Drawing.Size(663, 267);
             this.description.TabIndex = 20;
             // 
             // labelName
@@ -91,7 +92,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(245, 271);
+            this.dataGridView1.Size = new System.Drawing.Size(270, 271);
             this.dataGridView1.TabIndex = 28;
             // 
             // colIngridients
@@ -127,9 +128,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.Snow;
             this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(255, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(280, 32);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(412, 271);
+            this.pictureBox1.Size = new System.Drawing.Size(387, 271);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;

@@ -109,7 +109,7 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.colName.DefaultCellStyle = dataGridViewCellStyle3;
             this.colName.HeaderText = "Название";

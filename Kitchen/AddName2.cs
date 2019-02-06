@@ -29,6 +29,7 @@ namespace Kitchen
             imageDirection = ImageDirection;
             ddescription.ScrollBars = ScrollBars.Both;
             pictureBox1.ImageLocation = imageDirection;
+            this.Text = name + " - редактирование";
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -74,7 +75,7 @@ namespace Kitchen
         private void button1_Click(object sender, EventArgs e)
         {
             i++;
-            ddescription.Text = ddescription.Text + "\r\n" + i + ". ";
+            ddescription.Text = ddescription.Text + "\r\n\r\n" + i + ". ";
             сщгте.Text = Convert.ToString(i);
             ddescription.Focus();
             SendKeys.Send("{RIGHT}");

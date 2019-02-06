@@ -33,17 +33,8 @@ namespace Kitchen
             this.Cursor = Cursors.Default;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-        }
-
         private void Back_Click(object sender, EventArgs e)
         {
-            Form1 f1 = new Form1();
-            f1.StartPosition = FormStartPosition.Manual;
-            f1.Location = this.Location;
-            Hide();
-            f1.ShowDialog();
             Close();
         }
 
@@ -59,7 +50,7 @@ namespace Kitchen
                             {
                                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                                 {
-                                   // try
+                                  //  try
                                     {
                                         BinaryFormatter formatter = new BinaryFormatter();
 

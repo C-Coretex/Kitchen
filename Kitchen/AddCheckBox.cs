@@ -34,9 +34,5 @@ namespace Kitchen
                     MessageBox.Show("Этот ингредиент уже записан");
             }
         }
-
-        private void AddCheckBox_Load(object sender, EventArgs e)
-        {
-        }
     }
 }

@@ -84,6 +84,9 @@ namespace Kitchen
                 dataGridView1.Rows[n].Cells[3].Value = subType[i];
                 comboBoxSearch.Items.Remove(ingridients[Convert.ToInt16(subStr[i]) - 1]);
             }
+            this.Text = name + " - редактирование";
+
+
             this.Cursor = Cursors.Default;
         }
 

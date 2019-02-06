@@ -38,11 +38,13 @@ namespace Kitchen
             string[] subStr = Ingridients.Split(new string[] { "\r " }, StringSplitOptions.None);
             string[] subCount = Count.Split(' ');
             string[] subType = Type.Split('|');
+            string[] subLack = lack.Split(new string[] { "\r " }, StringSplitOptions.None);
             for (i = 0; i < subStr.Length-1; i++)
             {
                     int n = dataGridView1.Rows.Add();
                     dataGridView1.Rows[n].Cells[0].Value = subStr[i];
-                    if (lack.Contains(subStr[i]))
+               foreach (string subSubLack in subLack)
+                    if (subSubLack == subStr[i])
                         {
                             dataGridView1.Rows[n].Cells[0].Style.BackColor = Color.LightCoral;
                              dataGridView1.Rows[n].Cells[0].Style.ForeColor = Color.DarkRed;
@@ -50,6 +52,7 @@ namespace Kitchen
                              dataGridView1.Rows[n].Cells[1].Style.ForeColor = Color.DarkRed;
                             dataGridView1.Rows[n].Cells[2].Style.BackColor = Color.LightCoral;
                              dataGridView1.Rows[n].Cells[2].Style.ForeColor = Color.DarkRed;
+                            break;
                         }
                 else
                 {

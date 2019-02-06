@@ -44,7 +44,7 @@ namespace Kitchen
         private void button1_Click(object sender, EventArgs e)
         {
             i++;
-            description.Text = description.Text + "\r\n" + i + ". ";
+            description.Text = description.Text + "\r\n\r\n" + i + ". ";
             сщгте.Text = Convert.ToString(i);
             description.Focus();
             SendKeys.Send("{RIGHT}");

@@ -39,6 +39,9 @@ namespace Kitchen
             BrowseRecepts.TabStop = false;
             BrowseRecepts.FlatStyle = FlatStyle.Flat;
             BrowseRecepts.FlatAppearance.BorderSize = 0;
+            WhatsHappening.TabStop = false;
+            WhatsHappening.FlatStyle = FlatStyle.Flat;
+            WhatsHappening.FlatAppearance.BorderSize = 0;
             #endregion 
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             List<string> firstLetters = new List<string>();
@@ -80,8 +83,12 @@ namespace Kitchen
         }
 
         #region 1-st TAB entrails
+        private void WhatsHappening_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://docs.google.com/document/d/1amQcHizBYU3zBE8kxdD8qqusnPvJHRfP69d5dyJaur8/edit?usp=sharing");
+        }
 
-        private void comboBoxSearch_SelectedIndexChanged_2(object sender, EventArgs e)
+        private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             int n = dataGridView1.Rows.Add();
             dataGridView1.Rows[n].Cells["colIngridients"].Value = comboBoxSearch.SelectedItem.ToString();
@@ -165,6 +172,7 @@ namespace Kitchen
             Form2.saveMyIng = ingrTrue;
             this.Hide();
             f2.ShowDialog();
+            this.Show();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -208,12 +216,42 @@ namespace Kitchen
                             dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[objectsBackup.Count - 1].Name;
                             dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a;
                         }
+                        foreach (DataGridViewRow row in dataGridViewSQL.Rows)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.LightCoral;
+                            row.DefaultCellStyle.ForeColor = Color.DarkRed;
+                        }
+                        backgroundWorker1.RunWorkerAsync();
                     }
                 }
                 else
                 {
-
+                    dataGridViewSQL.Rows.Clear();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    var objectsBackup = new List<RecipeList>();
+                    using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
+                    {
+                        int a = 0;
+                        fs.Position = 0;
+                        while (fs.Position < fs.Length)
+                        {
+                            a++;
+                            objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
+                            int n = dataGridViewSQL.Rows.Add();
+                            //int o = Convert.ToUInt16(objectsBackup[objectsBackup.Count - 1].Ingridients) - 1;
+                            dataGridViewSQL.Rows[n].Cells["colIngredients"].Value = objectsBackup[objectsBackup.Count - 1].Ingridients;
+                            dataGridViewSQL.Rows[n].Cells["colName"].Value = objectsBackup[objectsBackup.Count - 1].Name;
+                            dataGridViewSQL.Rows[n].Cells["colNumber"].Value = a;
+                        }
+                    }
+                    foreach (DataGridViewRow row in dataGridViewSQL.Rows)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                        row.DefaultCellStyle.ForeColor = Color.DarkRed;
+                    }
+                    backgroundWorker2.RunWorkerAsync();
                 }
+                    dataGridViewSQL.ClearSelection();
             }
            // catch
             {
@@ -485,7 +523,7 @@ namespace Kitchen
 
         private void metroToggle1_CheckedChanged(object sender, EventArgs e)
         {
-            Reload.PerformClick();     
+            Reload.PerformClick();
         }
         #endregion
 
@@ -499,9 +537,78 @@ namespace Kitchen
             notifyIcon.ShowBalloonTip(5000);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            using (Stream fsss = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            {
+                BinaryFormatter formatterr = new BinaryFormatter();
+
+                var objects = new List<RecipeList>();
+
+                fsss.Position = 0;
+                string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
+                while (fsss.Position < fsss.Length)
+                {
+                    objects.Add((RecipeList)formatterr.Deserialize(fsss));
+                    foreach (DataGridViewRow row in dataGridViewSQL.Rows)
+                        if ((row.Cells[2].Value.ToString() == objects[objects.Count - 1].Name) && (row.Cells[3].Value.ToString() == objects[objects.Count - 1].Ingridients))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.YellowGreen;
+                            row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            using (Stream fsss = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            {
+                BinaryFormatter formatterr = new BinaryFormatter();
+
+                var objects = new List<RecipeList>();
+
+                fsss.Position = 0;
+                string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
+                while (fsss.Position < fsss.Length)
+                {
+                    objects.Add((RecipeList)formatterr.Deserialize(fsss));
+                    foreach (DataGridViewRow row in dataGridViewSQL.Rows)
+                        if ((row.Cells[2].Value.ToString() == objects[objects.Count - 1].Name) && (row.Cells[3].Value.ToString() == objects[objects.Count - 1].Ingridients))
+                        {
+                            dataGridViewSQL.Invoke(new Action(() => { dataGridViewSQL.Rows.Remove(row); }));//Иначе ошибка - меняю ядро, из которого была запущена ассинхронная функция
+                            break;
+                        }
+                }
+            }
+            dataGridViewSQL.ClearSelection();
+        }
+
+        private void metroTabPage1_MouseMove(object sender, MouseEventArgs e)
+        {
+            foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
+            {
+                if (chbox.Checked == true)
+                {
+                    int n = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[n].Cells["colIngridients"].Value = chbox.Text;
+                    comboBoxSearch.Items.Remove(chbox.Text);
+                    chbox.Checked = false;
+                    chbox.Visible = false;
+                    chbox.Enabled = false;
+                }
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer.Close();
+            System.Diagnostics.Process self = System.Diagnostics.Process.GetCurrentProcess();
+            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses().Where(p => p.Id != self.Id))
+            {
+                p.Close();
+            }
         }
     }
 }

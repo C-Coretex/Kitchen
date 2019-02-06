@@ -70,6 +70,10 @@
             this.saveExit.UseVisualStyleBackColor = false;
             this.saveExit.Click += new System.EventHandler(this.saveExit_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipTitle = "Добавить новый ингредиент";
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Silver;
