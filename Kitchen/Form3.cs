@@ -42,6 +42,13 @@ namespace Kitchen
             {
                 comboBoxSearch.Items.Add(a);
             }
+
+            string[] category;
+            using (Stream fs = File.Open(pathToFile + @"Category.txt", FileMode.OpenOrCreate))
+            {
+                category = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            }
+
             this.Cursor = Cursors.Default;
         }
 
