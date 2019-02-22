@@ -373,7 +373,7 @@ namespace Kitchen
                         File.WriteAllText(@"C:\RecipeBackup\RecipeBackup.dat", String.Empty);
                         foreach (RecipeList recipe in objectsBackup)
                         {
-                            RecipeList.Serialization2(recipe.Name, recipe.Description, recipe.Ingridients, recipe.Count, recipe.Type, "");
+                            RecipeList.Serialization2(recipe.Name, recipe.Description, recipe.Ingridients, recipe.Count, recipe.Type, "", recipe.Category);
                         }
                     }
                 }
@@ -415,7 +415,7 @@ namespace Kitchen
                                     if (objectsBackup[objectsBackup.Count - 1].Name == name && objectsBackup[objectsBackup.Count - 1].Ingridients == ingridients)
                                     {
                                         var RC = objectsBackup[objectsBackup.Count - 1];
-                                        RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection);
+                                        RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection, RC.Category);
                                         break;
                                     }
                                 }
@@ -465,10 +465,11 @@ namespace Kitchen
                         }
                         if (exist == false)
                         {
-                            RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection);
+                            RecipeList.Serialization(RC.Name, RC.Description, RC.Ingridients, RC.Count, RC.Type, RC.ImageDirection, RC.Category);
                         }
                     }
                 }
+
                     string[] ingridientsFile = File.ReadAllLines(@"C:\RecipeBackup\Ingridients.txt", Encoding.UTF8);
                     File.WriteAllText(pathToFile + @"Ingridients.txt", String.Empty);
                 string ing = "";
@@ -477,6 +478,16 @@ namespace Kitchen
                     ing += ingridientsFile[a] + "\r";
                 }
                 File.WriteAllText(pathToFile + @"Ingridients.txt", ing.Substring(0, ing.Length - 1));
+
+                string[] categoryFile = File.ReadAllLines(@"C:\RecipeBackup\Category.txt", Encoding.UTF8);
+                File.WriteAllText(pathToFile + @"Category.txt", String.Empty);
+                string cat = "";
+                for (int a = 0; a < categoryFile.Count(); a++)
+                {
+                    cat += ingridientsFile[a] + "\r";
+                }
+                File.WriteAllText(pathToFile + @"Ingridients.txt", cat.Substring(0, ing.Length - 1));
+
                 this.Cursor = Cursors.Default;
             }
          }

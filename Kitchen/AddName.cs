@@ -10,12 +10,14 @@ namespace Kitchen
         string count = "";
         string type = "";
         string imageDirection = "";
-        public AddName(string Ingridients, string Count, string Type)
+        string category = "";
+        public AddName(string Ingridients, string Count, string Type, string Category)
         {
             InitializeComponent();
             ingr = Ingridients;
             count = Count;
             type = Type;
+            category = Category;
             description.ScrollBars = ScrollBars.Both;
         }
 
@@ -30,7 +32,7 @@ namespace Kitchen
                 MessageBox.Show("Впишите описание рецепта");
             }
             else{
-                RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection);
+                RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection, category);
                 this.Close();
             }
         }

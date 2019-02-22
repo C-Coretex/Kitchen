@@ -13,8 +13,9 @@ namespace Kitchen
         public string Count { get; set; }
         public string Type { get; set; }
         public string ImageDirection { get; set; }
+        public string Category { get; set; }
 
-        static public void Serialization(string name, string description, string ingridients, string count, string type, string imageDirection)
+        static public void Serialization(string name, string description, string ingridients, string count, string type, string imageDirection, string category)
         {
             RecipeList RL = new RecipeList
             {
@@ -23,7 +24,8 @@ namespace Kitchen
                 Ingridients = ingridients,
                 Count = count,
                 Type = type,
-                ImageDirection = imageDirection
+                ImageDirection = imageDirection,
+                Category = category
             };
             // создаем объект BinaryFormatter
             // получаем поток, куда будем записывать сериализованный объект
@@ -33,7 +35,7 @@ namespace Kitchen
                 formatter.Serialize(fs, RL);
             }
         }
-        static public void Serialization2(string name, string description, string ingridients, string count, string type, string imageDirection)
+        static public void Serialization2(string name, string description, string ingridients, string count, string type, string imageDirection, string category)
         {
             RecipeList RL = new RecipeList
             {
@@ -42,7 +44,8 @@ namespace Kitchen
                 Ingridients = ingridients,
                 Count = count,
                 Type = type,
-                ImageDirection = imageDirection
+                ImageDirection = imageDirection,
+                Category = category
             };
             // создаем объект BinaryFormatter
             // получаем поток, куда будем записывать сериализованный объект

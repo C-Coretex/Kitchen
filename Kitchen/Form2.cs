@@ -298,7 +298,7 @@ namespace Kitchen
                     }
                     if (equals == false)
                     {
-                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "");
+                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "", objects[i].Category);
                     }
                 }
         }
@@ -356,7 +356,7 @@ namespace Kitchen
                     }
                     if (equals == false)
                     {
-                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "");
+                        RecipeList.Serialization2(objects[i].Name, objects[i].Description, objects[i].Ingridients, objects[i].Count, objects[i].Type, "", objects[i].Category);
                     }
                 }
             }

@@ -22,6 +22,7 @@ namespace Kitchen
         string pathToFile = Form1.pathToFile;
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
+
         public Edit(int RowIndex, int RowNumber)
         {
             InitializeComponent();
@@ -55,9 +56,16 @@ namespace Kitchen
                 comboBoxSearch.Items.Add(a);
             }
 
+            string[] categoryArray = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            foreach (string a in categoryArray)
+            {
+                comboBox2.Items.Add(a);
+            }
+
             string ingrid;
             string count;
             string type;
+            string category;
             using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
             {
                 fs.Position = 0;
@@ -71,6 +79,7 @@ namespace Kitchen
                 ingrid = objects[rowNumber].Ingridients;
                 count = objects[rowNumber].Count;
                 type = objects[rowNumber].Type;
+                category = objects[rowNumber].Category;
             }
 
             string[] subStr = ingrid.Split(' ');
@@ -83,9 +92,9 @@ namespace Kitchen
                 dataGridView1.Rows[n].Cells[2].Value = subCount[i];
                 dataGridView1.Rows[n].Cells[3].Value = subType[i];
                 comboBoxSearch.Items.Remove(ingridients[Convert.ToInt16(subStr[i]) - 1]);
+                comboBox2.SelectedItem = category;
             }
             this.Text = name + " - редактирование";
-
 
             this.Cursor = Cursors.Default;
         }
@@ -284,7 +293,7 @@ namespace Kitchen
             {
                 ing += ingridientsFile[a] + "\r";
             }
-            bool exists = System.IO.Directory.Exists(@"C:\asd\");
+            bool exists = Directory.Exists(@"C:\asd\");
             if (!exists)
             {
                 Directory.CreateDirectory(@"C:\RecipeBackup");
@@ -292,6 +301,45 @@ namespace Kitchen
             }
             File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", String.Empty);
             File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", ing.Substring(0, ing.Length - 1));
+        }
+
+        private void AddCategoryButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Удалить новую категорию будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AddCategory aC = new AddCategory();
+                aC.StartPosition = FormStartPosition.Manual;
+                aC.Location = this.Location;
+                aC.ShowDialog();
+                try
+                {
+                    backgroundWorker2.RunWorkerAsync(); //TODO: Сохранение в директорию "C:\Program Files"
+                }
+                catch
+                {
+                    backgroundWorker2.RunWorkerAsync();
+                }
+                comboBox2.Items.Add(AddCategory.categoryName);
+                comboBox2.Sorted = true;
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string cat = "";
+            for (int a = 0; a < categoryFile.Count(); a++)
+            {
+                cat += categoryFile[a] + "\r";
+            }
+            bool exists = Directory.Exists(@"C:\RecipeBackup");
+            if (!exists)
+            {
+                Directory.CreateDirectory(@"C:\RecipeBackup");
+            }
+            File.WriteAllText(@"C:\RecipeBackup\Category.txt", String.Empty);
+            File.WriteAllText(@"C:\RecipeBackup\Category.txt", cat.Substring(0, cat.Length - 1));
         }
     }
 }

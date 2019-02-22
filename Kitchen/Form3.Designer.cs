@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.label2 = new System.Windows.Forms.Label();
             this.saveExit = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.AddCategoryButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
@@ -44,10 +45,10 @@
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,6 +92,19 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // AddCategoryButton
+            // 
+            this.AddCategoryButton.BackColor = System.Drawing.Color.Silver;
+            this.AddCategoryButton.Image = global::Kitchen.Properties.Resources.Plus1;
+            this.AddCategoryButton.Location = new System.Drawing.Point(281, 85);
+            this.AddCategoryButton.Name = "AddCategoryButton";
+            this.AddCategoryButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.AddCategoryButton.Size = new System.Drawing.Size(34, 24);
+            this.AddCategoryButton.TabIndex = 34;
+            this.toolTip1.SetToolTip(this.AddCategoryButton, "Добавить новый ингредиент");
+            this.AddCategoryButton.UseVisualStyleBackColor = false;
+            this.AddCategoryButton.Click += new System.EventHandler(this.AddCategoryButton_Click);
+            // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -110,14 +124,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDelete,
@@ -207,27 +221,15 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Silver;
-            this.button1.Image = global::Kitchen.Properties.Resources.Plus1;
-            this.button1.Location = new System.Drawing.Point(284, 85);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(34, 24);
-            this.button1.TabIndex = 34;
-            this.toolTip1.SetToolTip(this.button1, "Добавить новый ингредиент");
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(208, 64);
+            this.label1.Location = new System.Drawing.Point(317, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(258, 19);
+            this.label1.Size = new System.Drawing.Size(149, 19);
             this.label1.TabIndex = 33;
-            this.label1.Text = "Категория рецепта (обязательно)";
+            this.label1.Text = "Категория рецепта";
             // 
             // comboBox2
             // 
@@ -235,14 +237,18 @@
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(324, 85);
+            this.comboBox2.Location = new System.Drawing.Point(321, 85);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(142, 24);
+            this.comboBox2.Size = new System.Drawing.Size(145, 24);
             this.comboBox2.TabIndex = 32;
             // 
             // toolTip2
             // 
             this.toolTip2.ToolTipTitle = "Добавить новую категорию";
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
             // Form3
             // 
@@ -250,7 +256,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(467, 401);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.AddCategoryButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBoxSearch);
@@ -284,9 +290,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewComboBoxColumn colType;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddCategoryButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }

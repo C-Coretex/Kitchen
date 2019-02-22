@@ -26,12 +26,11 @@ namespace Kitchen
             foreach (string a in ingridients)
             {
                 allIngridients.Add(a.ToString());
-                if (firstLetters.Contains(a.Substring(0, 1))) { }
-                else
+                if (!firstLetters.Contains(a.Substring(0, 1)))
                 {
                     firstLetters.Add(a.Substring(0, 1));
                 }
-            }
+            }//Changed
             firstLetters.Sort();
             allIngridients.Sort();
             foreach (string a in firstLetters)
@@ -43,11 +42,13 @@ namespace Kitchen
                 comboBoxSearch.Items.Add(a);
             }
 
-            string[] category;
-            using (Stream fs = File.Open(pathToFile + @"Category.txt", FileMode.OpenOrCreate))
+            string[] category = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            foreach (string a in category)
             {
-                category = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+                comboBox2.Items.Add(a);
             }
+            firstLetters.Sort();
+
 
             this.Cursor = Cursors.Default;
         }
@@ -105,7 +106,7 @@ namespace Kitchen
             {
                 this.Cursor = Cursors.Default;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName AD = new AddName(ingr, count, type);
+                AddName AD = new AddName(ingr, count, type, comboBox2.SelectedItem.ToString());
                 AD.StartPosition = FormStartPosition.Manual;
                 AD.Location = this.Location;
                 this.Hide();
@@ -240,20 +241,58 @@ namespace Kitchen
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-                        string[] ingridientsFile = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            string[] ingridientsFile = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
             string ing = "";
             for (int a = 0; a< ingridientsFile.Count(); a++)
             {
                 ing += ingridientsFile[a] + "\r";
             }
-            bool exists = System.IO.Directory.Exists(@"C:\asd\");
+            bool exists = Directory.Exists(@"C:\RecipeBackup");
             if (!exists)
             {
                 Directory.CreateDirectory(@"C:\RecipeBackup");
             }
             File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", String.Empty);
-            System.IO.File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", ing.Substring(0, ing.Length - 1));
+            File.WriteAllText(@"C:\RecipeBackup\Ingridients.txt", ing.Substring(0, ing.Length - 1));
+        }
+
+        private void AddCategoryButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Удалить новую категорию будет НЕВОЗМОЖНО!!!\nХотите продолжить?", "ВНИМАНИЕ", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                AddCategory aC = new AddCategory();
+                aC.StartPosition = FormStartPosition.Manual;
+                aC.Location = this.Location;
+                aC.ShowDialog();
+                try
+                {
+                    backgroundWorker2.RunWorkerAsync(); //TODO: Сохранение в директорию "C:\Program Files"
+                }
+                catch
+                {
+                    backgroundWorker2.RunWorkerAsync();
+                }
+                comboBox2.Items.Add(AddCategory.categoryName);
+                comboBox2.Sorted = true;
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string cat = "";
+            for (int a = 0; a < categoryFile.Count(); a++)
+            {
+                cat += categoryFile[a] + "\r";
+            }
+            bool exists = Directory.Exists(@"C:\RecipeBackup");
+            if (!exists)
+            {
+                Directory.CreateDirectory(@"C:\RecipeBackup");
+            }
+            File.WriteAllText(@"C:\RecipeBackup\Category.txt", String.Empty);
+            File.WriteAllText(@"C:\RecipeBackup\Category.txt", cat.Substring(0, cat.Length - 1));
         }
     }
 }
-
