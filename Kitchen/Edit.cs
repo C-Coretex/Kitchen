@@ -19,6 +19,7 @@ namespace Kitchen
         string name = "";
         string description = "";
         string imageDirection = "";
+        string category = "";
         string pathToFile = Form1.pathToFile;
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекюоксы везде
@@ -225,15 +226,19 @@ namespace Kitchen
             if (boxTrue == 0)
             {
                 this.Cursor = Cursors.Default;
-                MessageBox.Show("Выберите ингридиенты");
+                MessageBox.Show("Выберите ингредиенты");
             }
             else
             {
+                if (comboBox2.SelectedItem == null)
+                    comboBox2.SelectedIndex = 0;
+
+                category = comboBox2.SelectedItem.ToString();
                 this.Cursor = Cursors.Default;
                 Form2.OriginalName = name;
                 Form2.OriginalDescription = description;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection);
+                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection, category);
                 AD.StartPosition = FormStartPosition.Manual;
                 AD.Location = this.Location;
                 this.Hide();

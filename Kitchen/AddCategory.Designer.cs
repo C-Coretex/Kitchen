@@ -68,6 +68,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(289, 101);
             this.MinimumSize = new System.Drawing.Size(289, 101);
             this.Name = "AddCategory";
             this.Text = "AddCategory";

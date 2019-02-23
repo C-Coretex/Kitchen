@@ -12,7 +12,7 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
-        System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 5);
+        System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 10);
         string ingrTrue = "";
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы ВЕЗДЕЕЕЕЕЕЕЕЕЕЕ
@@ -49,12 +49,8 @@ namespace Kitchen
             foreach (string a in ingridients)
             {
                 allIngridients.Add(a.ToString());
-                if (firstLetters.Contains(a.Substring(0, 1)))
-                { }
-                else
-                {
+                if (!firstLetters.Contains(a.Substring(0, 1)))
                     firstLetters.Add(a.Substring(0, 1));
-                }
             }
             firstLetters.Sort();
             allIngridients.Sort();

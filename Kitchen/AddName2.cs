@@ -15,9 +15,10 @@ namespace Kitchen
         string name = "";
         string description = "";
         string imageDirection = "";
+        string category = "";
         int rowNumber = 0;
         string pathToFile = Form1.pathToFile;
-        public AddName2(string Ingridients, string Count, string Type, string Name, string Description, int rowN, string ImageDirection)
+        public AddName2(string Ingridients, string Count, string Type, string Name, string Description, int rowN, string ImageDirection, string Category)
         {
             InitializeComponent();
             ingr = Ingridients;
@@ -27,6 +28,7 @@ namespace Kitchen
             description = Description;
             rowNumber = rowN;
             imageDirection = ImageDirection;
+            category = Category;
             ddescription.ScrollBars = ScrollBars.Both;
             pictureBox1.ImageLocation = imageDirection;
             this.Text = name + " - редактирование";
@@ -123,7 +125,8 @@ namespace Kitchen
                     Description = ddescription.Text,
                     Type = type,
                     Count = count,
-                    ImageDirection = imageDirection
+                    ImageDirection = imageDirection,
+                    Category = category
                 };
                 var objects = new List<RecipeList>();
                 int a = 0;

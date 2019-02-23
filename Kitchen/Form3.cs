@@ -104,6 +104,9 @@ namespace Kitchen
             }
             else
             {
+                if (comboBox2.SelectedItem == null)
+                    comboBox2.SelectedIndex = 0;
+
                 this.Cursor = Cursors.Default;
                 //-----------------------------------------------------------------------------------------------------------------------------------------
                 AddName AD = new AddName(ingr, count, type, comboBox2.SelectedItem.ToString());

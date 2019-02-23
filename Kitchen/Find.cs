@@ -28,6 +28,10 @@ namespace Kitchen
                 {
                     try
                     {
+                        //Dictionary - храню так: key - категория, value - количество рецептов в категории
+                        Dictionary<string, int> categoryDictionary = new Dictionary<string, int>();
+                        //Выглядит круто
+
                         BinaryFormatter formatter = new BinaryFormatter();
 
                         RecipeList RL = new RecipeList();
@@ -40,20 +44,42 @@ namespace Kitchen
                         }
                         foreach (RecipeList r in objects)
                         {
+
+                            if (r.Category == null)
+                                r.Category = "Категория не выбрана";
+
                             int n = dataGridView.Rows.Add();
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
                             dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
                             dataGridView.Rows[n].Cells["colType"].Value = r.Type;
                             dataGridView.Rows[n].Cells["colImageDirection"].Value = r.ImageDirection;
+                            dataGridView.Rows[n].Cells["ColCategory"].Value = r.Category;
+
                             string[] subStr = r.Ingridients.Split(' ');
                             string together = "";
                             for (uint i = 0; i < subStr.Length - 1; i++)
                             {
                                 together += allIngridients[Convert.ToInt16(subStr[i]) - 1] + "\r ";
                             }
+
                             dataGridView.Rows[n].Cells["colNotEnough"].Value = together;
                             dataGridView.Rows[n].Cells["colEqualsProcents"].Value = "0%";
                             dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
+
+                            if (!categoryDictionary.ContainsKey(r.Category))
+                            {
+                                categoryDictionary.Add(r.Category, 1);
+                            }
+                            else
+                            {
+                                categoryDictionary[r.Category] = Convert.ToUInt16(categoryDictionary[r.Category].ToString()) + 1;
+                            }
+                        }
+                        foreach (var cat in categoryDictionary)
+                        {
+                            int i = dataGridViewRecepies.Rows.Add();
+                            dataGridViewRecepies.Rows[i].Cells["CategoryName"].Value = cat.Key.ToString();
+                            dataGridViewRecepies.Rows[i].Cells[1].Value =cat.Value.ToString();
                         }
                     }
                     catch
@@ -67,6 +93,10 @@ namespace Kitchen
                 //---------------------------------------------------------------------------------------------------------------------------
                 using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
+                    //Dictionary - храню так: key - категория, value - количество рецептов в категории
+                    Dictionary<string, int> categoryDictionary = new Dictionary<string, int>();
+                    //Выглядит круто
+
                     BinaryFormatter formatter = new BinaryFormatter();
 
                     RecipeList RL = new RecipeList();
@@ -79,6 +109,8 @@ namespace Kitchen
                     }
                     foreach (RecipeList r in objects)
                     {
+                        if (r.Category == null)
+                            r.Category = "Категория не выбрана";
 
                         //Записываю выбранные ингредиенты во множество
                         HashSet<uint> ingrTrueSet = new HashSet<uint>();
@@ -111,6 +143,7 @@ namespace Kitchen
                             dataGridView.Rows[n].Cells["colCount"].Value = r.Count;
                             dataGridView.Rows[n].Cells["colType"].Value = r.Type;
                             dataGridView.Rows[n].Cells["colImageDirection"].Value = r.ImageDirection;
+                            dataGridView.Rows[n].Cells["ColCategory"].Value = r.Category;
 
                             dataGridView.Rows[n].Cells["colName"].Value = r.Name;
                             ingrTrueSetCount = (equals.Count / ingrTrueSetCount) * 100;
@@ -118,6 +151,14 @@ namespace Kitchen
                             equals = ingrCountEVER.Except(equals).ToList();
                             if (equals.Count != 0)
                             {
+                                if (!categoryDictionary.ContainsKey(r.Category))
+                                {
+                                    categoryDictionary.Add(r.Category, 1);
+                                }
+                                else
+                                {
+                                    categoryDictionary[r.Category] = Convert.ToUInt16(categoryDictionary[r.Category].ToString()) + 1;
+                                }
                                 for (int i = 0; i < equals.Count; i++)
                                 {
                                     string together = dataGridView.Rows[n].Cells["colNotEnough"].Value + "\r " + allIngridients[Convert.ToInt16(equals[i]) - 1];
@@ -134,12 +175,19 @@ namespace Kitchen
                             dataGridView.Rows[n].Cells["colDescription"].Value = r.Description;
                         }
                     }
+                    foreach (var cat in categoryDictionary)
+                    {
+                        int i = dataGridViewRecepies.Rows.Add();
+                        dataGridViewRecepies.Rows[i].Cells["CategoryName"].Value = cat.Key.ToString();
+                        dataGridViewRecepies.Rows[i].Cells[1].Value = cat.Value.ToString();
+                    }
                 }
                 dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
                 dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
             this.Cursor = Cursors.Default;
         }
+        private void Find_Shown(object sender, EventArgs e) => dataGridViewRecepies.ClearSelection();
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -183,8 +231,43 @@ namespace Kitchen
             ed.Show();
         }
 
-        private void Find_Shown(object sender, EventArgs e)
+        private void dataGridViewRecepies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                this.Text = "Поиск рецептов по категории (" + dataGridViewRecepies.Rows[e.RowIndex].Cells[0].Value.ToString() + ")";
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (row.Cells["ColCategory"].Value.ToString() == dataGridViewRecepies.Rows[e.RowIndex].Cells[0].Value.ToString())
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        row.Visible = false;
+                    }
+                }
+                dataGridViewRecepies.Visible = false;
+                dataGridViewRecepies.Enabled = false;
+                dataGridView.Visible = true;
+                dataGridView.Enabled = true;
+                dataGridView.ClearSelection();
+            }
+            catch
+            {
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Text = "Поиск рецептов(категория)";
+            dataGridViewRecepies.Visible = true;
+            dataGridViewRecepies.Enabled = true;
+            dataGridView.Visible = false;
+            dataGridView.Enabled = false;
             dataGridView.ClearSelection();
         }
     }

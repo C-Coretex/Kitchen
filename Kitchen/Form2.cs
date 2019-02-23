@@ -226,9 +226,6 @@ namespace Kitchen
             dataGridView.Rows.Clear();
             NewTable();
         }
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -242,6 +239,9 @@ namespace Kitchen
 
                 dataGridView.Rows.Clear();
                 NewTable();
+
+                dataGridView.ClearSelection();
+                dataGridView.Rows[rowIndex].Selected = true;
                 try
                 {
                     backgroundWorker2.RunWorkerAsync(); //TODO: Сохранение в директорию "C:\Program Files"
