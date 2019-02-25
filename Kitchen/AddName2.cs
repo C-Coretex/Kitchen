@@ -17,6 +17,7 @@ namespace Kitchen
         string imageDirection = "";
         string category = "";
         int rowNumber = 0;
+        bool conceived = false;
         string pathToFile = Form1.pathToFile;
         public AddName2(string Ingridients, string Count, string Type, string Name, string Description, int rowN, string ImageDirection, string Category)
         {
@@ -36,42 +37,47 @@ namespace Kitchen
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecipeList RL = new RecipeList
+            DialogResult dialogResult = MessageBox.Show("Ты точно хочешь удалить этот рецепт?", "Удалить рецепт?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                Name = name,
-                Description = description
-            };
-            List<RecipeList> objects = new List<RecipeList>();
-            int a = 0;
-            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                fs.Position = 0;
-                while (fs.Position < fs.Length)
+                RecipeList RL = new RecipeList
                 {
-                    if (a == rowNumber)
-                    {
-                        objects.Add((RecipeList)formatter.Deserialize(fs));
-                        objects.Remove(objects[a]);
-                    }
-                    else
-                    {
-                        objects.Add((RecipeList)formatter.Deserialize(fs));
-                    }
-                    a++;
-                }
-            }
-            File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
-            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                for (int i = 0; i < a - 1; i++)
+                    Name = name,
+                    Description = description
+                };
+                List<RecipeList> objects = new List<RecipeList>();
+                int a = 0;
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
                 {
-                    formatter.Serialize(fs, objects[i]);
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        if (a == rowNumber)
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                            objects.Remove(objects[a]);
+                        }
+                        else
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                        }
+                        a++;
+                    }
                 }
+                File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    for (int i = 0; i < a - 1; i++)
+                    {
+                        formatter.Serialize(fs, objects[i]);
+                    }
+                }
+                Form2.deleted = true;
+                conceived = true;
+                this.Close();
             }
-            Form2.deleted = true;
-            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,6 +167,7 @@ namespace Kitchen
                     }
                 }
             }
+            conceived = true;
             this.Close();
         }
 
@@ -172,6 +179,21 @@ namespace Kitchen
                 imageDirection = fileDialog.FileName;
                 pictureBox1.ImageLocation = imageDirection;
             }
+        }
+
+        private void AddName2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (conceived == false)
+            {
+                DialogResult dialogResult = MessageBox.Show("Хочешь отменить изменения?", "Отменить изменения?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                    e.Cancel = true;
+            }
+        }
+
+        private void AddName2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SendKeys.Send("{ENTER}");
         }
     }
 }

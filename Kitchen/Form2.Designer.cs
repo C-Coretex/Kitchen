@@ -37,20 +37,21 @@
             this.Find = new System.Windows.Forms.Button();
             this.AddRecept = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // Back
             // 
             this.Back.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.Back.Location = new System.Drawing.Point(0, 338);
+            this.Back.Location = new System.Drawing.Point(0, 434);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(116, 21);
+            this.Back.Size = new System.Drawing.Size(171, 21);
             this.Back.TabIndex = 0;
             this.Back.Text = "Назад";
             this.Back.UseVisualStyleBackColor = true;
@@ -61,9 +62,9 @@
             this.findText.AcceptsReturn = true;
             this.findText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.findText.BackColor = System.Drawing.Color.White;
-            this.findText.Location = new System.Drawing.Point(122, 338);
+            this.findText.Location = new System.Drawing.Point(170, 434);
             this.findText.Name = "findText";
-            this.findText.Size = new System.Drawing.Size(210, 20);
+            this.findText.Size = new System.Drawing.Size(218, 20);
             this.findText.TabIndex = 1;
             this.findText.Click += new System.EventHandler(this.FindText_Click);
             this.findText.TextChanged += new System.EventHandler(this.FindText_TextChanged);
@@ -77,7 +78,7 @@
             this.label1.Enabled = false;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(142, 339);
+            this.label1.Location = new System.Drawing.Point(191, 436);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 17);
             this.label1.TabIndex = 2;
@@ -88,9 +89,9 @@
             // Find
             // 
             this.Find.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.Find.Location = new System.Drawing.Point(330, 338);
+            this.Find.Location = new System.Drawing.Point(386, 435);
             this.Find.Name = "Find";
-            this.Find.Size = new System.Drawing.Size(84, 21);
+            this.Find.Size = new System.Drawing.Size(139, 20);
             this.Find.TabIndex = 3;
             this.Find.Text = "Искать!";
             this.Find.UseVisualStyleBackColor = true;
@@ -99,12 +100,14 @@
             // AddRecept
             // 
             this.AddRecept.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddRecept.Location = new System.Drawing.Point(0, 319);
+            this.AddRecept.BackColor = System.Drawing.Color.GreenYellow;
+            this.AddRecept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.AddRecept.Location = new System.Drawing.Point(0, 400);
             this.AddRecept.Name = "AddRecept";
-            this.AddRecept.Size = new System.Drawing.Size(414, 20);
+            this.AddRecept.Size = new System.Drawing.Size(525, 35);
             this.AddRecept.TabIndex = 5;
-            this.AddRecept.Text = "Добавить";
-            this.AddRecept.UseVisualStyleBackColor = true;
+            this.AddRecept.Text = "Добавить рецепт";
+            this.AddRecept.UseVisualStyleBackColor = false;
             this.AddRecept.Click += new System.EventHandler(this.AddRecept_Click);
             // 
             // dataGridView
@@ -130,6 +133,7 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
             this.colName,
+            this.colCategory,
             this.colIngridients});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -149,10 +153,18 @@
             this.dataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(414, 319);
+            this.dataGridView.Size = new System.Drawing.Size(525, 403);
             this.dataGridView.TabIndex = 6;
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
             // colNumber
             // 
@@ -176,6 +188,14 @@
             this.colName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colName.Width = 98;
             // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCategory.HeaderText = "Категория";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.ToolTipText = "Категория рецепта";
+            // 
             // colIngridients
             // 
             this.colIngridients.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -185,25 +205,17 @@
             this.colIngridients.ReadOnly = true;
             this.colIngridients.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 359);
+            this.ClientSize = new System.Drawing.Size(524, 455);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.AddRecept);
             this.Controls.Add(this.Find);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.findText);
             this.Controls.Add(this.Back);
+            this.Controls.Add(this.AddRecept);
             this.MinimumSize = new System.Drawing.Size(369, 398);
             this.Name = "Form2";
             this.ShowIcon = false;
@@ -226,6 +238,7 @@
         public System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIngridients;
     }
 }

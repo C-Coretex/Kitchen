@@ -67,6 +67,9 @@ namespace Kitchen
                                         {
                                             int n = dataGridView.Rows.Add();
                                             dataGridView.Rows[n].Cells[1].Value = r.Name;
+                                            if (r.Category == null || r.Category == "" || r.Category == " ")
+                                                r.Category = "Категория не выбрана";
+                                            dataGridView.Rows[n].Cells[2].Value = r.Category;
                                                 string[] subStr = r.Ingridients.Split(' ');
                                                 for (uint i = 0; i < subStr.Length - 1; i++)
                                                 {
@@ -193,38 +196,42 @@ namespace Kitchen
 
         private void delMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
-            List<RecipeList> objects = new List<RecipeList>();
-            int a = 0;
-            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+            DialogResult dialogResult = MessageBox.Show("Ты точно хочешь удалить этот рецепт?", "Удалить рецепт?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                fs.Position = 0;
-                while (fs.Position < fs.Length)
+                int rowNumber = Convert.ToInt16(dataGridView.Rows[rowIndex].Cells[0].Value.ToString());
+                List<RecipeList> objects = new List<RecipeList>();
+                int a = 0;
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
                 {
-                    if (a == rowNumber)
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
                     {
-                        objects.Add((RecipeList)formatter.Deserialize(fs));
-                        objects.Remove(objects[a - 1]);
+                        if (a == rowNumber)
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                            objects.Remove(objects[a - 1]);
+                        }
+                        else
+                        {
+                            objects.Add((RecipeList)formatter.Deserialize(fs));
+                        }
+                        a++;
                     }
-                    else
-                    {
-                        objects.Add((RecipeList)formatter.Deserialize(fs));
-                    }
-                    a++;
                 }
-            }
-            File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
-            using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                for (int i = 0; i < a - 1; i++)
+                File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
                 {
-                    formatter.Serialize(fs, objects[i]);
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    for (int i = 0; i < a - 1; i++)
+                    {
+                        formatter.Serialize(fs, objects[i]);
+                    }
                 }
+                dataGridView.Rows.Clear();
+                NewTable();
             }
-            dataGridView.Rows.Clear();
-            NewTable();
         }
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -322,7 +329,7 @@ namespace Kitchen
                 }
 
                 var objectsBackup = new List<RecipeList>();
-                bool exists = System.IO.Directory.Exists(@"C:\asd\");
+                bool exists = Directory.Exists(@"C:\RecipeBackup\");
                 if (!exists)
                 {
                     Directory.CreateDirectory(@"C:\RecipeBackup");
@@ -335,11 +342,6 @@ namespace Kitchen
                     while (fs.Position < fs.Length)
                     {
                         objectsBackup.Add((RecipeList)formatter.Deserialize(fs));
-                        if (objectsBackup[objectsBackup.Count-1].Name == OriginalName && objectsBackup[objectsBackup.Count-1].Description == OriginalDescription)
-                        {
-                            objectsBackup.RemoveAt(objectsBackup.Count-1);
-                            //editedRecepieNumber = a;
-                        }
                     }
                 }
 
@@ -348,7 +350,7 @@ namespace Kitchen
                     bool equals = false;
                     foreach (var obB in objectsBackup)
                     {
-                        if (objects[i].Description == obB.Description && objects[i].Name == obB.Name)
+                        if ((objects[i].Description == obB.Description && objects[i].Name == obB.Name) && obB.Name != "" && obB.Name != " ")
                         {
                             equals = true;
                             break;

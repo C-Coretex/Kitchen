@@ -71,7 +71,7 @@
             this.description.Location = new System.Drawing.Point(286, 96);
             this.description.Multiline = true;
             this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(295, 200);
+            this.description.Size = new System.Drawing.Size(358, 372);
             this.description.TabIndex = 3;
             // 
             // label3
@@ -129,7 +129,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(350, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(231, 68);
+            this.button2.Size = new System.Drawing.Size(294, 68);
             this.button2.TabIndex = 12;
             this.button2.Text = "Не сохранять";
             this.button2.UseVisualStyleBackColor = true;
@@ -140,9 +140,9 @@
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.BackColor = System.Drawing.Color.Snow;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 177);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 292);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(169, 119);
+            this.pictureBox1.Size = new System.Drawing.Size(264, 167);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
@@ -153,9 +153,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ChooseImage.BackColor = System.Drawing.Color.Snow;
             this.ChooseImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChooseImage.Location = new System.Drawing.Point(178, 253);
+            this.ChooseImage.Location = new System.Drawing.Point(3, 222);
             this.ChooseImage.Name = "ChooseImage";
-            this.ChooseImage.Size = new System.Drawing.Size(98, 43);
+            this.ChooseImage.Size = new System.Drawing.Size(264, 64);
             this.ChooseImage.TabIndex = 14;
             this.ChooseImage.Text = "Выбрать картику";
             this.ChooseImage.UseVisualStyleBackColor = false;
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 299);
+            this.ClientSize = new System.Drawing.Size(647, 471);
             this.Controls.Add(this.ChooseImage);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
@@ -177,10 +177,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.name);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(600, 338);
+            this.MinimumSize = new System.Drawing.Size(663, 510);
             this.Name = "AddName";
             this.ShowIcon = false;
             this.Text = "Добавить рецепт";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddName_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddName_FormClosed);
             this.Shown += new System.EventHandler(this.AddName_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

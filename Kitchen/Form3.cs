@@ -48,6 +48,7 @@ namespace Kitchen
                 comboBox2.Items.Add(a);
             }
             firstLetters.Sort();
+            comboBox2.Sorted = true;
 
 
             this.Cursor = Cursors.Default;
@@ -296,6 +297,13 @@ namespace Kitchen
             }
             File.WriteAllText(@"C:\RecipeBackup\Category.txt", String.Empty);
             File.WriteAllText(@"C:\RecipeBackup\Category.txt", cat.Substring(0, cat.Length - 1));
+        }
+
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Хочешь отменить изменения?", "Отменить изменения?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
+                e.Cancel = true;
         }
     }
 }

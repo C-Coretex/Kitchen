@@ -11,6 +11,7 @@ namespace Kitchen
         string type = "";
         string imageDirection = "";
         string category = "";
+        bool conceived = false;
         public AddName(string Ingridients, string Count, string Type, string Category)
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace Kitchen
             }
             else{
                 RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection, category);
+                conceived = true;
                 this.Close();
             }
         }
@@ -67,7 +69,12 @@ namespace Kitchen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("Хочешь отменить изменения?", "Отменить изменения?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
+            {
+                conceived = true;
+                this.Close();
+            }
         }
 
         private void ChooseImage_Click(object sender, EventArgs e)
@@ -78,6 +85,21 @@ namespace Kitchen
                 imageDirection = fileDialog.FileName;
                 pictureBox1.ImageLocation = imageDirection;
             }
+        }
+
+        private void AddName_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (conceived == false)
+            {
+                DialogResult dialogResult = MessageBox.Show("Хочешь отменить изменения?", "Отменить изменения?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                    e.Cancel = true;
+            }
+        }
+
+        private void AddName_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SendKeys.Send("{ENTER}");
         }
     }
 }

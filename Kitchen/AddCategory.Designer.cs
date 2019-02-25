@@ -71,7 +71,8 @@
             this.MaximumSize = new System.Drawing.Size(289, 101);
             this.MinimumSize = new System.Drawing.Size(289, 101);
             this.Name = "AddCategory";
-            this.Text = "AddCategory";
+            this.ShowIcon = false;
+            this.Text = "Добавить категорию";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -62,7 +62,7 @@ namespace Kitchen
             {
                 comboBoxSearch.Items.Add(a);
             }
-            //metroTabControl1.SelectTab(0);
+            metroTabControl1.SelectTab(0);
             #endregion
 
             this.Cursor = Cursors.Default;
@@ -70,6 +70,8 @@ namespace Kitchen
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+            //metroTabControl1.SelectTab(0);
+
             this.CenterToScreen();
             dataGridViewSQL.RowHeadersWidth = 20;
             dataGridViewSQL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -480,9 +482,9 @@ namespace Kitchen
                 string cat = "";
                 for (int a = 0; a < categoryFile.Count(); a++)
                 {
-                    cat += ingridientsFile[a] + "\r";
+                    cat += categoryFile[a] + "\r";
                 }
-                File.WriteAllText(pathToFile + @"Ingridients.txt", cat.Substring(0, ing.Length - 1));
+                File.WriteAllText(pathToFile + @"Category.txt", cat.Substring(0, cat.Length - 1));
 
                 this.Cursor = Cursors.Default;
             }
@@ -616,6 +618,11 @@ namespace Kitchen
             {
                 p.Close();
             }
+        }
+
+        private void metroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Reload.PerformClick();
         }
     }
 }

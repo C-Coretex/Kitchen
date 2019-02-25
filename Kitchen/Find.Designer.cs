@@ -31,15 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewRecepies = new System.Windows.Forms.DataGridView();
             this.colEqualsProcents = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +48,7 @@
             this.colAllIngridients = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colImageDirection = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewRecepies = new System.Windows.Forms.DataGridView();
             this.CategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CategoryRecepies = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -107,56 +107,10 @@
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(509, 302);
+            this.dataGridView.Size = new System.Drawing.Size(608, 386);
             this.dataGridView.TabIndex = 7;
             this.dataGridView.Visible = false;
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            // 
-            // dataGridViewRecepies
-            // 
-            this.dataGridViewRecepies.AllowUserToAddRows = false;
-            this.dataGridViewRecepies.AllowUserToDeleteRows = false;
-            this.dataGridViewRecepies.AllowUserToResizeColumns = false;
-            this.dataGridViewRecepies.AllowUserToResizeRows = false;
-            this.dataGridViewRecepies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewRecepies.BackgroundColor = System.Drawing.Color.LightCyan;
-            this.dataGridViewRecepies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightCyan;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRecepies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewRecepies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRecepies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CategoryName,
-            this.CategoryRecepies});
-            this.dataGridViewRecepies.EnableHeadersVisualStyles = false;
-            this.dataGridViewRecepies.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridViewRecepies.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewRecepies.MultiSelect = false;
-            this.dataGridViewRecepies.Name = "dataGridViewRecepies";
-            this.dataGridViewRecepies.ReadOnly = true;
-            this.dataGridViewRecepies.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRecepies.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewRecepies.RowHeadersVisible = false;
-            this.dataGridViewRecepies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewRecepies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRecepies.ShowEditingIcon = false;
-            this.dataGridViewRecepies.Size = new System.Drawing.Size(506, 303);
-            this.dataGridViewRecepies.TabIndex = 8;
-            this.dataGridViewRecepies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRecepies_CellDoubleClick);
             // 
             // colEqualsProcents
             // 
@@ -178,7 +132,6 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             this.colDescription.Visible = false;
-            this.colDescription.Width = 81;
             // 
             // colName
             // 
@@ -245,6 +198,52 @@
             this.ColCategory.Visible = false;
             this.ColCategory.Width = 2;
             // 
+            // dataGridViewRecepies
+            // 
+            this.dataGridViewRecepies.AllowUserToAddRows = false;
+            this.dataGridViewRecepies.AllowUserToDeleteRows = false;
+            this.dataGridViewRecepies.AllowUserToResizeColumns = false;
+            this.dataGridViewRecepies.AllowUserToResizeRows = false;
+            this.dataGridViewRecepies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewRecepies.BackgroundColor = System.Drawing.Color.LightCyan;
+            this.dataGridViewRecepies.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightCyan;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRecepies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewRecepies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRecepies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CategoryName,
+            this.CategoryRecepies});
+            this.dataGridViewRecepies.EnableHeadersVisualStyles = false;
+            this.dataGridViewRecepies.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dataGridViewRecepies.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewRecepies.MultiSelect = false;
+            this.dataGridViewRecepies.Name = "dataGridViewRecepies";
+            this.dataGridViewRecepies.ReadOnly = true;
+            this.dataGridViewRecepies.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRecepies.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewRecepies.RowHeadersVisible = false;
+            this.dataGridViewRecepies.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewRecepies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewRecepies.ShowEditingIcon = false;
+            this.dataGridViewRecepies.Size = new System.Drawing.Size(605, 387);
+            this.dataGridViewRecepies.TabIndex = 8;
+            this.dataGridViewRecepies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRecepies_CellDoubleClick);
+            // 
             // CategoryName
             // 
             this.CategoryName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -285,7 +284,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 302);
+            this.ClientSize = new System.Drawing.Size(604, 386);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.dataGridViewRecepies);
             this.Controls.Add(this.dataGridView);

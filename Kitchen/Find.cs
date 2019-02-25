@@ -45,7 +45,7 @@ namespace Kitchen
                         foreach (RecipeList r in objects)
                         {
 
-                            if (r.Category == null)
+                            if (r.Category == null || r.Category == "" || r.Category == " ")
                                 r.Category = "Категория не выбрана";
 
                             int n = dataGridView.Rows.Add();
