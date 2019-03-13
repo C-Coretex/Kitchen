@@ -124,51 +124,72 @@ namespace Kitchen
             }
             else
             {
-                RecipeList RL = new RecipeList
-                {
-                    Name = nname.Text,
-                    Ingridients = ingr,
-                    Description = ddescription.Text,
-                    Type = type,
-                    Count = count,
-                    ImageDirection = imageDirection,
-                    Category = category
-                };
-                var objects = new List<RecipeList>();
-                int a = 0;
-                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                bool exist = false;
+                using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
+                    var objectss = new List<RecipeList>();
                     fs.Position = 0;
-
                     while (fs.Position < fs.Length)
                     {
-                        if (a == rowNumber)
+                        objectss.Add((RecipeList)formatter.Deserialize(fs));
+                        if ((objectss[objectss.Count - 1].Name == nname.Text) && (rowNumber != objectss.Count - 1))
                         {
-                            objects.Add(RL);
-                            objects.Add((RecipeList)formatter.Deserialize(fs));
-                            a++;
-                            objects.Remove(objects[a]);
-                        }
-                        else
-                        {
-                            objects.Add((RecipeList)formatter.Deserialize(fs));
-                            a++;
+                            exist = true;
+                            break;
                         }
                     }
                 }
-                System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
-                using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                if (exist == false)
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    for (int i = 0; i < a; i++)
-                    {   
-                        formatter.Serialize(fs, objects[i]);
+                    RecipeList RL = new RecipeList
+                    {
+                        Name = nname.Text,
+                        Ingridients = ingr,
+                        Description = ddescription.Text,
+                        Type = type,
+                        Count = count,
+                        ImageDirection = imageDirection,
+                        Category = category
+                    };
+                    var objects = new List<RecipeList>();
+                    int a = 0;
+                    using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        fs.Position = 0;
+
+                        while (fs.Position < fs.Length)
+                        {
+                            if (a == rowNumber)
+                            {
+                                objects.Add(RL);
+                                objects.Add((RecipeList)formatter.Deserialize(fs));
+                                a++;
+                                objects.Remove(objects[a]);
+                            }
+                            else
+                            {
+                                objects.Add((RecipeList)formatter.Deserialize(fs));
+                                a++;
+                            }
+                        }
                     }
+                    System.IO.File.WriteAllText(pathToFile + "Recipe.dat", string.Empty);
+                    using (FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        for (int i = 0; i < a; i++)
+                        {
+                            formatter.Serialize(fs, objects[i]);
+                        }
+                    }
+                    conceived = true;
+                    this.Close();
                 }
+                else
+                    MessageBox.Show("Рецепт с таким названием уже существует");
             }
-            conceived = true;
-            this.Close();
         }
 
         private void ChooseImage_Click(object sender, EventArgs e)

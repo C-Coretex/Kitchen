@@ -80,5 +80,10 @@ namespace Kitchen
         {
             dataGridView1.ClearSelection();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

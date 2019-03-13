@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace Kitchen
@@ -32,10 +35,29 @@ namespace Kitchen
             {
                 MessageBox.Show("Впишите описание рецепта");
             }
-            else{
-                RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection, category);
-                conceived = true;
-                this.Close();
+            else
+            {
+                bool exist = false;
+                using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    var objects = new List<RecipeList>();
+                    fs.Position = 0;
+                    while (fs.Position < fs.Length)
+                    {
+                        objects.Add((RecipeList)formatter.Deserialize(fs));
+                        if (objects[objects.Count - 1].Name == name.Text)
+                            exist = true;
+                    }
+                }
+                if (exist == false)
+                {
+                    RecipeList.Serialization(name.Text, description.Text, ingr, count, type, imageDirection, category);
+                    conceived = true;
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Рецепт с таким названием уже существует");
             }
         }
 
@@ -70,7 +92,7 @@ namespace Kitchen
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Хочешь отменить изменения?", "Отменить изменения?", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.No)
+            if (dialogResult == DialogResult.Yes)
             {
                 conceived = true;
                 this.Close();

@@ -19,7 +19,7 @@ namespace Kitchen
             if (textBox1.Text.Trim() != "")
             {
                 textBox1.Text = textBox1.Text.Substring(0, 1).ToUpper() + textBox1.Text.Substring(1, textBox1.Text.Length - 1);
-                string[] ingridients = (File.ReadAllLines(Form1.pathToFile + @"Category.txt", Encoding.UTF8));
+                string[] ingridients = (File.ReadAllLines(Form1.pathToFile + @"Cccategory.txt", Encoding.UTF8));
                 foreach (string s in ingridients)
                 {
                     if (s == textBox1.Text.Trim())
@@ -27,7 +27,7 @@ namespace Kitchen
                 }
                 if (equals == false)
                 {
-                    File.AppendAllText(path: Form1.pathToFile + "Category.txt", contents: Environment.NewLine + textBox1.Text.Trim());
+                    File.AppendAllText(path: Form1.pathToFile + "Cccategory.txt", contents: Environment.NewLine + textBox1.Text.Trim());
                     categoryName = textBox1.Text.Trim();
                     this.Close();
                 }

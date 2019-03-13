@@ -12,7 +12,7 @@ namespace Kitchen
 {
     public partial class Form1 : Form
     {
-        System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 10);
+        System.Timers.Timer timer = new System.Timers.Timer(1000 * 60 * 20);
         string ingrTrue = "";
         int i;//Количество CheckBox'ов
         CheckBox box; //Обьявляю для того, чтобы можно было использовать чекбоксы ВЕЗДЕЕЕЕЕЕЕЕЕЕЕ
@@ -22,16 +22,28 @@ namespace Kitchen
         {
             InitializeComponent();
             this.Cursor = Cursors.WaitCursor;
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            {
+                string o = System.AppDomain.CurrentDomain.BaseDirectory;
+                pathToFile = @o;
+            }
+            //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
+            //pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+            if (!File.Exists(pathToFile + "Cccategory.txt"))
+            {
+                FileStream fs = new FileStream(pathToFile + "Cccategory.txt", FileMode.OpenOrCreate);
+                fs.Close();
+            }
+            if (!File.Exists(pathToFile + "Ingridients.txt"))
+            {
+                FileStream fs2 = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
+                fs2.Close();
+            }
 
             #region 1-st TAB
-            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // string o = System.AppDomain.CurrentDomain.BaseDirectory;
-            //pathToFile = @o + "\";
-            //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
-            pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
-            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            FileStream fs = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
-            fs.Close();
             #region Interface setting
             FindRecepts.TabStop = false;
             FindRecepts.FlatStyle = FlatStyle.Flat;
@@ -48,9 +60,12 @@ namespace Kitchen
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
             {
-                allIngridients.Add(a.ToString());
-                if (!firstLetters.Contains(a.Substring(0, 1)))
-                    firstLetters.Add(a.Substring(0, 1));
+                if (a != "" && a!= " " && a!= null)
+                {
+                    allIngridients.Add(a.ToString());
+                    if (!firstLetters.Contains(a.Substring(0, 1)))
+                        firstLetters.Add(a.Substring(0, 1));
+                }
             }
             firstLetters.Sort();
             allIngridients.Sort();
@@ -68,9 +83,9 @@ namespace Kitchen
             this.Cursor = Cursors.Default;
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            //metroTabControl1.SelectTab(0);
+            metroTabControl1.SelectTab(1);
 
             this.CenterToScreen();
             dataGridViewSQL.RowHeadersWidth = 20;
@@ -78,6 +93,11 @@ namespace Kitchen
             timer.AutoReset = true; // the key is here so it repeats
             timer.Elapsed += timer_elapsed;
             timer.Start();
+        }
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (pathToFile.Substring(0, 2) == "C:")
+                MessageBox.Show("Программа установлена на диск C:\rПожалуйста, переустановите программу на другой диск, иначе она работать не будет", "ВНИМАНИЕ");
         }
 
         #region 1-st TAB entrails
@@ -96,6 +116,13 @@ namespace Kitchen
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             string[] ingrid = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            try
+            {
+                if (ingrid[0] == "" || ingrid[0] == " " || ingrid[0] == null)
+                    ingrid = ingrid.Skip(1).ToArray();
+            }
+            catch { }
+
             int startLocation = 75;
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
             {
@@ -115,10 +142,14 @@ namespace Kitchen
                 bool repeat = false;
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    if (row.Cells[1].Value.ToString() == ingridients[i])
+                    try
                     {
-                        repeat = true;
+                        if (row.Cells[1].Value.ToString() == ingridients[i])
+                        {
+                            repeat = true;
+                        }
                     }
+                    catch { }
                 }
                 if (repeat == false)
                 {
@@ -148,12 +179,20 @@ namespace Kitchen
             {
                 ingrTrue += row.Cells[1].Value.ToString() + " ";
             }
+
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
-            uint n = 0;
+            try
+            {
+                if (ingridients[0] == "" || ingridients[0] == " " || ingridients[0] == null)
+                    ingridients = ingridients.Skip(1).ToArray();
+            }
+            catch { }
+
+            int n = 0;
             foreach (string ing in ingridients)
             {
                 n++;
-                if (ingrTrue.Contains(ing))
+                if (ingrTrue.Contains(ing.Trim()) && (ingrTrue!="" && ingrTrue!=null && ingrTrue!=" "))
                     ingrTrueInt += n + " ";
             }
             Find find = new Find(ingrTrueInt);
@@ -171,21 +210,32 @@ namespace Kitchen
             this.Hide();
             f2.ShowDialog();
             this.Show();
-        }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
+
+            string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            List<string> firstLetters = new List<string>();
+            List<string> allIngridients = new List<string>();
+            firstLetters.Clear();
+            comboBox1.Items.Clear();
+            comboBoxSearch.Items.Clear();
+            foreach (string a in ingridients)
             {
-                if (e.ColumnIndex == 0)
+                if (a != "" && a != " " && a != null)
                 {
-                    comboBoxSearch.Items.Add(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                    comboBoxSearch.Sorted = true;
-                    dataGridView1.Rows.RemoveAt(e.RowIndex);
+                    allIngridients.Add(a.ToString());
+                    if (!firstLetters.Contains(a.Substring(0, 1)))
+                        firstLetters.Add(a.Substring(0, 1));
                 }
             }
-            catch
+            firstLetters.Sort();
+            allIngridients.Sort();
+            foreach (string a in firstLetters)
             {
+                comboBox1.Items.Add(a);
+            }
+            foreach (string a in allIngridients)
+            {
+                comboBoxSearch.Items.Add(a);
             }
         }
         #endregion
@@ -193,7 +243,7 @@ namespace Kitchen
         #region 2-nd TAB
         private void Reload_Click(object sender, EventArgs e)
         {
-           // try
+            try
             {
                 if (metroToggle1.Checked == false)
                 {
@@ -251,7 +301,7 @@ namespace Kitchen
                 }
                     dataGridViewSQL.ClearSelection();
             }
-           // catch
+            catch
             {
             }
             
@@ -477,16 +527,17 @@ namespace Kitchen
                 }
                 File.WriteAllText(pathToFile + @"Ingridients.txt", ing.Substring(0, ing.Length - 1));
 
-                string[] categoryFile = File.ReadAllLines(@"C:\RecipeBackup\Category.txt", Encoding.UTF8);
-                File.WriteAllText(pathToFile + @"Category.txt", String.Empty);
+                string[] categoryFile = File.ReadAllLines(@"C:\RecipeBackup\Cccategory.txt", Encoding.UTF8);
+                File.WriteAllText(pathToFile + @"Cccategory.txt", String.Empty);
                 string cat = "";
                 for (int a = 0; a < categoryFile.Count(); a++)
                 {
                     cat += categoryFile[a] + "\r";
                 }
-                File.WriteAllText(pathToFile + @"Category.txt", cat.Substring(0, cat.Length - 1));
+                File.WriteAllText(pathToFile + @"Cccategory.txt", cat.Substring(0, cat.Length - 1));
 
                 this.Cursor = Cursors.Default;
+                this.Close();
             }
          }
 
@@ -556,6 +607,12 @@ namespace Kitchen
 
                 fsss.Position = 0;
                 string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
+                try
+                {
+                    if (allIngridients[0] == "" || allIngridients[0] == " " || allIngridients[0] == null)
+                        allIngridients = allIngridients.Skip(1).ToArray();
+                }
+                catch { }
                 while (fsss.Position < fsss.Length)
                 {
                     objects.Add((RecipeList)formatterr.Deserialize(fsss));
@@ -572,26 +629,36 @@ namespace Kitchen
 
         private void backgroundWorker2_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            using (Stream fsss = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+            try
             {
-                BinaryFormatter formatterr = new BinaryFormatter();
-
-                var objects = new List<RecipeList>();
-
-                fsss.Position = 0;
-                string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
-                while (fsss.Position < fsss.Length)
+                using (Stream fsss = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
                 {
-                    objects.Add((RecipeList)formatterr.Deserialize(fsss));
-                    foreach (DataGridViewRow row in dataGridViewSQL.Rows)
-                        if ((row.Cells[2].Value.ToString() == objects[objects.Count - 1].Name) && (row.Cells[3].Value.ToString() == objects[objects.Count - 1].Ingridients))
-                        {
-                            dataGridViewSQL.Invoke(new Action(() => { dataGridViewSQL.Rows.Remove(row); }));//Иначе ошибка - меняю ядро, из которого была запущена ассинхронная функция
-                            break;
-                        }
+                    BinaryFormatter formatterr = new BinaryFormatter();
+
+                    var objects = new List<RecipeList>();
+
+                    fsss.Position = 0;
+                    string[] allIngridients = File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8);
+                    if (allIngridients[0] == "" || allIngridients[0] == " " || allIngridients[0] == null)
+                        allIngridients = allIngridients.Skip(1).ToArray();
+                    while (fsss.Position < fsss.Length)
+                    {
+                        objects.Add((RecipeList)formatterr.Deserialize(fsss));
+                        foreach (DataGridViewRow row in dataGridViewSQL.Rows)
+                            if ((row.Cells[2].Value.ToString() == objects[objects.Count - 1].Name) && (row.Cells[3].Value.ToString() == objects[objects.Count - 1].Ingridients))
+                            {
+                                try
+                                {
+                                    dataGridViewSQL.Invoke(new Action(() => { dataGridViewSQL.Rows.Remove(row); }));//Иначе ошибка - меняю ядро, из которого была запущена ассинхронная функция
+                                }
+                                catch { }
+                                break;
+                            }
+                    }
                 }
+                dataGridViewSQL.ClearSelection();
             }
-            dataGridViewSQL.ClearSelection();
+            catch { }
         }
 
         private void metroTabPage1_MouseMove(object sender, MouseEventArgs e)
@@ -623,6 +690,17 @@ namespace Kitchen
         private void metroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Reload.PerformClick();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                comboBoxSearch.Items.Add(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                comboBoxSearch.Sorted = true;
+                dataGridView1.Rows.RemoveAt(e.RowIndex);
+            }
+            catch { }
         }
     }
 }

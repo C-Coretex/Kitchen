@@ -25,11 +25,18 @@ namespace Kitchen
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
             {
-                allIngridients.Add(a.ToString());
-                if (!firstLetters.Contains(a.Substring(0, 1)))
+                try
                 {
-                    firstLetters.Add(a.Substring(0, 1));
+                    if (a != "" && a!=" " && a!= null)
+                    {
+                        allIngridients.Add(a.ToString());
+                        if (!firstLetters.Contains(a.Substring(0, 1)))
+                        {
+                            firstLetters.Add(a.Substring(0, 1));
+                        }
+                    }
                 }
+                catch { }
             }//Changed
             firstLetters.Sort();
             allIngridients.Sort();
@@ -42,7 +49,7 @@ namespace Kitchen
                 comboBoxSearch.Items.Add(a);
             }
 
-            string[] category = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string[] category = (File.ReadAllLines(pathToFile + @"Cccategory.txt", Encoding.UTF8));
             foreach (string a in category)
             {
                 comboBox2.Items.Add(a);
@@ -61,6 +68,12 @@ namespace Kitchen
             string count = "";
             int boxTrue = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            try
+            {
+                if (ingridients[0] == "" || ingridients[0] == " " || ingridients[0] == null)
+                    ingridients = ingridients.Skip(1).ToArray();
+            }
+            catch { }
             dataGridView1.Sort(dataGridView1.Columns[1], ListSortDirection.Ascending);
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -105,18 +118,33 @@ namespace Kitchen
             }
             else
             {
-                if (comboBox2.SelectedItem == null)
-                    comboBox2.SelectedIndex = 0;
+                try
+                {
+                    if (comboBox2.SelectedItem == null)
+                        comboBox2.SelectedIndex = 0;
 
-                this.Cursor = Cursors.Default;
-                //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName AD = new AddName(ingr, count, type, comboBox2.SelectedItem.ToString());
-                AD.StartPosition = FormStartPosition.Manual;
-                AD.Location = this.Location;
-                this.Hide();
-                AD.ShowDialog();
-                this.Close();
-                //-----------------------------------------------------------------------------------------------------------------------------------------
+                    this.Cursor = Cursors.Default;
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                    AddName AD = new AddName(ingr, count, type, comboBox2.SelectedItem.ToString());
+                    AD.StartPosition = FormStartPosition.Manual;
+                    AD.Location = this.Location;
+                    this.Hide();
+                    AD.ShowDialog();
+                    this.Close();
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                }
+                catch
+                {
+                    this.Cursor = Cursors.Default;
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                    AddName AD = new AddName(ingr, count, type, "");
+                    AD.StartPosition = FormStartPosition.Manual;
+                    AD.Location = this.Location;
+                    this.Hide();
+                    AD.ShowDialog();
+                    this.Close();
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                }
             }
         }
 
@@ -156,10 +184,11 @@ namespace Kitchen
             List<string> ingridients = new List<string>();
             foreach (string a in ingrid)
             {
-                if (a.Substring(0, 1) == comboBox1.Text)
-                {
-                    ingridients.Add(a);
-                }
+                if (a != "" && a != null && a!=" ")
+                    if (a.Substring(0, 1) == comboBox1.Text)
+                    {
+                        ingridients.Add(a);
+                    }
             }
             for (i = 0; i < ingridients.Count; i++)
             {
@@ -284,7 +313,7 @@ namespace Kitchen
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Cccategory.txt", Encoding.UTF8));
             string cat = "";
             for (int a = 0; a < categoryFile.Count(); a++)
             {
@@ -295,8 +324,8 @@ namespace Kitchen
             {
                 Directory.CreateDirectory(@"C:\RecipeBackup");
             }
-            File.WriteAllText(@"C:\RecipeBackup\Category.txt", String.Empty);
-            File.WriteAllText(@"C:\RecipeBackup\Category.txt", cat.Substring(0, cat.Length - 1));
+            File.WriteAllText(@"C:\RecipeBackup\Cccategory.txt", String.Empty);
+            File.WriteAllText(@"C:\RecipeBackup\Cccategory.txt", cat.Substring(0, cat.Length - 1));
         }
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)

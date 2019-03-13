@@ -35,16 +35,28 @@ namespace Kitchen
             var objects = new List<RecipeList>();
 
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            try
+            {
+                if (ingridients[0] == "" || ingridients[0] == " " || ingridients[0] == null)
+                    ingridients = ingridients.Skip(1).ToArray();
+            }
+            catch { }
             List<string> firstLetters = new List<string>();
             List<string> allIngridients = new List<string>();
             foreach (string a in ingridients)
             {
-                allIngridients.Add(a.ToString());
-                if (firstLetters.Contains(a.Substring(0, 1))) { }
-                else
+                try
                 {
-                    firstLetters.Add(a.Substring(0, 1));
+                    if (a != "" && a != null && a != " ")
+                    {
+                        allIngridients.Add(a.ToString());
+                        if (!firstLetters.Contains(a.Substring(0, 1)))
+                        {
+                            firstLetters.Add(a.Substring(0, 1));
+                        }
+                    }
                 }
+                catch { }
             }
             firstLetters.Sort();
             allIngridients.Sort();
@@ -57,7 +69,7 @@ namespace Kitchen
                 comboBoxSearch.Items.Add(a);
             }
 
-            string[] categoryArray = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string[] categoryArray = (File.ReadAllLines(pathToFile + @"Cccategory.txt", Encoding.UTF8));
             foreach (string a in categoryArray)
             {
                 comboBox2.Items.Add(a);
@@ -133,6 +145,13 @@ namespace Kitchen
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] ingrid = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            try
+            {
+                if (ingrid[0] == "" || ingrid[0] == " " || ingrid[0] == null)
+                    ingrid = ingrid.Skip(1).ToArray();
+            }
+            catch { }
+
             startLocation = 115;
             foreach (CheckBox chbox in this.Controls.OfType<CheckBox>())
             {
@@ -187,6 +206,13 @@ namespace Kitchen
             string count = "";
             int boxTrue = 0;
             string[] ingridients = (File.ReadAllLines(pathToFile + @"Ingridients.txt", Encoding.UTF8));
+            //Если начальная строчка пустая - удалить её из массива
+            try
+            {
+                if (ingridients[0] == "" || ingridients[0] == " " || ingridients[0] == null)
+                    ingridients = ingridients.Skip(1).ToArray();
+            }
+            catch { }
             dataGridView1.Sort(dataGridView1.Columns[1], ListSortDirection.Ascending);
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -231,21 +257,39 @@ namespace Kitchen
             }
             else
             {
-                if (comboBox2.SelectedItem == null)
-                    comboBox2.SelectedIndex = 0;
+                try
+                {
+                    if (comboBox2.SelectedItem == null)
+                        comboBox2.SelectedIndex = 0;
 
-                category = comboBox2.SelectedItem.ToString();
-                this.Cursor = Cursors.Default;
-                Form2.OriginalName = name;
-                Form2.OriginalDescription = description;
-                //-----------------------------------------------------------------------------------------------------------------------------------------
-                AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection, category);
-                AD.StartPosition = FormStartPosition.Manual;
-                AD.Location = this.Location;
-                this.Hide();
-                AD.ShowDialog();
-                this.Close();
-                //-----------------------------------------------------------------------------------------------------------------------------------------
+                    category = comboBox2.SelectedItem.ToString();
+                    this.Cursor = Cursors.Default;
+                    Form2.OriginalName = name;
+                    Form2.OriginalDescription = description;
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                    AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection, category);
+                    AD.StartPosition = FormStartPosition.Manual;
+                    AD.Location = this.Location;
+                    this.Hide();
+                    AD.ShowDialog();
+                    this.Close();
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                }
+                catch
+                {
+                    category = "";
+                    this.Cursor = Cursors.Default;
+                    Form2.OriginalName = name;
+                    Form2.OriginalDescription = description;
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                    AddName2 AD = new AddName2(ingr, count, type, name, description, rowNumber, imageDirection, category);
+                    AD.StartPosition = FormStartPosition.Manual;
+                    AD.Location = this.Location;
+                    this.Hide();
+                    AD.ShowDialog();
+                    this.Close();
+                    //-----------------------------------------------------------------------------------------------------------------------------------------
+                }
             }
         }
 
@@ -333,7 +377,7 @@ namespace Kitchen
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Category.txt", Encoding.UTF8));
+            string[] categoryFile = (File.ReadAllLines(pathToFile + @"Cccategory.txt", Encoding.UTF8));
             string cat = "";
             for (int a = 0; a < categoryFile.Count(); a++)
             {
@@ -344,8 +388,8 @@ namespace Kitchen
             {
                 Directory.CreateDirectory(@"C:\RecipeBackup");
             }
-            File.WriteAllText(@"C:\RecipeBackup\Category.txt", String.Empty);
-            File.WriteAllText(@"C:\RecipeBackup\Category.txt", cat.Substring(0, cat.Length - 1));
+            File.WriteAllText(@"C:\RecipeBackup\Cccategory.txt", String.Empty);
+            File.WriteAllText(@"C:\RecipeBackup\Cccategory.txt", cat.Substring(0, cat.Length - 1));
         }
 
         private void Edit_FormClosing(object sender, FormClosingEventArgs e)
