@@ -49,9 +49,9 @@ namespace Kitchen
 
                             private void NewTable()
                             {
-                                using (Stream fs = File.Open(Form1.pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                                using (Stream fs = File.Open(pathToFile + @"Recipe.dat", FileMode.Open))
                                 {
-                                    //try
+                                    try
                                     {
                                         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -89,7 +89,7 @@ namespace Kitchen
                                             dataGridView.Rows[n].Cells[0].Value = n + 1;
                                         }
                                     }
-                                    //catch
+                                    catch
                                     {
                                     }
                                 }
@@ -290,10 +290,8 @@ namespace Kitchen
                 var objectsBackup = new List<RecipeList>();
                 bool exists = System.IO.Directory.Exists(@"C:\RecipeBackup\");
                 if (!exists)
-                {
                     Directory.CreateDirectory(@"C:\RecipeBackup");
 
-                }
                 using (Stream fs = File.Open(@"C:\RecipeBackup\" + "RecipeBackup.dat", FileMode.OpenOrCreate))
                 {
                     fs.Position = 0;

@@ -24,23 +24,50 @@ namespace Kitchen
             this.Cursor = Cursors.WaitCursor;
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             {
-                string o = System.AppDomain.CurrentDomain.BaseDirectory;
-                pathToFile = @o;
+                //System.AppDomain.CurrentDomain.BaseDirectory
+                string o = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                pathToFile = Path.Combine(o, @"Valeron_Inc\");
+                if (!Directory.Exists(pathToFile))
+                    Directory.CreateDirectory(pathToFile);
             }
-            //РАБОТАЕТ ТОЛЬКО ПОСЛЕ ИНСТАЛЯТОРА(должно)
-            //pathToFile = @"C:\Users\valer\OneDrive\Desktop\Programming\Kitchen\";
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
             if (!File.Exists(pathToFile + "Cccategory.txt"))
             {
-                FileStream fs = new FileStream(pathToFile + "Cccategory.txt", FileMode.OpenOrCreate);
-                fs.Close();
+                try
+                {
+                    File.Copy(System.AppDomain.CurrentDomain.BaseDirectory + "Cccategory.txt", pathToFile + "Cccategory.txt");
+                }
+                catch
+                {
+                    FileStream fs = new FileStream(pathToFile + "Cccategory.txt", FileMode.OpenOrCreate);
+                    fs.Close();
+                }
             }
             if (!File.Exists(pathToFile + "Ingridients.txt"))
             {
-                FileStream fs2 = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
-                fs2.Close();
+                try
+                {
+                    File.Copy(System.AppDomain.CurrentDomain.BaseDirectory + "Ingridients.txt", pathToFile + "Ingridients.txt");
+                }
+                catch
+                {
+                    FileStream fs = new FileStream(pathToFile + "Ingridients.txt", FileMode.OpenOrCreate);
+                    fs.Close();
+                }
+            }
+            if (!File.Exists(pathToFile + "Recipe.dat"))
+            {
+                try
+                {
+                    File.Copy(System.AppDomain.CurrentDomain.BaseDirectory + "Recipe.dat", pathToFile + "Recipe.dat");
+                }
+                catch
+                {
+                    FileStream fs = new FileStream(pathToFile + "Recipe.dat", FileMode.OpenOrCreate);
+                    fs.Close();
+                }
             }
 
             #region 1-st TAB
@@ -96,8 +123,8 @@ namespace Kitchen
         }
         private void Form1_Shown(object sender, EventArgs e)
         {
-            if (pathToFile.Substring(0, 2) == "C:")
-                MessageBox.Show("Программа установлена на диск C:\rПожалуйста, переустановите программу на другой диск, иначе она работать не будет", "ВНИМАНИЕ");
+           // if (pathToFile.Substring(0, 2) == "C:")
+                //MessageBox.Show("Программа установлена на диск C:\rПожалуйста, переустановите программу на другой диск, иначе она работать не будет", "ВНИМАНИЕ");
         }
 
         #region 1-st TAB entrails
@@ -393,7 +420,7 @@ namespace Kitchen
         private void dataGridViewSQL_CellClick(object sender, DataGridViewCellEventArgs e)
         {
                         this.Cursor = Cursors.WaitCursor;
-            //try
+            try
             {
                 if (e.ColumnIndex == 0)
                 {
@@ -433,7 +460,7 @@ namespace Kitchen
                                     var objects = new List<RecipeList>();
                                     {
                                         BinaryFormatter formatter = new BinaryFormatter();
-                                        using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.OpenOrCreate))
+                                        using (Stream fs = File.Open(pathToFile + "Recipe.dat", FileMode.Open))
                                         {
                                             fs.Position = 0;
                                             while (fs.Position < fs.Length)
@@ -472,7 +499,7 @@ namespace Kitchen
                     }
                 }
             }
-            //catch
+            catch
             {
             }
                         this.Cursor = Cursors.Default;

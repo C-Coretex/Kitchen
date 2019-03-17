@@ -22,7 +22,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2816107E03F54C86EE245226B0C82859"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -34,13 +34,13 @@
         "Entry"
         {
         "MsmKey" = "8:_6BC5FFBBFF620B89F1D7E3B33BFF2086"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7557FE73EDFADE5B402405A65BB68372"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,14 +51,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_970E77B546CC2A48329A0BFC861F66C1"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "MsmKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_970E77B546CC2A48329A0BFC861F66C1"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,13 +88,19 @@
         "Entry"
         {
         "MsmKey" = "8:_E51C3B54AD4C3E4DAF5CCBA59C937926"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+        "OwnerKey" = "8:_6BC5FFBBFF620B89F1D7E3B33BFF2086"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_93E2A5BA456B40E3995647063957A5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -119,12 +125,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_970E77B546CC2A48329A0BFC861F66C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6BC5FFBBFF620B89F1D7E3B33BFF2086"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -556,7 +556,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KitchenSetup"
         "ProductCode" = "8:{8DCE68F3-A2DC-4CEA-B0E6-88CEFD468091}"
-        "PackageCode" = "8:{C7C32E36-802A-400A-9422-2B71DABCE772}"
+        "PackageCode" = "8:{C68DC592-A7C3-4FC0-88A1-257EE967A57B}"
         "UpgradeCode" = "8:{E0A147D1-1E71-46ED-A7EA-732EA24F0348}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -676,29 +676,29 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_813A45CD57904BE9A154ECB7F730D489"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_274F808B7BC7496C9DFB22DE45C4AADD"
             {
             "Name" = "8:Kitchen Helper"
             "Arguments" = "8:"
-            "Description" = "8:Open me up"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+            "Target" = "8:_93E2A5BA456B40E3995647063957A5E3"
             "Folder" = "8:_38E2236AB4C64E858DE54E67342CD558"
             "WorkingFolder" = "8:_44EB91D42D7B45718C1A981B465792A3"
             "Icon" = "8:_B6E5A26B8F9C4764BD8FBE5154BC8F3F"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F8C77183545E4A3C8DC83B67EC6F22AB"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7608EA5FE9724ABEAB9BE434B059627F"
             {
             "Name" = "8:Kitchen Helper"
             "Arguments" = "8:"
-            "Description" = "8:Open me up"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_9C31C982094148D6B805EFC0A1833BFF"
+            "Target" = "8:_93E2A5BA456B40E3995647063957A5E3"
             "Folder" = "8:_4DF2B863F02B473AAFE271B8F1CA5C14"
             "WorkingFolder" = "8:_44EB91D42D7B45718C1A981B465792A3"
             "Icon" = "8:_B6E5A26B8F9C4764BD8FBE5154BC8F3F"
@@ -1103,9 +1103,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9C31C982094148D6B805EFC0A1833BFF"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_93E2A5BA456B40E3995647063957A5E3"
             {
-            "SourcePath" = "8:..\\Kitchen\\obj\\Debug\\Kitchen.exe"
+            "SourcePath" = "8:..\\Kitchen\\obj\\Release\\Kitchen.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_44EB91D42D7B45718C1A981B465792A3"
